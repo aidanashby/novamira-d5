@@ -166,6 +166,22 @@ The ACF Return Format was still `d/m/Y g:i a` at this point (the user had change
 
 DATETIME comparison works on the SQLite database. Limits from the source: several items are always joined with `OR` (Divi sets `relation`), so two different conditions cannot both be required; `value` is fixed text, so there is no "today" token and date windows do not move on by themselves. The second limit is the gap the user's Date Conditions for Divi plugin targets.
 
+## T18. Loop filters by taxonomy term [Run, 2026-10-14]
+
+The user added taxonomy `genre` (flat, public) with Action (8), Romcom (7) and Sci-fi (6); Claude assigned them to the three movies. `includePostWithSpecificTerms` / `excludePostWithSpecificTerms` are lists of `{categoryId: <taxonomy>, selectedOptions: [{value: <term ID>, label}]}`, built into a `tax_query` (`field` `term_id`, `operator` `IN`) separate from the `meta_query`. Draft 124:
+
+| Filter | Result |
+|---|---|
+| Include Sci-fi | Test movie three, Test movie two |
+| Include Action | Movie title |
+| Exclude Sci-fi | Movie title |
+| Include Sci-fi and `metaQuery` date `>=` 2026-12-01 | Test movie three (both must match) |
+| Include Action or Romcom | Movie title, Test movie two |
+
+`loop_post_terms` needs `taxonomy_type` `genre` (the default is `category`, which printed nothing); with `links` `on` each genre links to its archive.
+
+Variables: the user reports that variables cannot be saved in the builder on 5.15.1. The local changelog (to 5.15.1) mentions no such bug; not investigated, at the user's request.
+
 ## T8. Reference page from the builder [Run, 2026-10-14]
 
 The user built page ID 41 "T8 Reference" and confirmed drafts 28, 33 and 34 look correct in the Visual Builder (so the accordion shape from `module.json`, the image shape and the parse, append, serialise edit all pass in the builder).

@@ -34,7 +34,7 @@ The skill sources in `skills/` match the stored skills byte for byte (md5 checke
 | Styling | Backgrounds, gradients, video backgrounds, spacing, borders, shadows, fonts, hover, sticky, position, breakpoints (T10, T12) |
 | Clone a published page | Byte-identical draft copy, original untouched (T12) |
 | Theme Builder | Edit layouts; create single and archive templates for a post type (T13, T14, T16) |
-| Loops and ACF | Group, blurb and column loops; ACF text, WYSIWYG, image, URL, date; `excludeCurrentPost`; pagination; filters by custom field (T14 to T17) |
+| Loops and ACF | Group, blurb and column loops; ACF text, WYSIWYG, image, URL, date; `excludeCurrentPost`; pagination; filters by custom field and by taxonomy term (T14 to T18) |
 | Fresh agents | Seven fresh agents with only the skills completed every task after one fix round (six on Opus, one on Haiku) |
 
 ## History
@@ -52,11 +52,9 @@ The skill sources in `skills/` match the stored skills byte for byte (md5 checke
 
 | Next step | Why | Needs |
 |---|---|---|
-| Loop filters by term and search | Taxonomy and keyword listings | A post type with a taxonomy (Movies has none) |
-| Moving date windows ("from today") | Divi's `metaQuery` takes fixed values only and joins items with OR (T17); the user's Date Conditions for Divi plugin targets this | Test the plugin with a Movies loop |
-| Font and number variable references | Use the site's own fonts and sizes without writing globals | A test like T10 |
+| Moving date windows ("from today") | Divi's `metaQuery` takes fixed values only (T17) | Out of scope here (the user's Date Conditions for Divi plugin) |
+| Font and number variable references | Use the site's own fonts and sizes without writing globals | Blocked: the user cannot save variables in 5.15.1 (possible Divi bug); retest after a Divi update |
 | Presets | Agents could apply existing presets | Reading only is allowed; writing is gated |
-| Staging copy on Krystal | Check LiteSpeed caching and remote connection | User's approval; Novamira is dev and staging only |
 | Divi upgrade check | Divi ships weekly; skills say "tested on 5.15.1" | Rerun T1, T6, T10 and T12 after each minor release |
 | Real sites | Use the skills on Foodbank and Bristol Charities staging builds | Staging sites with Novamira, never live |
 

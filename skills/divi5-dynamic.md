@@ -52,9 +52,11 @@ Any module or group repeats once per result when `module.advanced.loop` is set:
   - `[{"key":"text_field","value":"Second","compare":"LIKE"}]` gave the one match.
   - `BETWEEN` takes `"from,to"` in `value` (comma-separated); `IN` and `NOT IN` take a comma list.
   - Compares: `=`, `!=`, `>`, `>=`, `<`, `<=`, `LIKE`, `NOT LIKE`, `IN`, `NOT IN`, `BETWEEN`, `NOT BETWEEN`, `EXISTS`, `NOT EXISTS`, `REGEXP`. Types: `NUMERIC`, `DATE`, `DATETIME`, `DECIMAL`, `CHAR` and others.
-  - Several items are always joined with OR, never AND (Divi sets the relation). For a range use one `BETWEEN` item. For two different conditions at once, tell the user Divi's loop cannot do it.
+  - Several items are always joined with OR, never AND (Divi sets the relation). For a range use one `BETWEEN` item. Two different custom-field conditions cannot both be required; a custom field plus a taxonomy term can (below).
   - `value` is fixed text, so "from today" loops need the date written in, and do not move on by themselves.
-- Other keys Divi reads: `postOffset`, `ignoreStickysPost`, `includeSpecificPosts`, `excludeSpecificPosts`, `includePostWithSpecificTerms`, `excludePostWithSpecificTerms`, `search` (not tested here).
+- Filter by taxonomy term with `includePostWithSpecificTerms` or `excludePostWithSpecificTerms`, a list of `{"categoryId":"<taxonomy>","selectedOptions":[{"value":"<term ID>","label":"<name>"}]}` (verified with `genre`). Several terms in one taxonomy match any of them. A term filter and a `metaQuery` together must both match (verified: Sci-fi and released on or after 1 December gave one movie), so combine them for "genre and date" listings.
+- Show a post's terms with `loop_post_terms` and settings `taxonomy_type` (the taxonomy name; the default is `category`), `separator` (`", "`) and `links` (`on` links each term to its archive).
+- Other keys Divi reads: `postOffset`, `ignoreStickysPost`, `includeSpecificPosts`, `excludeSpecificPosts`, `search` (not tested here).
 - Use published posts for loop tests; Divi's query is expected to skip drafts (not tested).
 
 Check: every card shows a different post, no `$variable(` text is left in the HTML, and images and links differ per item.
