@@ -2,6 +2,11 @@
 
 14 October 2026. Site: Studio `divi-5`, Divi 5.15.1, Novamira 1.12.9 free. Evidence in docs/09; every site write in docs/08.
 
+## Decisions (user, 14 October 2026)
+
+- Gate (e): **no Novamira Pro.**
+- Gate (d): **option 1**, keep Divi globals as the source of truth, skip Novamira Design, agents reference global colours read-only.
+
 ## Recommendation
 
 1. **Do not buy Novamira Pro now.** The free route builds, copies and edits Divi 5 drafts reliably with three verified skills. Revisit Pro only if you need Loop Builder, dynamic content, Theme Builder or preset writes, which were not tested here.
@@ -39,4 +44,4 @@ No failure in testing would have been fixed by Pro. Also check Elegant Themes' o
 
 - Builder checks of drafts 46 and 48 passed (user, 14 October); 55 "S5 Contact" not yet opened.
 - Not tested: Loop Builder and dynamic content, presets, font and number variables, gallery, video, menus, Theme Builder, published-page cache behaviour, LiteSpeed on Krystal staging.
-- Clean-up of test drafts (docs/08 lists them).
+- Test drafts moved to the bin (docs/08).

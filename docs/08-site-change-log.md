@@ -35,5 +35,6 @@ The site currently has: 0 user skills, no User Context, no active design, an emp
 | 2026-10-14 | User skills `divi5-styling` (post ID 53) and `divi5-modules` (post ID 54) | `novamira/skill-write` | Stored md5 equals `skills/divi5-styling.md` and `skills/divi5-modules.md`; 0 backslashes | `novamira/skill-delete` for each slug |
 
 | 2026-10-14 | Draft page ID 55 "S5 Contact" (fresh-agent test of all three skills) | `execute-php` (agent following the skills) | Claude checked: draft; primary-colour variable, shadow and phone wrap emitted | `wp_delete_post(55, true)` |
+| 2026-10-14 | Moved Claude's 13 test drafts to the bin: 9, 24, 25, 26, 28, 33, 34, 35, 46, 48, 49, 50, 55 (standing approval) | `execute-php`, `wp_trash_post()` | Each now has status `trash`; user pages 10, 18, 41 and library item 22 unchanged | Restore from Pages, Bin, or `wp_untrash_post(<id>)`; empty the bin to delete permanently |
 
 User-created test pages (not Claude's; delete only if the user asks): ID 10 "T0 Baseline", ID 18 "T3 Component test", library item ID 22 "T3 Section Component", ID 41 "T8 Reference". Media items 36 to 40 uploaded by the user.
