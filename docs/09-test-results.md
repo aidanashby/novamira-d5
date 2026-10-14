@@ -148,6 +148,12 @@ Movies (`movie`, ACF group "Movie custom fields": `text_field`, `image_field`, `
 
 A Haiku subagent limited to Novamira tools (about 98,000 tokens) loaded `divi5-core`, `divi5-dynamic` and `divi5-theme-builder` unprompted. Task 1, "S6 Movies grid" (draft 109): it looped a `divi/column` (`8_24` desktop, `24_24` phone) inside a row with `flexWrap: wrap`, with cards of image, heading, ACF text and link; no unresolved variables. Claude's browser check: three across at 1280px, stacked at 447px. Task 2 (read only): it correctly reported template 99, its assignment, and body layout 98's contents. **Pass.** The looped-column grid was added to `divi5-dynamic`.
 
+## T16. Movies archive template and loop pagination [Run, 2026-10-14]
+
+The user turned on Has archive for Movies (`/movies/`, HTTP 200). `et_theme_builder_get_template_settings_options()` lists the valid assignment IDs; for Movies: `singular:post_type:movie:all`, `singular:post_type:movie:id:`, `archive:post_type:movie`. Template 112 with body layout 111: heading, a looped-column grid (`loopId` `movie_archive`, `postPerPage` `2`, `12_24` columns) and a `divi/post-nav` with `module.advanced.targetLoop` `movie_archive`. Divi paginates loops through a query parameter named after the `loopId`. Page 1 showed "Movie title" and "Test movie two" with formatted dates and a link to `?movie_archive=2`; page 2 showed "Test movie three" with a link to `?movie_archive=1`. Browser: two cards side by side and a "Next" link. **Pass.**
+
+The ACF Return Format was still `d/m/Y g:i a` at this point (the user had changed the Display Format), so single-page dates still showed unformatted.
+
 ## T8. Reference page from the builder [Run, 2026-10-14]
 
 The user built page ID 41 "T8 Reference" and confirmed drafts 28, 33 and 34 look correct in the Visual Builder (so the accordion shape from `module.json`, the image shape and the parse, append, serialise edit all pass in the builder).

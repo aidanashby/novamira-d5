@@ -45,6 +45,8 @@ $tid = et_theme_builder_store_template($theme_builder_id, ['title' => 'All Movie
 add_post_meta($theme_builder_id, '_et_template', $tid);
 ```
 
+- Assignment strings: list every valid one with `et_theme_builder_get_template_settings_options()` (collect each `id`). For a post type: `singular:post_type:<type>:all` (all single posts, verified), `singular:post_type:<type>:id:<ID>` (one post), `archive:post_type:<type>` (the post type archive, verified with `/movies/`; the type needs Has archive on).
+- An archive body uses a loop (see `divi5-dynamic`, with pagination) where a single body uses current-post values.
 - Header or footer `0` means the global or theme default. Only published layouts are accepted.
 - Build the body with current-post dynamic values (`divi5-dynamic`) and a `divi/post-content` module for the post's own content.
 - Clear caches for posts of that type with `remove_static_resources`, then check one post of the type and one page that must not change. `.et-l--body` also appears on ordinary pages, so check for the template's own content, not that class.

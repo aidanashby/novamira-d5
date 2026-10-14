@@ -1,6 +1,6 @@
 # novamira-d5: project instructions
 
-This project continues a chat session. Read `README.md`, then `docs/01` to `docs/06`, before doing anything. The parent `Projects\CLAUDE.md` also applies (test first, verify before claiming done, plan before executing, no scratch directories inside the Projects tree).
+Read `README.md` and `docs/00-status-and-roadmap.md` before doing anything; read `docs/01` to `docs/06` for background when needed. The parent `Projects\CLAUDE.md` also applies (test first, verify before claiming done, plan before executing, no scratch directories inside the Projects tree).
 
 ## What this project is
 
@@ -48,7 +48,7 @@ Gates (stop and ask with the choice tool):
 
 ## Plan to execute
 
-Lead the work. Follow the order in docs/06, "Recommended order", without waiting for the user, stopping only at the gates above. At each gate and at the end, summarise what was done, what was verified and what is needed from the user. Keep the README status current.
+Lead the work. Follow the order in docs/06, "Recommended order", without waiting for the user, stopping only at the gates above. At each gate and at the end, summarise what was done, what was verified and what is needed from the user. Keep `docs/00-status-and-roadmap.md` current.
 
 1. Connect Claude Code and check versions (the user pastes the setup prompt).
 2. Test T0: the user builds the baseline page in the Visual Builder, you dump and summarise it.

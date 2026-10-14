@@ -44,7 +44,8 @@ Any module or group repeats once per result when `module.advanced.loop` is set:
 
 - Put the loop on a `divi/group` to repeat a card made of several modules (image, heading, text, button), each using `loop_post_*` values. A loop on a single module (a blurb) repeats that module.
 - For a grid of any length, loop the column instead: one row with `module.decoration.layout` `flexWrap` `wrap` on desktop and phone, holding one `divi/column` that carries the loop, with `flexType` `8_24` on desktop and `24_24` on phone. Each result becomes a column, so three per line on desktop and stacked on phone (verified in a browser at 1280px and 447px).
-- `loopId` is any unique string on the page.
+- `loopId` is any unique string on the page. It is also the pagination parameter: `?<loopId>=2` shows page 2.
+- Pagination (verified on the Movies archive): add a `divi/post-nav` module with `module.advanced.targetLoop` `{"desktop":{"value":"<loopId>"}}`. With `postPerPage` `2` and three movies it showed two movies and a link to `?movie_archive=2`, and page 2 showed the third with a link back.
 - `excludeCurrentPost` `"on"` with `orderBy` `"title"` (verified): a "More movies" loop in a single-movie Theme Builder body lists the other movies in title order and leaves out the one being viewed.
 - Other keys Divi reads: `postOffset`, `ignoreStickysPost`, `includeSpecificPosts`, `excludeSpecificPosts`, `includePostWithSpecificTerms`, `excludePostWithSpecificTerms`, `metaQuery`, `search` (not tested here).
 - Use published posts for loop tests; Divi's query is expected to skip drafts (not tested).
