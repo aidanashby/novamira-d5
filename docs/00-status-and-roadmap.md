@@ -45,7 +45,7 @@ The skill sources in `skills/` match the stored skills byte for byte (md5 checke
 
 ## Open items
 
-- ACF date on single movie pages: the field's Return Format is still `d/m/Y g:i a`, so the custom display format is ignored there. Set Return Format (not Display Format) to `Y-m-d H:i:s`, then recheck `/movie/movie-title/`.
+- Done (23:05): the user set the date field's Return Format to `Y-m-d H:i:s`; single movie pages now show "16 October 2026, 2:17 pm" and the archive "16 Oct, 2026".
 - The theme's sidebar and footer widgets ("Archives", "Categories") show under Theme Builder bodies on movie pages. Cosmetic; a global footer in the Theme Builder would replace them.
 
 ## Roadmap (not started)

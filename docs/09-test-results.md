@@ -152,7 +152,7 @@ A Haiku subagent limited to Novamira tools (about 98,000 tokens) loaded `divi5-c
 
 The user turned on Has archive for Movies (`/movies/`, HTTP 200). `et_theme_builder_get_template_settings_options()` lists the valid assignment IDs; for Movies: `singular:post_type:movie:all`, `singular:post_type:movie:id:`, `archive:post_type:movie`. Template 112 with body layout 111: heading, a looped-column grid (`loopId` `movie_archive`, `postPerPage` `2`, `12_24` columns) and a `divi/post-nav` with `module.advanced.targetLoop` `movie_archive`. Divi paginates loops through a query parameter named after the `loopId`. Page 1 showed "Movie title" and "Test movie two" with formatted dates and a link to `?movie_archive=2`; page 2 showed "Test movie three" with a link to `?movie_archive=1`. Browser: two cards side by side and a "Next" link. **Pass.**
 
-The ACF Return Format was still `d/m/Y g:i a` at this point (the user had changed the Display Format), so single-page dates still showed unformatted.
+The ACF Return Format was still `d/m/Y g:i a` at this point (the user had changed the Display Format), so single-page dates still showed unformatted. After the user set Return Format to `Y-m-d H:i:s`, the single pages showed "16 October 2026, 2:17 pm", "20 November 2026, 12:00 am" and "25 December 2026, 12:00 am" (custom format `j F Y, g:i a`) and the archive kept "16 Oct, 2026". The `divi5-dynamic` date rules are now verified in both contexts.
 
 ## T8. Reference page from the builder [Run, 2026-10-14]
 
