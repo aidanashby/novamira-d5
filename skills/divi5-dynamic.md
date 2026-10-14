@@ -24,7 +24,12 @@ Post content in a Theme Builder body: use the `divi/post-content` module (no att
 
 Verified field types: text, WYSIWYG (with `enable_html` on, HTML kept), image (an ACF image field works as an image `src`), URL, and the subfields of an ACF group, which are flat meta named `<group>_<subfield>`.
 
-**Date limit:** an ACF date inside a group is stored as `Ymd` (`20261017`). Divi does not know it is a date, so a `date_format` setting reads it as a Unix timestamp and shows 1970. Show it unformatted, or ask the user to make the date a top-level ACF field (not tested here).
+**Dates.** Divi's formatter treats a digits-only value as a Unix timestamp and parses anything else with `strtotime()`. So:
+
+- An ACF **Date Picker** stores `Ymd` (`20261017`), which Divi misreads as 1970 when a `date_format` is set. Ask the user to use a **Date Time Picker**, which stores `Y-m-d H:i:s`.
+- Inside a loop, Divi reads the stored meta, so a Date Time Picker formats correctly (verified: `date_format` `j M, Y` gave "16 Oct, 2026").
+- Outside a loop (`post_meta_key`), Divi reads the ACF **Return Format**. A slashed format such as `d/m/Y g:i a` cannot be parsed, so the raw text shows. Ask the user to set the field's Return Format to `Y-m-d H:i:s`.
+- Date settings: `date_format` (`j M, Y`, `F d, Y`, `default` and others) or `custom` with `custom_date_format`.
 
 ## Loop Builder
 
@@ -38,8 +43,10 @@ Any module or group repeats once per result when `module.advanced.loop` is set:
 ```
 
 - Put the loop on a `divi/group` to repeat a card made of several modules (image, heading, text, button), each using `loop_post_*` values. A loop on a single module (a blurb) repeats that module.
+- For a grid of any length, loop the column instead: one row with `module.decoration.layout` `flexWrap` `wrap` on desktop and phone, holding one `divi/column` that carries the loop, with `flexType` `8_24` on desktop and `24_24` on phone. Each result becomes a column, so three per line on desktop and stacked on phone (verified in a browser at 1280px and 447px).
 - `loopId` is any unique string on the page.
-- Other keys Divi reads: `postOffset`, `excludeCurrentPost`, `ignoreStickysPost`, `includeSpecificPosts`, `excludeSpecificPosts`, `includePostWithSpecificTerms`, `excludePostWithSpecificTerms`, `metaQuery`, `search` (not tested here).
+- `excludeCurrentPost` `"on"` with `orderBy` `"title"` (verified): a "More movies" loop in a single-movie Theme Builder body lists the other movies in title order and leaves out the one being viewed.
+- Other keys Divi reads: `postOffset`, `ignoreStickysPost`, `includeSpecificPosts`, `excludeSpecificPosts`, `includePostWithSpecificTerms`, `excludePostWithSpecificTerms`, `metaQuery`, `search` (not tested here).
 - Use published posts for loop tests; Divi's query is expected to skip drafts (not tested).
 
 Check: every card shows a different post, no `$variable(` text is left in the HTML, and images and links differ per item.

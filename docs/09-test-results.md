@@ -137,6 +137,17 @@ Movies (`movie`, ACF group "Movie custom fields": `text_field`, `image_field`, `
 - **CPT single template.** Body layout 98 plus template 99 (`singular:post_type:movie:all`) created with `et_theme_builder_store_template()` and linked in post 85. Current-post names: `post_title`, `post_featured_image`, `post_meta_key` with `select_meta_key` `custom_meta_<field>`; `post_content` is not a dynamic name, use `divi/post-content`. Browser: movie 91 shows title, text field, WYSIWYG, website URL, post content, its featured image and its different ACF image; the Sample Page is unchanged.
 - New skill `divi5-dynamic`; `divi5-theme-builder` gained the create-template recipe.
 
+## T15. Dates and loop filters [Run, 2026-10-14]
+
+- Divi's `ModuleUtils::format_date()` treats digits-only values as Unix timestamps and parses other strings with `strtotime()`. ACF Date Picker stores `Ymd`, so it shows 1970.
+- After the user switched `date_field` to a Date Time Picker (stores `Y-m-d H:i:s`), the loop shows "16 Oct, 2026", "20 Nov, 2026", "25 Dec, 2026" with `date_format` `j M, Y`.
+- Outside a loop, `post_meta_key` reads ACF's Return Format (`d/m/Y g:i a`), so the custom display format is ignored and the raw text shows. Fix proposed to the user: Return Format `Y-m-d H:i:s`.
+- `excludeCurrentPost` `on` with `orderBy` `title`: each single movie page's "More movies" loop lists the other two movies in title order.
+
+## Fresh-agent test of divi5-dynamic and divi5-theme-builder (Haiku) [Run, 2026-10-14]
+
+A Haiku subagent limited to Novamira tools (about 98,000 tokens) loaded `divi5-core`, `divi5-dynamic` and `divi5-theme-builder` unprompted. Task 1, "S6 Movies grid" (draft 109): it looped a `divi/column` (`8_24` desktop, `24_24` phone) inside a row with `flexWrap: wrap`, with cards of image, heading, ACF text and link; no unresolved variables. Claude's browser check: three across at 1280px, stacked at 447px. Task 2 (read only): it correctly reported template 99, its assignment, and body layout 98's contents. **Pass.** The looped-column grid was added to `divi5-dynamic`.
+
 ## T8. Reference page from the builder [Run, 2026-10-14]
 
 The user built page ID 41 "T8 Reference" and confirmed drafts 28, 33 and 34 look correct in the Visual Builder (so the accordion shape from `module.json`, the image shape and the parse, append, serialise edit all pass in the builder).
