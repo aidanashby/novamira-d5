@@ -43,7 +43,7 @@ Open, in order (resume here):
 5. Done: step 7 skipped (no friction a helper would fix); step 8 memo written; gates (d) option 1 and (e) no Pro decided by the user.
 6. Done: Claude's 13 test drafts moved to the bin. User pages 10, 18, 41 and library item 22 kept. Next if wanted: a `divi5-dynamic` skill (Loop Builder, ACF; the user created CPT `movie` "Movies" with ACF group "Movie custom fields": `text_field` text, `image_field` image, `wysiwyg_field` wysiwyg, `group` group; no posts yet; Divi builder not enabled for it), font and number variables, Krystal staging cache test.
 
-In progress (14 October, 22:30): Theme Builder test. The user is building a template assigned only to "S5 Contact" with a custom header ("TB header text") and footer ("TB footer text"); Claude may edit those two layouts only after the user says so.
+Done (22:40): Theme Builder test passed; skill `divi5-theme-builder` (post 90) added. Also done this evening: T12 all-modules page (ID 65), clone of published page (ID 66), visual checks in the built-in browser pane (user signed in). See docs/09.
 
 Learnings not to lose: skill storage strips all backslashes (docs/09); Save to Library is under the section's three-dot hover menu in 5.15.1, not right-click; Divi skips saving when nothing changed; the local docs describe breakpoint direction wrongly.
 
