@@ -10,16 +10,18 @@
 
 ## Recommended order
 
-| Step | Action | Needs user approval to write? |
+Claude Code leads this order end to end. The standing approvals and gates in CLAUDE.md decide when it must stop and ask.
+
+| Step | Action | Approval |
 |---|---|---|
 | 1 | Connect Claude Code to the Studio site (CLAUDE.md). | Creates an application password in wp-admin (user does it). |
 | 2 | Ask the user to create a baseline page in the Visual Builder: one section, row, column, heading, text, button, saved. Record its `post_content` and all postmeta (read-only). | No site write by Claude. |
-| 3 | Run T1 to T6 on throwaway draft pages. | Yes (draft pages, log in docs/08). |
-| 4 | Write the User Context (draft below). Re-read `novamira/agent-context` to confirm it appears. | Yes. |
-| 5 | Write `divi5-core` v0.1 as a Novamira skill. Test with a fresh session on the sample prompts below. Iterate. | Yes. |
-| 6 | Add `divi5-styling` and `divi5-modules` after their rules are verified. | Yes. |
-| 7 | If building pages shows repeated friction, add the sandbox helper. | Yes. |
-| 8 | Decide on Pro and on design tokens. | Decision. |
+| 3 | Run T1 to T6 on throwaway draft pages. | Standing approval. Gate (a) if T1 fails. |
+| 4 | Write the User Context (draft below). Re-read `novamira/agent-context` to confirm it appears. | Standing approval, after the user sees the final text once (gate c). |
+| 5 | Write `divi5-core` v0.1 as a Novamira skill. Test with a fresh session on the sample prompts below. Iterate. | Standing approval. |
+| 6 | Add `divi5-styling` and `divi5-modules` after their rules are verified. | Standing approval. |
+| 7 | If building pages shows repeated friction, add the sandbox helper. | Standing approval (one file in the sandbox). |
+| 8 | Write `docs/10-decision-memo.md`, then decide on Pro and on design tokens. | User decision (gates d and e). |
 
 ## Verification tests (draft pages on the Studio site only)
 

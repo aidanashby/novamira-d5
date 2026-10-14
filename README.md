@@ -1,6 +1,6 @@
 # novamira-d5
 
-Handoff pack for the Claude, Novamira and Divi 5 project. Written by Claude in a chat session on 14 October 2026 so that Claude Code can continue from where that session stopped.
+Handoff pack for the Claude, Novamira and Divi 5 project. Written by Claude in a chat session on 14 October 2026 so that Claude Code can continue from where that session stopped. This folder is the local clone of a private GitHub repo.
 
 ## Goal
 
@@ -23,7 +23,7 @@ Not done:
 - Divi 5.12 and 5.13 release notes were not reviewed. Divi's own `module.json` schemas were not cross-checked.
 - The OAuth sign-in route failed on Studio (docs/02). It is not needed, because the application password route works.
 
-Open decisions (the user answered "no preference" when asked, so these are undecided):
+Open decisions (the user had no preference when asked, so Claude Code raises each at a gate, see CLAUDE.md, "Standing approvals"):
 1. Which writes to make first. Recommended order is in docs/06.
 2. How design tokens should work with Divi (skip Novamira Design, capture a DESIGN.md for guidance and lint only, or materialise tokens into Divi variables). Recommended default: skip for now.
 3. Free versus Pro, after the verification tests.
@@ -54,5 +54,5 @@ Used throughout, following the convention in `Projects\divi5-builder\divi5-build
 
 1. Read `CLAUDE.md` and docs 01 to 06.
 2. Connect Claude Code to the Studio site (CLAUDE.md, "Connecting Claude Code").
-3. Run verification test T1 from docs/06 with the user's go-ahead. Log it in docs/08.
-4. Only after T1 and T2 pass, write the skills.
+3. Lead the whole plan in docs/06 (CLAUDE.md, "Plan to execute"), stopping only at the gates listed under "Standing approvals". Log every site write in docs/08.
+4. Write skills only with rules that passed the tests. Keep this README status current.
