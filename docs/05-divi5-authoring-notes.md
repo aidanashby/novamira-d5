@@ -2,6 +2,26 @@
 
 Distilled from `divilovewp/divi5-skill` v0.6.9 (Divi 5.11.1, MIT, see NOTICE.md) and from `Projects\divi5-builder\divi5-builder-review.md` (measured on Divi 5.14.0 in WP Studio). Rewritten in condensed form. Every item is [Skill] unless marked. **Do not put any of this into a skill as fact until it has been run on the Studio site (5.15.1).** Tests are in docs/06.
 
+## Status after T0 to T6 (14 October 2026, Divi 5.15.1) [Run]
+
+Results in docs/09. This table overrides the text below where they differ.
+
+| Item | Status |
+|---|---|
+| Placeholder wrapper, hierarchy, `builderVersion` on every block | Confirmed (T0, Divi's own PHP) |
+| Method | `serialize_blocks()` from PHP arrays reproduces the builder's storage byte for byte (T1). Use it, not hand-written strings. |
+| Escaping | Values are HTML (`&amp;`, `<strong>`, `<p>` optional). WordPress's serialiser writes `&`, `"`, `<`, `>`, the same as the builder. Do not pre-escape. |
+| Meta | Five keys are enough: `_et_pb_use_builder on`, `_et_pb_use_divi_5 on`, `_et_pb_page_layout` (`et_full_width_page` for full width; the builder default is `et_right_sidebar`), `_et_pb_side_nav off`, `_et_pb_post_hide_nav default`. The builder adds its settings meta on first save. `_et_builder_version` and `_et_pb_built_for_post_type` are not used on pages. |
+| Row and column keys | The builder writes `columnStructure`, `flexColumnStructure`, `layout.flexWrap` on rows and `advanced.type`, `sizing.flexType` on columns. A row with only `flexColumnStructure` and a column with only `flexType` render, open and survive a save unchanged. |
+| Rules 1, 2, 3, 4, 5, 11 | Confirmed (T5, T6) |
+| Rule 8 breakpoints | Confirmed: phone `max-width: 767px`, tablet `768px` to `980px`, desktop `min-width: 981px`; disabled breakpoints emit nothing. The local docs' wording on direction is wrong. |
+| Rule 12 `htmlAttributes` | Breakpoint-outermost form renders but is legacy. Current form: `module.decoration.attributes.desktop.value.attributes[]` with `{id: uuid, name: "id" or "class", value, adminLabel}`. Per-key form renders nothing. |
+| Migrations | Content stamped 5.15.1 is never migrated, so legacy shapes are not repaired. |
+| Components | `divi/global-layout` is current (5.15.1): `{"globalModule":"<id>","blockName":"divi/section",...,"localAttrs":{...},"localAttrOverridePaths":[]}` wrapping a copy of the children with `syncNodeId`s. Do not hand-write; insert in the builder. |
+| Dynamic-assets cache | After any programmatic write call `ET_Core_PageResource::remove_static_resources($id, 'all')`. Previews skip the cache, so only published pages are affected. |
+| Kses | Not applied for user 1 (content stored intact, T1 and T6). |
+| Not yet verified | Module gotchas list, rules 6, 7, 9 to 10 beyond the basic row, 13 to 16, presets and variables. |
+
 ## Page model
 
 - Divi 5 stores a page as WordPress block markup in `post_content`: `<!-- wp:divi/<module> {json attributes} -->` with a self-closing form (` /-->`) for modules without children.
@@ -55,7 +75,7 @@ Distilled from `divilovewp/divi5-skill` v0.6.9 (Divi 5.11.1, MIT, see NOTICE.md)
 - Authors cannot create pages. A Contributor's write silently loses scripts, styles, iframes and `onclick` (kses). An Editor's write is stored intact. Relevant when writing from other users. Novamira runs as the connected administrator (user ID 1 here), so kses filtering is not expected, but `wp_insert_post` applies kses unless the user has `unfiltered_html`. Verify.
 - Compiled defaults can override presets: pinning weight, alignment or icon on every button beats a preset's values (same specificity, later rule wins). Do not write default values into modules that use presets.
 
-## Minimal skeleton to test (UNTESTED)
+## Minimal skeleton (T1a: renders, opens in the builder and survives a save on 5.15.1; prefer `serialize_blocks()`)
 
 ```
 <!-- wp:divi/placeholder -->

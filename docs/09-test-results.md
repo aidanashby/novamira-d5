@@ -31,7 +31,9 @@ Post meta written by the builder: `_et_pb_use_builder on`, `_et_pb_use_divi_5 on
 
 Both use meta `_et_pb_use_builder on`, `_et_pb_use_divi_5 on`, `_et_pb_page_layout et_full_width_page`, `_et_pb_side_nav off`, `_et_pb_post_hide_nav default`.
 
-Conclusion so far: `serialize_blocks()` from PHP arrays reproduces the builder's storage exactly, so it is the method for the skill. Builder check pending (user opens IDs 24, 25 and 9; then saves 24 unchanged for a diff). Pre-save hashes: 24 md5 `0db281de32da332a8d2794024805f48c` (1001 bytes), 25 `ef5493e1f2e260b007cf090a1d259e15` (1117), 9 `82c5d1b00a351f3f8cd5647f1e76fc14` (2719).
+Conclusion so far: `serialize_blocks()` from PHP arrays reproduces the builder's storage exactly, so it is the method for the skill. Builder check (user, 2026-10-14): IDs 24, 25 and 9 opened in the Visual Builder with every module visible and editable. The text editor shows `<p>Fish &amp; chips cost "£5" <strong>today</strong>.</p>` for both 24 and 25 (the editor adds `<p>` to 25's unwrapped value) and the front end shows `&`. In 9 the only empty modules were the two broken variants (`attrs` wrapper, `body` key). **Pass.**
+
+Round trip: saving 24 unchanged did not write (Divi skips a save with no changes). After the user changed only the heading text and saved, the content differed from the pre-save version only by the heading text and `\n` between blocks. The builder did not add `columnStructure`, `advanced.type` or `flexWrap`, and kept the escaping. It added its own settings meta (`_et_pb_post_settings_title`, `_divi_off_canvas_data`, `_et_pb_show_page_creation off` and blank `_et_pb_*` keys) and kept the five keys written by PHP. **Pass: a minimal page is stable through a builder save, and the five-key meta set is enough.** Pre-save hashes: 24 md5 `0db281de32da332a8d2794024805f48c` (1001 bytes), 25 `ef5493e1f2e260b007cf090a1d259e15` (1117), 9 `82c5d1b00a351f3f8cd5647f1e76fc14` (2719).
 
 ## T3. Components [Run, 2026-10-14]
 
