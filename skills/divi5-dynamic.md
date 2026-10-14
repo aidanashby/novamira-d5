@@ -47,7 +47,14 @@ Any module or group repeats once per result when `module.advanced.loop` is set:
 - `loopId` is any unique string on the page. It is also the pagination parameter: `?<loopId>=2` shows page 2.
 - Pagination (verified on the Movies archive): add a `divi/post-nav` module with `module.advanced.targetLoop` `{"desktop":{"value":"<loopId>"}}`. With `postPerPage` `2` and three movies it showed two movies and a link to `?movie_archive=2`, and page 2 showed the third with a link back.
 - `excludeCurrentPost` `"on"` with `orderBy` `"title"` (verified): a "More movies" loop in a single-movie Theme Builder body lists the other movies in title order and leaves out the one being viewed.
-- Other keys Divi reads: `postOffset`, `ignoreStickysPost`, `includeSpecificPosts`, `excludeSpecificPosts`, `includePostWithSpecificTerms`, `excludePostWithSpecificTerms`, `metaQuery`, `search` (not tested here).
+- Filter by custom field with `metaQuery`, a list of `{"key","value","compare","type"}` (verified on SQLite):
+  - `[{"key":"group_date_field","value":"2026-11-01 00:00:00","compare":">=","type":"DATETIME"}]` gave the two later movies.
+  - `[{"key":"text_field","value":"Second","compare":"LIKE"}]` gave the one match.
+  - `BETWEEN` takes `"from,to"` in `value` (comma-separated); `IN` and `NOT IN` take a comma list.
+  - Compares: `=`, `!=`, `>`, `>=`, `<`, `<=`, `LIKE`, `NOT LIKE`, `IN`, `NOT IN`, `BETWEEN`, `NOT BETWEEN`, `EXISTS`, `NOT EXISTS`, `REGEXP`. Types: `NUMERIC`, `DATE`, `DATETIME`, `DECIMAL`, `CHAR` and others.
+  - Several items are always joined with OR, never AND (Divi sets the relation). For a range use one `BETWEEN` item. For two different conditions at once, tell the user Divi's loop cannot do it.
+  - `value` is fixed text, so "from today" loops need the date written in, and do not move on by themselves.
+- Other keys Divi reads: `postOffset`, `ignoreStickysPost`, `includeSpecificPosts`, `excludeSpecificPosts`, `includePostWithSpecificTerms`, `excludePostWithSpecificTerms`, `search` (not tested here).
 - Use published posts for loop tests; Divi's query is expected to skip drafts (not tested).
 
 Check: every card shows a different post, no `$variable(` text is left in the HTML, and images and links differ per item.

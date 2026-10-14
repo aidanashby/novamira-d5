@@ -34,7 +34,7 @@ The skill sources in `skills/` match the stored skills byte for byte (md5 checke
 | Styling | Backgrounds, gradients, video backgrounds, spacing, borders, shadows, fonts, hover, sticky, position, breakpoints (T10, T12) |
 | Clone a published page | Byte-identical draft copy, original untouched (T12) |
 | Theme Builder | Edit layouts; create single and archive templates for a post type (T13, T14, T16) |
-| Loops and ACF | Group, blurb and column loops; ACF text, WYSIWYG, image, URL, date; `excludeCurrentPost`; pagination (T14 to T16) |
+| Loops and ACF | Group, blurb and column loops; ACF text, WYSIWYG, image, URL, date; `excludeCurrentPost`; pagination; filters by custom field (T14 to T17) |
 | Fresh agents | Seven fresh agents with only the skills completed every task after one fix round (six on Opus, one on Haiku) |
 
 ## History
@@ -52,7 +52,8 @@ The skill sources in `skills/` match the stored skills byte for byte (md5 checke
 
 | Next step | Why | Needs |
 |---|---|---|
-| Loop filters by meta value, term and search | Date-based listings (the user's Date Conditions for Divi plugin) | `metaQuery` shape from source or a builder-saved loop |
+| Loop filters by term and search | Taxonomy and keyword listings | A post type with a taxonomy (Movies has none) |
+| Moving date windows ("from today") | Divi's `metaQuery` takes fixed values only and joins items with OR (T17); the user's Date Conditions for Divi plugin targets this | Test the plugin with a Movies loop |
 | Font and number variable references | Use the site's own fonts and sizes without writing globals | A test like T10 |
 | Presets | Agents could apply existing presets | Reading only is allowed; writing is gated |
 | Staging copy on Krystal | Check LiteSpeed caching and remote connection | User's approval; Novamira is dev and staging only |

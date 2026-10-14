@@ -154,6 +154,18 @@ The user turned on Has archive for Movies (`/movies/`, HTTP 200). `et_theme_buil
 
 The ACF Return Format was still `d/m/Y g:i a` at this point (the user had changed the Display Format), so single-page dates still showed unformatted. After the user set Return Format to `Y-m-d H:i:s`, the single pages showed "16 October 2026, 2:17 pm", "20 November 2026, 12:00 am" and "25 December 2026, 12:00 am" (custom format `j F Y, g:i a`) and the archive kept "16 Oct, 2026". The `divi5-dynamic` date rules are now verified in both contexts.
 
+## T17. Loop filters by custom field [Run, 2026-10-14]
+
+`module.advanced.loop.desktop.value.metaQuery` is a list of `{key, value, compare, type}` (also accepts `metaKey`, `metaValue`), built into a `meta_query` by `LoopUtils::build_meta_query()`. Draft 116, three column loops over Movies:
+
+| Filter | Result |
+|---|---|
+| `group_date_field` `>=` `2026-11-01 00:00:00`, type `DATETIME` | Test movie two, Test movie three (same as a plain `WP_Query`) |
+| `text_field` `LIKE` `Second` | Test movie two |
+| `group_date_field` `BETWEEN` `2026-11-01 00:00:00,2026-12-01 00:00:00`, type `DATETIME` | Test movie two |
+
+DATETIME comparison works on the SQLite database. Limits from the source: several items are always joined with `OR` (Divi sets `relation`), so two different conditions cannot both be required; `value` is fixed text, so there is no "today" token and date windows do not move on by themselves. The second limit is the gap the user's Date Conditions for Divi plugin targets.
+
 ## T8. Reference page from the builder [Run, 2026-10-14]
 
 The user built page ID 41 "T8 Reference" and confirmed drafts 28, 33 and 34 look correct in the Visual Builder (so the accordion shape from `module.json`, the image shape and the parse, append, serialise edit all pass in the builder).
