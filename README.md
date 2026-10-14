@@ -37,11 +37,11 @@ Done (details in docs/09, every site write in docs/08):
 
 Open, in order (resume here):
 1. Done 20:15: the 2-byte difference was the local copy (line 19 had literal characters where the Write tool had decoded unicode escapes). Local file now matches the stored skill (md5 043f1d0f...). `divi5-core` is listed in `agent-context`. Studio update moved PHP to 8.3.35.
-2. Done: user confirmed drafts 28, 33, 34 in the builder. Pending builder check: 46 "T9 Module shapes", 48 "S1b Landing Page".
-3. Step 5: round 1 scored (3 pass, S1 partial); round 2 fixed S1 (draft 48 passes). User still to judge the drafts. See docs/09.
-4. Step 6: read the unread divi5-skill files (docs/04), then write `divi5-styling` and `divi5-modules`.
-5. Steps 7 and 8: sandbox helper only if friction justifies it; `docs/10-decision-memo.md`; gates (d) design tokens and (e) free versus Pro.
-6. Clean-up: delete Claude's drafts 9, 24, 25, 26, 28 and the sample-task drafts. The user's pages 10, 18 and library item 22 stay unless the user says otherwise.
+2. Done: user confirmed drafts 28, 33, 34, 46 and 48 in the builder. Not yet opened: 55 "S5 Contact".
+3. Done: step 5, round 1 (3 pass, S1 partial) and round 2 (S1 passes); user accepted the drafts. See docs/09.
+4. Done: `divi5-styling` (post 53) and `divi5-modules` (post 54) written from T10 and T11; fresh-agent test S5 passed.
+5. Step 7 skipped (no friction a helper would fix). Step 8: `docs/10-decision-memo.md` written; gates (d) and (e) put to the user.
+6. Clean-up: delete Claude's drafts 9, 24, 25, 26, 28, 33, 34, 35, 46, 48, 49, 50, 55 (all listed in docs/08). The user's pages 10, 18 and library item 22 stay unless the user says otherwise.
 
 Learnings not to lose: skill storage strips all backslashes (docs/09); Save to Library is under the section's three-dot hover menu in 5.15.1, not right-click; Divi skips saving when nothing changed; the local docs describe breakpoint direction wrongly.
 

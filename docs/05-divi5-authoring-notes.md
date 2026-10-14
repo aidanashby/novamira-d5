@@ -20,7 +20,11 @@ Results in docs/09. This table overrides the text below where they differ.
 | Components | `divi/global-layout` is current (5.15.1): `{"globalModule":"<id>","blockName":"divi/section",...,"localAttrs":{...},"localAttrOverridePaths":[]}` wrapping a copy of the children with `syncNodeId`s. Do not hand-write; insert in the builder. |
 | Dynamic-assets cache | After any programmatic write call `ET_Core_PageResource::remove_static_resources($id, 'all')`. Previews skip the cache, so only published pages are affected. |
 | Kses | Not applied for user 1 (content stored intact, T1 and T6). |
-| Not yet verified | Module gotchas list, rules 6, 7, 9 to 10 beyond the basic row, 13 to 16, presets and variables. |
+| Rows (T8) | Use Divi's layout templates (`equal-columns_N` and others in `constant-library.js`): row `nowrap` desktop, `wrap` phone; column `flexType` per width, `24_24` phone. `columnStructure` and `advanced.type` are legacy. |
+| Styling (T10) | Background, gradient, spacing, border, box shadow (needs `style`), sizing, filters, position and z-index, fonts, hover, per-breakpoint values: all confirmed. |
+| Rule 13 variables | Colour references to existing `gcid-` IDs confirmed. Font and number references not tested. |
+| Module gotchas (T8, T11) | Confirmed: blurb title `{text}`, CTA default background, testimonial portrait (`src` and `url` both work), team member image `url` (`src` fails), contact form adds CAPTCHA. Not tested: divider, menu, payment button, gallery, fullwidth header, number counter. |
+| Not yet verified | Rules 6, 10 (grid), 14 to 16, presets, font and number variables, the untested gotchas above. |
 
 ## Page model
 

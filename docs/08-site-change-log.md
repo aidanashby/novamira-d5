@@ -30,4 +30,10 @@ The site currently has: 0 user skills, no User Context, no active design, an emp
 | 2026-10-14 | Draft page ID 46 "T9 Module shapes" (three blurbs, one with media image 38; CTA with its own background; image module; four-column row) | `execute-php`, skill recipe | Read back identical; render shows every text, the image file and the CTA colour; phone wrap rule emitted | `wp_delete_post(46, true)` |
 | 2026-10-14 | `divi5-core` round-2 content (layout templates, module-choice rule, blurb, CTA and image shapes) | `novamira/skill-edit` | Stored md5 `2489a461...` equals `skills/divi5-core.md` | Earlier text is in git history; `skill-edit` it back |
 
+| 2026-10-14 | Draft page ID 49 "T10 Styling" (styling variants), later edited: first text module background set to a `gcid-primary-color` variable reference | `execute-php` | Read back identical; CSS checked per variant | `wp_delete_post(49, true)` |
+| 2026-10-14 | Draft page ID 50 "T11 Modules" (tabs, toggle, two testimonials, contact form, slider, icon list, team member), later edited: team member image key `src` changed to `url` | `execute-php` | Read back identical; every text renders | `wp_delete_post(50, true)` |
+| 2026-10-14 | User skills `divi5-styling` (post ID 53) and `divi5-modules` (post ID 54) | `novamira/skill-write` | Stored md5 equals `skills/divi5-styling.md` and `skills/divi5-modules.md`; 0 backslashes | `novamira/skill-delete` for each slug |
+
+| 2026-10-14 | Draft page ID 55 "S5 Contact" (fresh-agent test of all three skills) | `execute-php` (agent following the skills) | Claude checked: draft; primary-colour variable, shadow and phone wrap emitted | `wp_delete_post(55, true)` |
+
 User-created test pages (not Claude's; delete only if the user asks): ID 10 "T0 Baseline", ID 18 "T3 Component test", library item ID 22 "T3 Section Component", ID 41 "T8 Reference". Media items 36 to 40 uploaded by the user.

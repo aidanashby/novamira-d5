@@ -86,6 +86,27 @@ Fixes for round 2: a rule to use the module the user names (blurb, call to actio
 
 Fresh agent, same prompt, after the round-2 skill update. Draft ID 48 "S1b Landing Page": hero (heading, text, button), `equal-columns_3` row of three `divi/blurb`, and `divi/cta`. Claude's check: draft, meta, every block stamped, three blurbs and the CTA render with all texts, `8_24` columns, phone wrap rule emitted. **Pass** (builder check pending). The agent skipped the skill's render step (it read back only); minor, noted for the next skill revision.
 
+## T10. Styling [Run, 2026-10-14]
+
+Draft ID 49, one text module per variant, CSS read with `Style::render()`. Emitted as expected: background colour; linear gradient (`linear-gradient(90deg, ...)`); padding (written with `!important`); margin; border style, colour and radius; box shadow with `style: preset1`; `maxWidth`, `minHeight`; body font `size`, `color`, `weight`, `lineHeight`, `letterSpacing`, `textAlign`; hover background (`:hover` rule); `filters.opacity` (`filter: opacity(91%)`) and `backdropBlur` (with `-webkit-` prefix); `position.mode relative` with `zIndex`; per-breakpoint padding (tablet in `max-width: 980px`, phone in `max-width: 767px`); section background and padding; row `maxWidth`. **Not emitted:** box shadow without `style` (skill's caveat confirmed).
+
+Global colour reference `$variable({"type":"color","value":{"name":"gcid-primary-color","settings":{}}})$` as a background colour renders `background-color: var(--gcid-primary-color)`. `ET\Builder\Packages\GlobalData\GlobalData::get_global_colors()` lists five colours (primary, secondary, heading, body, link); `get_global_variables()` lists two font variables (`--et_global_heading_font`, `--et_global_body_font`, both Open Sans) and empty numbers, strings, images, links and colours. Global data is stored in `et_divi` option key `et_global_data`.
+
+## T11. Modules [Run, 2026-10-14]
+
+Draft ID 50. All texts render for tabs (first tab active), toggle (closed), testimonial (content, author, job title, company `{text, linkUrl}`), contact form (title, button, three fields, CAPTCHA added), slider (two slides, button), icon list and team member.
+
+- Testimonial `portrait.innerContent`: `{src}` (the `module.json` key) and `{url}` (the skill's claim) both render.
+- Team member `image.innerContent`: `{src}` renders nothing (`et_pb_team_member_no_image`); `{url}` renders. The skill's claim holds for this module.
+
+## Step 6. divi5-styling and divi5-modules [Run, 2026-10-14]
+
+Written from T8, T10 and T11 results only; unverified items are listed as such in each skill. The divi5-skill files read for this step (`DIVI5-STYLING.md`, `DIVI5-MODULES-INTERACTIVE.md`, `DIVI5-MODULES-MEDIA.md`) were treated as claims to test. Still unread: `DIVI5-DESIGN-PROCESS.md`, `DIVI5-PRESETS.md`, `DIVI5-PATTERNS.md`, `-DATA`, `-DYNAMIC`, `-WOOCOMMERCE`, `WORKFLOW.md` (presets and variables writes are outside the standing approvals; dynamic content is a later `divi5-dynamic` skill).
+
+## Step 6 test. Styled contact page [Run, 2026-10-14]
+
+Fresh agent, task needing styling and modules. Draft ID 55 "S5 Contact". It loaded `divi5-core`, `divi5-styling` and `divi5-modules` unprompted, listed global colours before referencing `gcid-primary-color`, used section background and padding, white centred heading and text, `equal-columns_2` with a testimonial and a contact form (three fields), radius and box shadow with `style`, and did not set a recipient email (asked instead). Claude checked: phone `flex-wrap: wrap` at 767px for both rows, phone column classes, primary-colour variable and shadow emitted. **Pass.** Step 7 (sandbox helper) skipped: no repeated friction a helper would fix.
+
 ## T8. Reference page from the builder [Run, 2026-10-14]
 
 The user built page ID 41 "T8 Reference" and confirmed drafts 28, 33 and 34 look correct in the Visual Builder (so the accordion shape from `module.json`, the image shape and the parse, append, serialise edit all pass in the builder).
