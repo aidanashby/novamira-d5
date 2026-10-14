@@ -53,6 +53,22 @@ Verdict: `divi/global-layout` is current in 5.15.1. docs/04's "probably stale" w
 - Divi's own invalidation is `ET_Core_PageResource::remove_static_resources($post_id, 'all')`, which calls `clear_post_meta_caches()` (deletes `et_enqueued_post_fonts`, `_et_dynamic_cached_shortcodes`, `_et_dynamic_cached_attributes`, `_et_builder_module_features_cache`, `_divi_dynamic_assets_cached_modules`, `_divi_dynamic_assets_cached_feature_used`, `_divi_dynamic_assets_canvases_used`) and removes static CSS. It returns early unless the current user can `edit_posts`, which holds under Novamira (user 1). Tested on draft 26: planted cache meta was removed.
 - Rule for the skill: after any programmatic write, call `ET_Core_PageResource::remove_static_resources($id, 'all')`. A live published-page reproduction was not run (publishing is outside the standing approvals) and is not needed for the rule.
 
+## Editing round trip [Run, 2026-10-14]
+
+`serialize_blocks(parse_blocks($content)) === $content` for T0 (ID 10), T3 with components (ID 18) and T1a after a builder save (ID 24): exact, whitespace included. Parse, modify, serialise is safe for edits and copies.
+
+## T7. divi5-core recipe [Run, 2026-10-14]
+
+Draft ID 28, built by running the skill's recipe as written: two columns (`1_2,1_2`, `equal-columns_2`, columns `1_2` / `12_24` with phone `24_24`, row phone `flexWrap: wrap`), then a parse, append, serialise edit adding a text module (with `null` appended to the column's `innerContent`). Stored content identical; all three texts render; column classes `et_flex_column_24_24_phone`; CSS `@media only screen and (max-width: 767px) { .et_pb_row_0 {flex-wrap: wrap;} }`. Builder URL form `?page_id=28&preview=true&et_fb=1`. Not yet opened in the builder by the user.
+
+## User Context [Run, 2026-10-14]
+
+Written with `\Novamira\Context\instructions_update_content()` (writes both options; the admin screen only unslashes, no sanitising). "Enabled" is the `novamira/user-context` feature toggle, already on. `novamira/agent-context` shows the text first in `instructions`, ahead of Novamira's system context. The system context still says to load `novamira-design` and to ask which builder to use; the User Context and `divi5-core` override both.
+
+## Skill storage strips backslashes [Run, 2026-10-14]
+
+`skill-write` and `skill-edit` remove every backslash from `content`, including doubled ones (`&` became `u0026`, `ET\Builder\...` lost its separators, `"\n"` became a real newline). Skills must contain no backslashes: describe escapes in words and build namespaced class names with `implode(chr(92), [...])`. Check stored content with `substr_count($c, chr(92))`.
+
 ## T5. Schema cross-check (offline, read-only) [Run, 2026-10-14]
 
 Source: the site's own theme, `<Studio sites folder>\divi-5\wp-content\themes\Divi` (style.css `Version: 5.15.1`), so no 5.14.0 versus 5.15.1 gap. Module metadata is in `includes/builder-5/visual-builder/packages/module-library/src/components/<module>/` (116 `module.json` files, plus `module-default-render-attributes.json` and `module-default-printed-style-attributes.json`). PHP is in `includes/builder-5/server/`.

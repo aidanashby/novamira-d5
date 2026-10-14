@@ -10,7 +10,7 @@ Let Claude build and edit Divi 5 pages on WordPress sites through the free Novam
 2. Divi 5 knowledge delivered to the agent as Novamira skills, adapted from the MIT-licensed `divilovewp/divi5-skill` and checked against Divi 5.15.1, the local Divi docs and the live site.
 3. A decision on whether Novamira Pro (which adds Divi 5 module-level tooling) is worth buying, based on how far the free route gets.
 
-## Status at handoff (14 October 2026, about 15:50 BST)
+## Status at handoff from the chat session (14 October 2026, about 15:50 BST, superseded by the status below)
 
 Done:
 - Novamira 1.12.9 (free) is installed on the local Studio site with AI Abilities enabled. Claude Desktop is connected through the Novamira MCP bundle (application password). Read-only probes worked.
@@ -27,6 +27,23 @@ Open decisions (the user had no preference when asked, so Claude Code raises eac
 1. Which writes to make first. Recommended order is in docs/06.
 2. How design tokens should work with Divi (skip Novamira Design, capture a DESIGN.md for guidance and lint only, or materialise tokens into Divi variables). Recommended default: skip for now.
 3. Free versus Pro, after the verification tests.
+
+## Status (14 October 2026, 17:00 BST, paused by the user)
+
+Done (details in docs/09, every site write in docs/08):
+- Step 1: this Claude Desktop Code-tab session reuses Claude Desktop's Novamira connection (user's choice). No separate application password.
+- Steps 2 and 3: T0 to T7 run and passed. Main results: `serialize_blocks()` from PHP arrays matches the Visual Builder byte for byte; parse, edit, serialise round-trips exactly; five meta keys are enough; drafts open, edit and survive a builder save; `divi/global-layout` is current for components; clear caches with `ET_Core_PageResource::remove_static_resources($id, 'all')`. docs/05 has a status table.
+- Step 4: User Context written and verified (gate c approved). `divi5-core` skill written (post ID 30); source in `skills/divi5-core.md`.
+
+Open, in order (resume here):
+1. Find the 2-byte difference between the stored `divi5-core` (8,797 bytes) and `skills/divi5-core.md` (8,795), then confirm with `skill-get` and `agent-context` that the skill is listed.
+2. User opens draft ID 28 "T7 Skill recipe two columns" in the Visual Builder.
+3. Step 5: run the four sample tasks (docs/06) in a fresh session using only what the site agent sees; score; up to three fix rounds; user judges the drafts.
+4. Step 6: read the unread divi5-skill files (docs/04), then write `divi5-styling` and `divi5-modules`.
+5. Steps 7 and 8: sandbox helper only if friction justifies it; `docs/10-decision-memo.md`; gates (d) design tokens and (e) free versus Pro.
+6. Clean-up: delete Claude's drafts 9, 24, 25, 26, 28 and the sample-task drafts. The user's pages 10, 18 and library item 22 stay unless the user says otherwise.
+
+Learnings not to lose: skill storage strips all backslashes (docs/09); Save to Library is under the section's three-dot hover menu in 5.15.1, not right-click; Divi skips saving when nothing changed; the local docs describe breakpoint direction wrongly.
 
 ## Reading order
 
