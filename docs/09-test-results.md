@@ -128,6 +128,15 @@ The user built a template in Divi, Theme Builder, assigned to page 55 only, with
 
 Claude edited both layouts with parse, modify, serialise (header: section gradient, text colour and size, an added button; footer: replaced with an `equal-columns_2` row of text and social follow). Browser (built-in pane): page 55 shows both edits in `.et-l--header` and `.et-l--footer`, the gradient computes, the footer columns stack at 375px, and the default Divi header is replaced. The Sample Page keeps the default header. **Pass.** New skill `divi5-theme-builder`. Not tested: body layouts, creating templates or changing assignments by PHP (left to the Theme Builder screen).
 
+## T14. Loops, ACF and a CPT Theme Builder template [Run, 2026-10-14]
+
+Movies (`movie`, ACF group "Movie custom fields": `text_field`, `image_field`, `wysiwyg_field`, group `group` with `date_field` date picker and `url_field`). Three published movies (91 by the user, 92 and 93 by Claude).
+
+- **Loop.** `module.advanced.loop` `{enable, loopId, queryType: post_types, subTypes: [{value: movie, label: Movies}], postPerPage, orderBy, order}` on a `divi/group` card and on a `divi/blurb` (draft 94). Each repeated three times with the right title, featured image (thumbnail size honoured), ACF text, WYSIWYG HTML and permalink. Names: `loop_post_title`, `loop_post_featured_image`, `loop_post_link`, `loop_post_meta_key_manual_custom_field` with `select_loop_meta_key` `loop_post_meta_key_<field>`.
+- **Date limit.** The group subfield date (`group_date_field`, stored `Ymd`) with any `date_format` renders 1970: Divi gets no `acf_type` for it, and `format_date` reads `20261017` as a timestamp. Adding `acf_type` by hand is ignored. `loop_acf_<group>|||<sub>` options exist only for ACF repeaters (Pro). Shown unformatted instead.
+- **CPT single template.** Body layout 98 plus template 99 (`singular:post_type:movie:all`) created with `et_theme_builder_store_template()` and linked in post 85. Current-post names: `post_title`, `post_featured_image`, `post_meta_key` with `select_meta_key` `custom_meta_<field>`; `post_content` is not a dynamic name, use `divi/post-content`. Browser: movie 91 shows title, text field, WYSIWYG, website URL, post content, its featured image and its different ACF image; the Sample Page is unchanged.
+- New skill `divi5-dynamic`; `divi5-theme-builder` gained the create-template recipe.
+
 ## T8. Reference page from the builder [Run, 2026-10-14]
 
 The user built page ID 41 "T8 Reference" and confirmed drafts 28, 33 and 34 look correct in the Visual Builder (so the accordion shape from `module.json`, the image shape and the parse, append, serialise edit all pass in the builder).
