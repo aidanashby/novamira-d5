@@ -107,6 +107,21 @@ Written from T8, T10 and T11 results only; unverified items are listed as such i
 
 Fresh agent, task needing styling and modules. Draft ID 55 "S5 Contact". It loaded `divi5-core`, `divi5-styling` and `divi5-modules` unprompted, listed global colours before referencing `gcid-primary-color`, used section background and padding, white centred heading and text, `equal-columns_2` with a testimonial and a contact form (three fields), radius and box shadow with `style`, and did not set a recipient email (asked instead). Claude checked: phone `flex-wrap: wrap` at 767px for both rows, phone column classes, primary-colour variable and shadow emitted. **Pass.** Step 7 (sandbox helper) skipped: no repeated friction a helper would fix.
 
+## T12. All modules, clone, visual checks [Run, 2026-10-14]
+
+**All modules.** Draft ID 65: every registered top-level module (63; Contact Form 7 not registered), in a section with a linear gradient, an `offset-columns_9` row with a sticky note in the narrow column, an offset text module, three font families, a fullwidth section and (added later) a video-background section. Render: no PHP output, every module wrapper present, all marker texts present except three explained below. In the built-in browser (signed in by the user), 62 of 65 top-level modules have a visible box. Zero-size: dropdown (hidden until triggered), lottie (no animation URL), fullwidth map (no Google Maps API key). Empty or different by design: signup (no email provider), payment button (no provider), post filter ("Select a Loop"), login (shows "Log out" to an admin).
+
+- Fonts: `family` Georgia (text), Roboto Slab (heading), Lato (button `button.decoration.font.font`) all computed and loaded; Divi enqueued Roboto Slab from Google Fonts.
+- Sticky `module.decoration.sticky` `{"position":"top","offset":{"top":"40px"}}`: stayed pinned on scroll (seen in browser). No CSS: applied by script.
+- Position `{"mode":"relative","offset":{"vertical":"15px","horizontal":"30px"}}`: `top: 15px; left: 30px`.
+- Video background `background.desktop.value.video {mp4, width, height}`: `<video autoplay loop playsinline muted>` and playing in the browser.
+- Audio with the media library WAV: rendered. Gallery `{galleryIds}`: images shown. Select, checkbox and radio contact fields: rendered.
+- Phone (375px): the two-column row stacks (both columns full width, second below), no horizontal overflow.
+
+**Clone.** Published ID 55 to draft ID 66: content byte-identical, builder meta and page template copied (cache, lock and A/B keys skipped; `_wp_desired_post_slug` should also be skipped and is now in the recipe), heading edited in the copy and visible in the browser preview, ID 55 unchanged and still published.
+
+**Visual checks.** The built-in browser pane, signed in once by the user, gives drafts at desktop and phone widths, screenshots and read-only DOM checks. Added to `divi5-core` as step 3 of "Verify and report".
+
 ## T8. Reference page from the builder [Run, 2026-10-14]
 
 The user built page ID 41 "T8 Reference" and confirmed drafts 28, 33 and 34 look correct in the Visual Builder (so the accordion shape from `module.json`, the image shape and the parse, append, serialise edit all pass in the builder).

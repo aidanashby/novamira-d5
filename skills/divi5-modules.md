@@ -38,12 +38,29 @@ $form = $b('divi/contact-form', [
 ]);
 ```
 
-- Verified field types: `input`, `email`, `text` (message box). `module.json` also lists `select`, `checkbox` and `radio` with options under `fieldItem.advanced.selectOptions`, `checkboxOptions` and `radioOptions`; verify those on this site. Give every field a unique `id`.
+- Field types (all rendered): `input`, `email`, `text` (message box), `select` with `fieldItem.advanced.selectOptions` `[{"value":"One","id":"o1"}]`, `checkbox` with `checkboxOptions` `[{"value":"Tick","checked":"0","dragID":0}]`, `radio` with `radioOptions` (same shape). Give every field a unique `id`.
 - Divi adds a maths CAPTCHA and the submit button itself.
 - The recipient address is `email.innerContent`. Ask the user before setting it.
 
-## Not verified here
+## More modules (rendered and seen in a browser, T12)
 
-Gallery (needs media IDs set in the builder), video, audio, maps, counters, pricing tables, menus, Loop Builder and dynamic content, and modules from plugins not installed (WooCommerce, Gravity Forms). For these, read the module's `module.json`, or ask the user to add one in the builder and copy its saved shape.
+- Audio: `audio.innerContent` is a plain URL string (media library, `wp_get_attachment_url($id)`; WAV works), plus `title.innerContent`, `artistName.innerContent` text.
+- Video: `video.innerContent` `{src}` (a YouTube URL works). Video slider: `divi/video-slider` holding `divi/video-slider-item` with the same `video` shape.
+- Before and after: `beforeImage.innerContent` and `afterImage.innerContent` `{src}`, `beforeLabel`, `afterLabel` text.
+- Circle counter: `title.innerContent` text, `number.innerContent` `"70"`. Number counter: same, plus `number.advanced.enablePercentSign` `"off"` to drop the default percent sign.
+- Bar counters: `divi/counters` holding `divi/counter` with `title.innerContent` and `barProgress.innerContent` `"80"`.
+- Countdown: `title.innerContent`, `content.advanced.dateTime` `"2027-01-01 00:00"`.
+- Pricing: `divi/pricing-tables` holding `divi/pricing-table` with `title`, `price`, `content` (HTML list), `button` `{text, linkUrl}`.
+- Timeline: `divi/timeline` holding `divi/timeline-item` with `date`, `title`, `content`.
+- Divider: `divider.advanced.line` `{show, color, weight}`. Icon: `icon.innerContent` `{unicode, type: "divi", weight}`. Link: `content.innerContent` `{text, linkUrl}`.
+- Social follow: `divi/social-media-follow` holding `divi/social-media-follow-network` with `socialNetwork.innerContent` `{title: "facebook", link}`.
+- Tooltip: a `divi/tooltip` child inside the module it annotates, with `content.innerContent` and `module.advanced.tooltip` `{trigger: "always"}` (or `hover`, `click`).
+- Group: `divi/group` holding any modules. Group carousel: `divi/group-carousel` holding `divi/group` children.
+- SVG: `svg.innerContent` `{sourceType: "code", code: "<svg>...</svg>"}`. Charts: `chart.innerContent` `{title}` (data needs the builder's table editor).
+- Gallery: `gallery.innerContent` `{galleryIds: "37,38"}` (comma-separated attachment IDs).
+- With defaults only (site data fills them): blog, portfolio, filterable portfolio, post slider, post navigation, post title, comments, breadcrumbs, search, sidebar, menu, table of contents.
+- Fullwidth section: `divi/section` with `module.advanced.type` `"fullwidth"`; fullwidth modules sit directly in it, with no row (header, image, slider, code, menu, portfolio, post slider, post title, map).
+
+Need outside setup, so they render empty or hidden until configured: signup (email provider), payment button (payment provider), map and fullwidth map (Google Maps API key), lottie (animation URL), post filter (a Loop Builder module), dropdown (a trigger). Login shows "Log out" to a logged-in viewer. Contact Form 7, Gravity Forms and Imagely need their plugins. Theme Builder only: post content modules. Components only: `divi/global-slot`.
 
 Adapted in part from divilovewp/divi5-skill (MIT, copyright 2026 Shashank Gupta, divilove.com), verified and rewritten for Divi 5.15.1.

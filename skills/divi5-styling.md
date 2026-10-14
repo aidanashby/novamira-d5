@@ -18,7 +18,9 @@ Tested on Divi 5.15.1 (14 October 2026) by rendering each shape and reading the 
 | `boxShadow` | `{"style":"preset1","horizontal":"0px","vertical":"8px","blur":"24px","spread":"0px","position":"outer","color":"rgba(0,0,0,0.15)"}`. `style` is required: without it nothing is emitted. |
 | `sizing` | `{"maxWidth":"720px","minHeight":"400px"}` (columns also carry `flexType` here) |
 | `filters` | `{"opacity":"90%","backdropBlur":"8px"}` (backdrop needs a translucent background to show) |
-| `position` and `zIndex` | `position`: `{"mode":"relative"}`; `zIndex`: `"2"` |
+| `position` and `zIndex` | `position`: `{"mode":"relative","offset":{"vertical":"15px","horizontal":"30px"}}` emits `top: 15px; left: 30px`; `zIndex`: `"2"` |
+| `sticky` | `{"position":"top","offset":{"top":"40px"}}` (also `bottom`, `topBottom`). Applied by Divi's script, so check it in a browser: it held in the column on scroll. |
+| `background` video | `{"color":"#1e3a5f","video":{"mp4":"<URL>","width":"1280","height":"720"}}` (`webm` also accepted). Renders a muted, looping, autoplay video behind the section. Keep a fallback `color`. |
 
 Sections and rows take the same groups. Padding on a section, `max-width` on a row and backgrounds on both were verified.
 
@@ -26,7 +28,7 @@ Sections and rows take the same groups. Padding on a section, `max-width` on a r
 
 - Text module body: `content.decoration.bodyFont.body.font.<bp>.value`.
 - Heading module: `title.decoration.font.font.<bp>.value`.
-- Keys (verified): `size` (`"21px"`), `color`, `weight` (`"700"`), `lineHeight` (`"1.6em"`), `letterSpacing` (`"1px"`), `textAlign` (`"center"`), `capitalization` (`"uppercase"`, `"lowercase"`, `"capitalize"`, `"smallCaps"`, `"allSmallCaps"`). Heading also takes `headingLevel`.
+- Keys (verified): `size` (`"21px"`), `color`, `weight` (`"700"`), `lineHeight` (`"1.6em"`), `letterSpacing` (`"1px"`), `textAlign` (`"center"`), `capitalization` (`"uppercase"`, `"lowercase"`, `"capitalize"`, `"smallCaps"`, `"allSmallCaps"`). Heading also takes `headingLevel`. `family` sets the font (`"Georgia"`, or a Google font such as `"Roboto Slab"` or `"Lato"`, which Divi enqueues itself). Button text font is `button.decoration.font.font`.
 - `style:["uppercase"]` emits nothing. Use `capitalization`. `style` is for italic, underline and similar.
 
 ## Site colours and fonts (read only)

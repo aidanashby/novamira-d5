@@ -108,7 +108,30 @@ $content = serialize_blocks($blocks);
 
 - `parse_blocks()` then `serialize_blocks()` round-trips builder content exactly, including components.
 - When you add a child to a parsed block, also append `null` to that block's `innerContent`, or the child is not written. Builder-saved blocks keep newline strings in `innerContent` between children; leave them.
-- Copy to a new draft with the same meta keys plus the source's `_et_pb_page_layout`. Edit in place only when asked, and then call `remove_static_resources` afterwards.
+- Edit in place only when asked, and then call `remove_static_resources` afterwards.
+
+### Clone a published page to a draft copy (verified)
+
+Edit published content in a draft copy, never in the live page. Publishing or swapping the copy in is the user's job.
+
+```php
+$src = get_post($source_id);
+$skip = ['_edit_lock', '_edit_last', '_wp_old_slug', '_wp_desired_post_slug', 'et_enqueued_post_fonts',
+         '_divi_dynamic_assets_cached_modules', '_divi_dynamic_assets_cached_feature_used',
+         '_divi_dynamic_assets_canvases_used', '_et_dynamic_cached_shortcodes',
+         '_et_dynamic_cached_attributes', '_et_builder_module_features_cache'];
+$id = wp_insert_post(['post_type' => $src->post_type, 'post_status' => 'draft',
+    'post_title' => $src->post_title . ' (draft copy)', 'post_content' => wp_slash($src->post_content),
+    'post_parent' => $src->post_parent, 'menu_order' => $src->menu_order], true);
+if (is_wp_error($id)) return $id->get_error_message();
+foreach (get_post_meta($source_id) as $k => $vals) {
+    if (in_array($k, $skip, true) || str_starts_with($k, '_et_pb_ab_')) continue;
+    foreach ($vals as $val) add_post_meta($id, $k, wp_slash(maybe_unserialize($val)));
+}
+update_post_meta($id, '_et_pb_post_settings_title', $src->post_title . ' (draft copy)');
+```
+
+Then edit the copy with parse, modify, serialise, call `remove_static_resources($id, 'all')`, and confirm the source's `post_content` hash is unchanged.
 
 ## Components (global modules)
 
@@ -139,6 +162,7 @@ A component instance on a page is `divi/global-layout` with `"globalModule":"<li
 
 1. Read back `post_content` and compare with what you wrote.
 2. Render check without a browser: set up the post and run `apply_filters('the_content', $post->post_content)`; every module should contain its text. Then `$S = implode(chr(92), ['ET', 'Builder', 'FrontEnd', 'Module', 'Style']); $S::render();` returns the module CSS.
-3. Report the page ID, title, status (draft), the builder URL, and ask the user to open it in the Visual Builder and confirm the modules are editable.
+3. Visual check. If you have a browser tool (Claude Code's built-in browser pane, or Claude in Chrome) and it is signed in to wp-admin, open `get_preview_post_link($id)` at desktop and phone width and look: layout, images, anything JavaScript-driven (sliders, tabs, sticky, video backgrounds). A quick script listing `.et_pb_module` elements with zero width or height finds blank modules. If no signed-in browser is available, say so and ask the user to look; never sign in yourself.
+4. Report the page ID, title, status (draft), the builder URL, what you checked, and ask the user to open it in the Visual Builder and confirm the modules are editable.
 
 Adapted in part from divilovewp/divi5-skill (MIT, copyright 2026 Shashank Gupta, divilove.com), verified and rewritten for Divi 5.15.1.
