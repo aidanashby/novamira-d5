@@ -4,7 +4,7 @@ Tested on Divi 5.15.1, WordPress 7.1.3 (14 October 2026). If `ET_BUILDER_VERSION
 
 - Divi 5 is the only builder here. Do not ask which builder to use. Do not load `novamira-design` or `custom-theme-build` for Divi page work, and never create, save or activate a Novamira design unless asked.
 - Use native Divi modules. No Code module, injected HTML, CSS or JavaScript for layout.
-- New pages are drafts. Never publish, and never overwrite an existing page; copy it to a new draft instead, unless the user asks for an in-place edit.
+- Build new pages as drafts. Publish a new or draft page only when the user asks (`wp_update_post(['ID' => $id, 'post_status' => 'publish'])`), then check it on the front end. Never delete, trash or unpublish a page. Never overwrite an existing page; copy it to a new draft instead, unless the user asks for an in-place edit.
 - Do not write Divi global colours, variables, presets or components unless asked.
 - Ask at most one question, and only when the brief is ambiguous. Otherwise build, then report.
 
@@ -112,7 +112,7 @@ $content = serialize_blocks($blocks);
 
 ### Clone a published page to a draft copy (verified)
 
-Edit published content in a draft copy, never in the live page. Publishing or swapping the copy in is the user's job.
+Edit published content in a draft copy, never in the live page. Publish the copy only when the user asks. Replacing the live page with it means unpublishing or deleting the original, which is the user's job.
 
 ```php
 $src = get_post($source_id);

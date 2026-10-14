@@ -29,6 +29,8 @@ Granted:
 
 Log every write in docs/08 with how to undo it, and read each write back to verify it.
 
+- 14 October 2026 only, for writing and testing the presets skill: create and edit Divi presets on the Studio site. Expires at the end of that day; the skill itself keeps preset writes gated.
+
 Not granted, always ask first:
 - Saving or activating a Novamira design.
 - Divi global colours, variables or presets.
