@@ -16,7 +16,7 @@ Tested on Divi 5.15.1, WordPress 7.1.3 (14 October 2026). If `ET_BUILDER_VERSION
 - Hierarchy: placeholder, `divi/section`, `divi/row`, `divi/column`, then modules. Never put a module directly in a section or row. A column may also hold `divi/group` or a nested row.
 - Every block except the placeholder carries `"builderVersion"` set to `ET_BUILDER_VERSION`. Read it at runtime, never type a literal. Divi only migrates blocks stamped with an older version, so a current stamp means the shape must already be current.
 - Attributes are JSON with responsive values: `{"desktop":{"value":...},"tablet":{"value":...},"phone":{"value":...}}`. Always set `desktop`. Add `tablet` or `phone` only where they differ; desktop values cascade down.
-- Text values are HTML: `&amp;`, `<strong>`, `<p>`. Do not pre-escape. The serialiser escapes `&`, `"`, `<`, `>` as `&`, `"`, `<`, `>`, exactly as the Visual Builder does.
+- Text values are HTML: `&amp;`, `<strong>`, `<p>`. Do not pre-escape. The serialiser escapes `&`, `"`, `<`, `>` as JSON unicode escapes, exactly as the Visual Builder does.
 
 ## Build markup with serialize_blocks()
 
