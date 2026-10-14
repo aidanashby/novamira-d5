@@ -16,4 +16,4 @@ The site currently has: 0 user skills, no User Context, no active design, an emp
 
 | Date | Change | Method | Verified by | Undo |
 |---|---|---|---|---|
-| (none yet) | | | | |
+| 2026-10-14 | Draft page ID 9 "T6 Silent failures" (T6 and T2 variants); meta `_et_pb_use_builder=on`, `_et_pb_page_layout=et_full_width_page` | `execute-php`, `wp_insert_post` with `serialize_blocks()` | Read back `post_content`, identical to the written string | `wp_delete_post(9, true)` |
