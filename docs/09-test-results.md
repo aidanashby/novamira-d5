@@ -182,6 +182,14 @@ The user added taxonomy `genre` (flat, public) with Action (8), Romcom (7) and S
 
 Variables: the user reports that variables cannot be saved in the builder on 5.15.1. The local changelog (to 5.15.1) mentions no such bug; not investigated, at the user's request.
 
+## T19. Presets [Run, 2026-10-14]
+
+Under the user's one-day permission. The user made a module preset (Button) and an option-group preset (Heading, Title Text) in the builder and applied them on T0 Baseline. Storage: option `builder_global_presets_d5`, read with `GlobalPreset::get_data()`: `module[<block>]` and `group[<group name>]`, each `{default, items}`; items carry `attrs` and `styleAttrs` (identical for style settings), `version`, `created`, `updated` in milliseconds; group items add `groupName` `divi/font`, `moduleName`, `groupId` `designTitleText`. The builder also created empty default presets. On a module: `"modulePreset":["<id>"]` (a list) and `"groupPreset":{"designTitleText":{"presetId":["<id>"],"groupName":"divi/font"}}`. This corrects two divi5-skill claims (docs/04 and docs/05): `modulePreset` is a list, and `groupPreset` is current and valid.
+
+Claude created two presets with `prepare_data()` and `save_data()` (Divi's own save path; `save_data()` clears static CSS site-wide) and applied them on draft 130. Browser: the blurb preset gave background, padding and radius; the heading group preset gave Georgia, navy, 36px; the user's 40px preset applied; a module's own colour beat the preset's (title red over navy, button green over the preset's red). Button colours were confirmed by screenshot: a script reading the computed colour reported transparent, probably because of Divi's button background transition. The skill's create-and-edit recipe, run as written, created and edited a third preset with defaults and other presets unchanged. **Pass.** New skill `divi5-presets` keeps preset writes gated.
+
+Fresh Haiku agent (about 92,000 tokens): "S7 Preset demo" (draft 132). It loaded `divi5-core` and `divi5-presets`, applied the existing module and group presets by ID, gave the second button a local green, and created or changed no preset. Its PHP render check could not see preset styles (preset CSS is printed separately from `Style::render()`); Claude's screenshot confirmed the serif navy heading, the red preset button and the green one. **Pass.**
+
 ## T8. Reference page from the builder [Run, 2026-10-14]
 
 The user built page ID 41 "T8 Reference" and confirmed drafts 28, 33 and 34 look correct in the Visual Builder (so the accordion shape from `module.json`, the image shape and the parse, append, serialise edit all pass in the builder).

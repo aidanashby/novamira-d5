@@ -24,7 +24,8 @@ Results in docs/09. This table overrides the text below where they differ.
 | Styling (T10) | Background, gradient, spacing, border, box shadow (needs `style`), sizing, filters, position and z-index, fonts, hover, per-breakpoint values: all confirmed. |
 | Rule 13 variables | Colour references to existing `gcid-` IDs confirmed. Font and number references not tested. |
 | Module gotchas (T8, T11) | Confirmed: blurb title `{text}`, CTA default background, testimonial portrait (`src` and `url` both work), team member image `url` (`src` fails), contact form adds CAPTCHA. Not tested: divider, menu, payment button, gallery, fullwidth header, number counter. |
-| Not yet verified | Rules 6, 10 (grid), 14 to 16, presets, font and number variables, the untested gotchas above. |
+| Rule 14 presets (T19) | Wrong on 5.15.1: `groupPreset` is valid (`{"<groupId>":{"presetId":["<id>"],"groupName":"<group>"}}`), and `modulePreset` is a list of IDs. |
+| Not yet verified | Rules 6, 10 (grid), 15, 16, font and number variables, the untested gotchas above. |
 
 ## Page model
 

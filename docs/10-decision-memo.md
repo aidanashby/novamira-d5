@@ -9,7 +9,7 @@
 
 ## Recommendation
 
-1. **Do not buy Novamira Pro now.** The free route builds, copies and edits Divi 5 drafts reliably with five verified skills, including Theme Builder, Loop Builder and ACF dynamic content. Revisit Pro only if you need preset or design-system writes, which were not tested.
+1. **Do not buy Novamira Pro now.** The free route builds, copies and edits Divi 5 drafts reliably with five verified skills, including Theme Builder, Loop Builder and ACF dynamic content. Presets were tested later (T19) and also work; preset writes stay behind the user's approval.
 2. **Design tokens: keep Divi as the source of truth, and skip Novamira Design.** Agents read the site's global colours and reference them; they do not write them.
 
 ## Update (14 October 2026, late evening)
@@ -31,7 +31,7 @@ After the decision, the free route was also tested on Theme Builder, Loop Builde
 | Build pages as real modules | No. Free route already produces builder-identical modules. |
 | Single-module edits on existing pages | No. Parse, modify, serialise does this exactly. |
 | Loop Builder, dynamic content (ACF, post data) | No. Tested later the same day (T14 to T16): group, blurb and column loops over a custom post type, ACF text, WYSIWYG, image, URL and date fields, `excludeCurrentPost`, pagination. Loop filters by meta value are still untested. |
-| Global presets, design system writes | Not tested and outside the standing approvals. |
+| Global presets, design system writes | No. Reading, applying, creating and editing module and group presets worked (T19, under a one-day permission); the skill keeps writes gated. |
 | Theme Builder layouts | No. Editing header and footer layouts and creating single and archive templates for a post type all worked (T13, T14, T16). |
 | Memory between sessions | No. Skills and User Context cover it. |
 | Read Mode for production | Useful only if you want Novamira on a live site, which the project rules forbid. |

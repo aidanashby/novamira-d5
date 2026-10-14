@@ -10,12 +10,13 @@ The original plan (docs/06, "Recommended order") is complete, and the scope was 
 
 | Item | Where | Notes |
 |---|---|---|
-| User Context | option `novamira_instructions_content` | Text in docs/user-context-proposed.md (approved at gate c) |
+| User Context | option `novamira_instructions_content` | Text in docs/user-context-proposed.md (revised 14 October: publish when asked, never delete or unpublish) |
 | Skill `divi5-core` | post 30 | Structure, `serialize_blocks()` recipe, meta, rows and columns, module choice, clone, components, silent failures, verification including browser checks |
 | Skill `divi5-styling` | post 53 | Decoration paths, fonts, hover, sticky, position, video background, responsive, global colour references |
 | Skill `divi5-modules` | post 54 | Shapes for every registered module, contact form fields, fullwidth sections |
 | Skill `divi5-theme-builder` | post 90 | Theme Builder storage, editing layouts, creating templates for a post type and its archive |
-| Skill `divi5-dynamic` | post 103 | Dynamic content, ACF fields, Loop Builder, pagination, dates, custom post types |
+| Skill `divi5-dynamic` | post 103 | Dynamic content, ACF fields, Loop Builder, pagination, filters by custom field and term, dates, custom post types |
+| Skill `divi5-presets` | post 131 | Read and apply module and option-group presets; create and edit only when the user asks |
 | Theme Builder template "All Movies" | template 99, body layout 98 | Single movie pages (`singular:post_type:movie:all`), with a "More movies" loop |
 | Theme Builder template "Movies archive" | template 112, body layout 111 | `/movies/` (`archive:post_type:movie`), paginated grid |
 | Theme Builder template for S5 | template 87, layouts 81 and 83 | Built by the user, header and footer edited by Claude |
@@ -35,7 +36,8 @@ The skill sources in `skills/` match the stored skills byte for byte (md5 checke
 | Clone a published page | Byte-identical draft copy, original untouched (T12) |
 | Theme Builder | Edit layouts; create single and archive templates for a post type (T13, T14, T16) |
 | Loops and ACF | Group, blurb and column loops; ACF text, WYSIWYG, image, URL, date; `excludeCurrentPost`; pagination; filters by custom field and by taxonomy term (T14 to T18) |
-| Fresh agents | Seven fresh agents with only the skills completed every task after one fix round (six on Opus, one on Haiku) |
+| Presets | Builder and PHP-made module and group presets, applied and checked in a browser; local settings override presets (T19) |
+| Fresh agents | Eight fresh agents with only the skills completed every task after one fix round (six on Opus, two on Haiku) |
 
 ## History
 
@@ -54,7 +56,6 @@ The skill sources in `skills/` match the stored skills byte for byte (md5 checke
 |---|---|---|
 | Moving date windows ("from today") | Divi's `metaQuery` takes fixed values only (T17) | Out of scope here (the user's Date Conditions for Divi plugin) |
 | Font and number variable references | Use the site's own fonts and sizes without writing globals | Blocked: the user cannot save variables in 5.15.1 (possible Divi bug); retest after a Divi update |
-| Presets | Agents could apply existing presets | Reading only is allowed; writing is gated |
 | Divi upgrade check | Divi ships weekly; skills say "tested on 5.15.1" | Rerun T1, T6, T10 and T12 after each minor release |
 | Real sites | Use the skills on Foodbank and Bristol Charities staging builds | Staging sites with Novamira, never live |
 
