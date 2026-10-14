@@ -36,25 +36,47 @@ $heading = $b('divi/heading', ['title' => ['innerContent' => $d('Welcome'),
 $text    = $b('divi/text', ['content' => ['innerContent' => $d('<p>Body text &amp; more.</p>')]]);
 $button  = $b('divi/button', ['button' => ['innerContent' => $d(['text' => 'Contact us', 'linkUrl' => '/contact/'])]]);
 
-$column  = $b('divi/column', ['module' => ['advanced' => ['type' => $d('4_4')],
-    'decoration' => ['sizing' => $d(['flexType' => '24_24'])]]], [$heading, $text, $button]);
-$row     = $b('divi/row', ['module' => ['advanced' => ['columnStructure' => $d('4_4'),
-    'flexColumnStructure' => $d('equal-columns_1')],
-    'decoration' => ['layout' => $d(['flexWrap' => 'nowrap'])]]], [$column]);
-$section = $b('divi/section', [], [$row]);
+$col = fn(string $w, array $kids) => $b('divi/column', ['module' => ['decoration' => ['sizing' =>
+    ['desktop' => ['value' => ['flexType' => $w]], 'phone' => ['value' => ['flexType' => '24_24']]]]]], $kids);
+$row = fn(string $layout, array $cols) => $b('divi/row', ['module' => [
+    'advanced' => ['flexColumnStructure' => $d($layout)],
+    'decoration' => ['layout' => ['desktop' => ['value' => ['flexWrap' => 'nowrap']],
+                                  'phone' => ['value' => ['flexWrap' => 'wrap']]]]]], $cols);
 
+$hero    = $row('equal-columns_1', [$col('24_24', [$heading, $text, $button])]);
+$section = $b('divi/section', [], [$hero]);
 $content = serialize_blocks([['blockName' => 'divi/placeholder', 'attrs' => [],
     'innerBlocks' => [$section], 'innerHTML' => '', 'innerContent' => [null]]]);
 ```
 
 ### Rows and columns
 
-| Columns | Row `columnStructure` | Row `flexColumnStructure` | Each column `type` | Each column `flexType` |
-|---|---|---|---|---|
-| 1 | `4_4` | `equal-columns_1` | `4_4` | `24_24` |
-| 2 | `1_2,1_2` | `equal-columns_2` | `1_2` | `12_24` |
+Use Divi's own layout templates (from the builder's column picker). Set the row's `module.advanced.flexColumnStructure` to the layout name and its `module.decoration.layout` to `{"desktop":{"value":{"flexWrap":"nowrap"}},"phone":{"value":{"flexWrap":"wrap"}}}`, then give each column `module.decoration.sizing` `{"desktop":{"value":{"flexType":"<width>"}},"phone":{"value":{"flexType":"24_24"}}}`, so columns stack on phone.
 
-The number of `divi/column` children must match the structure. Widths are 24ths (`8_24` a third, `6_24` a quarter, `16_24` two thirds). To stack on phone, set the column `flexType` `phone` value to `24_24` and the row `module.decoration.layout` `phone` value to `{"flexWrap":"wrap"}`. Other structures: verify on this site (copy a row the builder saved).
+| Layout name | Column widths (desktop) |
+|---|---|
+| `equal-columns_1` | `24_24` |
+| `equal-columns_2` | `12_24` x2 |
+| `equal-columns_3` | `8_24` x3 |
+| `equal-columns_4` | `6_24` x4 |
+| `offset-columns_5` / `_6` | `16_24` + `8_24` / `8_24` + `16_24` |
+| `offset-columns_9` / `_10` | `18_24` + `6_24` / `6_24` + `18_24` |
+| `offset-columns_11` | `6_24` + `12_24` + `6_24` |
+
+- The number of `divi/column` children must match the layout.
+- `module.advanced.columnStructure` (row) and `module.advanced.type` (column) are legacy. The builder keeps writing `4_4` there whatever the column count, and rows render without them. Omit them in new rows; keep them when copying.
+- A row with several `24_24` columns and `nowrap` (what the builder makes when the user adds columns one by one) shows them side by side but never stacks. Do not copy that form for new rows.
+
+## Choose the module the user names
+
+Use the native module for each thing the user asks for, never a heading and text stand-in: blurb `divi/blurb`, call to action `divi/cta`, image `divi/image`, FAQ or accordion `divi/accordion`, tabs `divi/tabs`, testimonial `divi/testimonial`, contact form `divi/contact-form`. For a module not shown below, read its `module.json` (path at the end of this skill) or copy it from a builder-saved page.
+
+Verified shapes (from builder-saved pages on 5.15.1):
+
+- Blurb: `{"title":{"innerContent":{"desktop":{"value":{"text":"Title"}}}},"content":{"innerContent":{"desktop":{"value":"<p>Body</p>"}}},"imageIcon":{"innerContent":{"desktop":{"value":{"src":"<image URL>"}}}}}`. The title value is an object with `text`. Omit `imageIcon` for no image; the builder fills it with a grey placeholder SVG.
+- Call to action: `{"title":{"innerContent":{"desktop":{"value":"Title"}}},"content":{"innerContent":{"desktop":{"value":"<p>Body</p>"}}},"button":{"innerContent":{"desktop":{"value":{"text":"Label","linkUrl":"/"}}}}}`. It renders on the theme primary colour by default (`--gcid-primary-color`). Set `module.decoration.background` for another colour.
+- Image: `{"image":{"innerContent":{"desktop":{"value":{"src":"<URL>","id":"<attachment ID as string>","alt":"<alt text>","titleText":"<title>","width":"<px>","height":"<px>"}}}}}`. Take `src`, `width` and `height` from `wp_get_attachment_image_src($id, 'full')`, and always write meaningful `alt` text.
+- Images come from the media library (`get_posts(['post_type' => 'attachment', 'post_mime_type' => 'image'])`). If none fits, ask which image to use, or use the placeholder and say so.
 
 ## Create a draft page
 

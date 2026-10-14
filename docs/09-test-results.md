@@ -69,6 +69,38 @@ Written with `\Novamira\Context\instructions_update_content()` (writes both opti
 
 `skill-write` and `skill-edit` remove every backslash from `content`, including doubled ones (`&` became `u0026`, `ET\Builder\...` lost its separators, `"\n"` became a real newline). Skills must contain no backslashes: describe escapes in words and build namespaced class names with `implode(chr(92), [...])`. Check stored content with `substr_count($c, chr(92))`.
 
+## Step 5. Sample tasks, round 1 [Run, 2026-10-14]
+
+Each task ran in a fresh subagent limited to the Novamira tools (no local files, no web), starting from `agent-context`. All four loaded `divi5-core` unprompted, skipped `novamira-design` and `custom-theme-build`, and asked no questions they could default.
+
+| Task | Draft | Valid | Draft + meta | Version | Native modules | Questions | Builder check | Score |
+|---|---|---|---|---|---|---|---|---|
+| S1 landing page | 35 | Yes | Yes | Yes | **No**: blurbs and CTA built from heading and text; three-column row values extrapolated | 0 | Pending | Partial |
+| S2 copy plus FAQ | 33 | Yes | Yes (kept source layout) | Yes | Yes (`divi/accordion` from module.json) | 0 (would ask for real FAQ copy) | Pending | Pass |
+| S3 image and text | 34 | Yes | Yes | Yes | Yes (`divi/image` from module.json; empty media library, used Divi `logo.png`) | 0 (would ask which image) | Pending | Pass |
+| S4 explain page | none | n/a | n/a | n/a | Identified components correctly | 0 | n/a | Pass |
+
+Fixes for round 2: a rule to use the module the user names (blurb, call to action, image and so on), verified blurb and CTA shapes, and three- and four-column row values. Divi's PHP has examples of one- and two-column rows only, so these come from a user-built reference page (T8).
+
+## Step 5. Sample task 1, round 2 [Run, 2026-10-14]
+
+Fresh agent, same prompt, after the round-2 skill update. Draft ID 48 "S1b Landing Page": hero (heading, text, button), `equal-columns_3` row of three `divi/blurb`, and `divi/cta`. Claude's check: draft, meta, every block stamped, three blurbs and the CTA render with all texts, `8_24` columns, phone wrap rule emitted. **Pass** (builder check pending). The agent skipped the skill's render step (it read back only); minor, noted for the next skill revision.
+
+## T8. Reference page from the builder [Run, 2026-10-14]
+
+The user built page ID 41 "T8 Reference" and confirmed drafts 28, 33 and 34 look correct in the Visual Builder (so the accordion shape from `module.json`, the image shape and the parse, append, serialise edit all pass in the builder).
+
+- **Columns added one by one** (the user's method) are stored as a one-column row (`columnStructure 4_4`, `equal-columns_1`) holding several `24_24` columns with `flexWrap: nowrap`. They render side by side because they shrink, but never stack.
+- **Divi's layout templates** (`visual-builder/build/constant-library.js`) define `equal-columns_N`, `offset-columns_N`, `multi-row-grids_N`, `multi-column-grids_N`. Each sets the row to `nowrap` desktop and `wrap` phone, and most set column `flexType` per desktop width with `24_24` on phone. Examples: `equal-columns_3` = `8_24` x3; `equal-columns_4` = `6_24` x4 (no phone value in the template); fifths and sevenths use `1_5`, `1_7`.
+- `columnStructure` and `advanced.type` are legacy: the builder left them at `4_4` on rows with three and four columns.
+- Blurb title is `{"text": ...}`. With no image chosen, the builder stores a grey placeholder SVG data URI in `imageIcon`.
+- CTA renders `background-color: var(--gcid-primary-color)` by default.
+- Image stores `{src, id, alt, titleText, width, height}` plus a `module.decoration.attributes` title attribute (with both a top-level `attributes` list and the `desktop` form).
+
+## T9. Round-2 shapes [Run, 2026-10-14]
+
+Draft ID 46 built with the round-2 recipe: `equal-columns_3` with three blurbs (one with media image 38), a CTA with `module.decoration.background` `#1e3a5f`, an image module from `wp_get_attachment_image_src(38, 'full')`, and `equal-columns_4`. Stored identical; all texts and the image file render; CTA colour emitted; phone `flex-wrap: wrap` emitted. Builder check pending.
+
 ## T5. Schema cross-check (offline, read-only) [Run, 2026-10-14]
 
 Source: the site's own theme, `<Studio sites folder>\divi-5\wp-content\themes\Divi` (style.css `Version: 5.15.1`), so no 5.14.0 versus 5.15.1 gap. Module metadata is in `includes/builder-5/visual-builder/packages/module-library/src/components/<module>/` (116 `module.json` files, plus `module-default-render-attributes.json` and `module-default-printed-style-attributes.json`). PHP is in `includes/builder-5/server/`.

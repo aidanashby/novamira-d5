@@ -36,9 +36,9 @@ Done (details in docs/09, every site write in docs/08):
 - Step 4: User Context written and verified (gate c approved). `divi5-core` skill written (post ID 30); source in `skills/divi5-core.md`.
 
 Open, in order (resume here):
-1. Done 20:15: the 2-byte difference was the local copy (line 19 had literal characters where the Write tool had decoded `` escapes). Local file now matches the stored skill (md5 043f1d0f...). `divi5-core` is listed in `agent-context`. Studio update moved PHP to 8.3.35.
-2. User opens draft ID 28 "T7 Skill recipe two columns" in the Visual Builder.
-3. Step 5: run the four sample tasks (docs/06) in a fresh session using only what the site agent sees; score; up to three fix rounds; user judges the drafts.
+1. Done 20:15: the 2-byte difference was the local copy (line 19 had literal characters where the Write tool had decoded unicode escapes). Local file now matches the stored skill (md5 043f1d0f...). `divi5-core` is listed in `agent-context`. Studio update moved PHP to 8.3.35.
+2. Done: user confirmed drafts 28, 33, 34 in the builder. Pending builder check: 46 "T9 Module shapes", 48 "S1b Landing Page".
+3. Step 5: round 1 scored (3 pass, S1 partial); round 2 fixed S1 (draft 48 passes). User still to judge the drafts. See docs/09.
 4. Step 6: read the unread divi5-skill files (docs/04), then write `divi5-styling` and `divi5-modules`.
 5. Steps 7 and 8: sandbox helper only if friction justifies it; `docs/10-decision-memo.md`; gates (d) design tokens and (e) free versus Pro.
 6. Clean-up: delete Claude's drafts 9, 24, 25, 26, 28 and the sample-task drafts. The user's pages 10, 18 and library item 22 stay unless the user says otherwise.

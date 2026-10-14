@@ -25,4 +25,9 @@ The site currently has: 0 user skills, no User Context, no active design, an emp
 
 | 2026-10-14 | User skill `divi5-core` (post ID 30, type `novamira_skill`) created, then content replaced twice with `skill-edit` to remove backslashes | `novamira/skill-write`, `novamira/skill-edit` | `skill-get`; stored body has 0 backslashes and the `chr(92)` fix; 8,797 bytes against 8,795 for `skills/divi5-core.md` (2-byte difference not yet located) | `novamira/skill-delete` slug `divi5-core` |
 
-User-created test pages (not Claude's; delete only if the user asks): ID 10 "T0 Baseline", ID 18 "T3 Component test", library item ID 22 "T3 Section Component".
+| 2026-10-14 | Sample-task drafts made by fresh agents through Novamira: ID 48 "S1b Landing Page" (round 2), ID 33 "S2 T0 Baseline with FAQ", 34 "S3 Image and text row", 35 "S1 Landing Page" | `execute-php` (agents following divi5-core) | Checked by Claude: drafts, five meta keys, every block stamped 5.15.1, escaping matches builder, parse and serialise round-trips; source ID 10 unchanged (1137 bytes) | `wp_delete_post(<id>, true)` for each |
+
+| 2026-10-14 | Draft page ID 46 "T9 Module shapes" (three blurbs, one with media image 38; CTA with its own background; image module; four-column row) | `execute-php`, skill recipe | Read back identical; render shows every text, the image file and the CTA colour; phone wrap rule emitted | `wp_delete_post(46, true)` |
+| 2026-10-14 | `divi5-core` round-2 content (layout templates, module-choice rule, blurb, CTA and image shapes) | `novamira/skill-edit` | Stored md5 `2489a461...` equals `skills/divi5-core.md` | Earlier text is in git history; `skill-edit` it back |
+
+User-created test pages (not Claude's; delete only if the user asks): ID 10 "T0 Baseline", ID 18 "T3 Component test", library item ID 22 "T3 Section Component", ID 41 "T8 Reference". Media items 36 to 40 uploaded by the user.
