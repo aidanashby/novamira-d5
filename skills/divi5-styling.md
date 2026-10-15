@@ -5,7 +5,7 @@ Tested on Divi 5.15.1 (14 October 2026) by rendering each shape and reading the 
 - Style through module settings, never Custom CSS or a Code module.
 - Every group below sits under the element it styles, usually `module.decoration.<group>`, with the breakpoint outermost: `{"desktop":{"value":{...}},"tablet":{"value":{...}},"phone":{"value":{...}}}`. Desktop cascades down; add `tablet` or `phone` only where they differ.
 - Hover sits beside `value`, never inside it: `{"desktop":{"value":{"color":"#123456"},"hover":{"color":"#654321"}}}`.
-- Do not write defaults (see each module's `module-default-render-attributes.json`). Do not write global colours, variables or presets.
+- Do not write defaults (see each module's `module-default-render-attributes.json`). Global colours, variables and presets: use existing ones first; propose a new or changed one and write it only after the user agrees (below, and `divi5-presets`).
 
 ## Verified paths (`module.decoration.*` unless stated)
 
@@ -31,16 +31,45 @@ Sections and rows take the same groups. Padding on a section, `max-width` on a r
 - Keys (verified): `size` (`"21px"`), `color`, `weight` (`"700"`), `lineHeight` (`"1.6em"`), `letterSpacing` (`"1px"`), `textAlign` (`"center"`), `capitalization` (`"uppercase"`, `"lowercase"`, `"capitalize"`, `"smallCaps"`, `"allSmallCaps"`). Heading also takes `headingLevel`. `family` sets the font (`"Georgia"`, or a Google font such as `"Roboto Slab"` or `"Lato"`, which Divi enqueues itself). Button text font is `button.decoration.font.font`.
 - `style:["uppercase"]` emits nothing. Use `capitalization`. `style` is for italic, underline and similar.
 
-## Site colours and fonts (read only)
+## Site colours and variables
 
-List what the site defines, then reference it. Never invent an ID: an unknown ID renders as nothing.
+Divi 5's Variable Manager holds global colours and variables of every type: `numbers`, `strings` (text), `images`, `links`, `colors`, `fonts`, `gradients`. List what the site defines, then reference it. Never invent an ID: an unknown ID renders as nothing.
 
 ```php
 $G = implode(chr(92), ['ET', 'Builder', 'Packages', 'GlobalData', 'GlobalData']);
 return ['colors' => $G::get_global_colors(), 'variables' => $G::get_global_variables()];
 ```
 
-A colour reference goes where a colour string would: `$variable({"type":"color","value":{"name":"gcid-primary-color","settings":{}}})$`. It renders as `var(--gcid-primary-color)` (verified). Font and number variable references are not yet verified here; use plain values.
+- Colour reference, where a colour string would go: `$variable({"type":"color","value":{"name":"gcid-primary-color","settings":{}}})$`, renders as `var(--gcid-primary-color)` (verified).
+- Variable reference, where the value would go: `$variable({"type":"content","value":{"name":"gvid-<id>","settings":{}}})$`. Verified for a number variable in padding (renders `var(--gvid-<id>)`, 24px in the browser). Other types are not yet verified here; check the result in a browser.
+
+### Create or change colours and variables (after the user agrees)
+
+Use existing colours and variables first; keep the set lean, with no near-duplicates and nothing for a one-off value. You may propose a new or changed colour or variable yourself: give its type, label, value and where it would be used (a change affects every page using it). Write only after the user agrees.
+
+```php
+$G = implode(chr(92), ['ET', 'Builder', 'Packages', 'GlobalData', 'GlobalData']);
+// Global colour (verified)
+$c = $G::get_global_colors();
+$cid = 'gcid-' . substr(md5(uniqid()), 0, 10);
+$c[$cid] = ['color' => '#1f6f6b', 'label' => 'Teal', 'status' => 'active', 'folder' => '',
+    'lastUpdated' => gmdate('Y-m-d') . 'T' . gmdate('H:i:s') . '.000Z', 'usedInPosts' => []];
+$G::set_global_colors($c);
+// Variable of any type (verified for numbers)
+if ('sqlite' === (defined('DB_ENGINE') ? DB_ENGINE : '')) {
+    add_filter('et_builder_5_global_variables_got_lock', fn() => '1');
+}
+$prev = array_map(fn($x) => (array) $x, (array) $G::get_global_variables());
+$data = $prev;
+$vid = 'gvid-' . wp_generate_uuid4();
+$data['numbers'][$vid] = ['id' => $vid, 'label' => 'Section spacing', 'value' => '80px',
+    'status' => 'active', 'order' => count($data['numbers']) + 1];
+$err = $G::set_global_variables($data, $prev);   // null on success, WP_Error otherwise
+```
+
+- Pass every existing variable back: Divi rejects a save that drops an existing `gvid-` ID, so a variable cannot be deleted this way. Never delete colours or variables; to retire a test item, set its `status` to `archived`.
+- On WP Studio (SQLite) Divi's save lock always fails, because the database answers `GET_LOCK()` with `1=1`; the filter above fixes it for this request only. MySQL sites do not need it.
+- Read back with `get_global_colors()` or `get_global_variables()`, then check a page using it in a browser.
 
 ## Responsive
 

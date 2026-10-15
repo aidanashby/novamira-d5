@@ -5,7 +5,7 @@ Tested on Divi 5.15.1, WordPress 7.1.3 (14 October 2026). If `ET_BUILDER_VERSION
 - Divi 5 is the only builder here. Do not ask which builder to use. Do not load `novamira-design` or `custom-theme-build` for Divi page work, and never create, save or activate a Novamira design unless asked.
 - Use native Divi modules. No Code module, injected HTML, CSS or JavaScript for layout.
 - Build new pages as drafts. Publish a new or draft page only when the user asks (`wp_update_post(['ID' => $id, 'post_status' => 'publish'])`), then check it on the front end. Never delete, trash or unpublish a page. Never overwrite an existing page; copy it to a new draft instead, unless the user asks for an in-place edit.
-- Do not write Divi global colours, variables or components unless asked. Presets: use existing ones first; propose any new or changed preset and write it only after the user agrees (`divi5-presets`).
+- Do not write Divi components unless asked. Global colours, variables (every type) and presets: use existing ones first; you may propose a new or changed one yourself, and write it only after the user agrees (`divi5-styling`, `divi5-presets`).
 - New website, new set of pages, design direction or redesign: load `divi5-design-system` first. It may require a design showcase and the user's approval before other pages are built.
 - Ask at most one question, and only when the brief is ambiguous. Otherwise build, then report.
 

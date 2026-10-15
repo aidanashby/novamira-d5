@@ -273,3 +273,11 @@ Skill `divi5-design-system` plus the User Context routing sentence. Three fresh 
 | C, skip | "Skip the design showcase", Home page (Hillcrest Repair Café) | No showcase; built draft 138. **Pass** |
 
 Only pages 138 to 140 were created. Claude's browser check of 140: no blank modules, no horizontal overflow, Nunito and Nunito Sans loaded, every row stacks to one column at 375px. Faults found: buttons rendered in Open Sans (the button font was not set), cards had no surface, no image row; the agent also said the global colour list was empty when it holds Divi's five defaults. The skill now requires the button font (`button.decoration.font.font`), card surfaces and an image and text row. None of the agents could check their page in a browser (Novamira tools only), as the skill expects them to report.
+
+## T21. Writing global colours and variables [Run, 2026-10-15]
+
+- Root cause of "variables will not save": WP Studio's SQLite driver (1.8.0) answers `SELECT GET_LOCK(...)` with `1=1`. Divi's `set_global_variables()` treats anything but `1` as locked and returns "Global variables are currently being saved by another request", so every variable save fails on this site, from the builder or PHP, whether or not the Variable Manager is open. MySQL sites (Krystal) should not be affected [Inferred].
+- With Divi's own filter `et_builder_5_global_variables_got_lock` returning `1` for the request, a number variable saved and read back. A global colour saved with `set_global_colors()` (no lock involved).
+- Draft 146: a heading with padding from the variable and colour from the colour. Browser: padding 24px, colour rgb(31,111,107), both `:root` custom properties defined. **Pass.**
+- Divi rejects a variables save that drops an existing `gvid-` ID (`global_variable_ids_missing`), so variables cannot be deleted through it; the test variable was archived instead. The test colour was removed.
+- Only the number type and `gcid` colours were rendered. The other variable types use the same save but their references are untested.

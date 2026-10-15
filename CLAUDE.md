@@ -29,13 +29,12 @@ Granted:
 
 Log every write in docs/08 with how to undo it, and read each write back to verify it.
 
-- Presets (ongoing, from 15 October 2026): create and edit Divi presets, preferring existing presets, and only after proposing each new or changed preset to the user and getting agreement. Never delete a preset or change a module's default preset.
+- Presets, global colours and variables of every type (ongoing, from 15 October 2026): create and edit them, preferring existing ones, and only after proposing each new or changed item to the user and getting agreement. Agents may make the proposal themselves. Never delete a preset, colour or variable, or change a module's default preset.
 
 - 15 October 2026, for the docs/11 expansion only: add one User Context line routing new-site and redesign tasks to `divi5-design-system` (show the final text once first, gate c); create labelled test presets and components for the audit conversion test, and remove them afterwards.
 
 Not granted, always ask first:
 - Saving or activating a Novamira design.
-- Divi global colours or variables.
 - Installing, updating or deactivating plugins or themes.
 - Changing any option other than the two User Context options.
 - Deleting anything you did not create.

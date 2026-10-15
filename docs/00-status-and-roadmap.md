@@ -55,7 +55,7 @@ The skill sources in `skills/` match the stored skills byte for byte (md5 checke
 | Next step | Why | Needs |
 |---|---|---|
 | Moving date windows ("from today") | Divi's `metaQuery` takes fixed values only (T17) | Out of scope here (the user's Date Conditions for Divi plugin) |
-| Font and number variable references | Use the site's own fonts and sizes without writing globals | Blocked: the user cannot save variables in 5.15.1 (possible Divi bug); retest after a Divi update |
+| Font and number variable references | Use the site's own fonts and sizes without writing globals | Number variables verified (T21); other types untested. Saving was blocked by WP Studio's SQLite answer to `GET_LOCK()`, not Divi; skills work around it per request. The builder still cannot save variables on Studio |
 | Divi upgrade check | Divi ships weekly; skills say "tested on 5.15.1" | Rerun T1, T6, T10 and T12 after each minor release |
 | Real sites | Use the skills on Foodbank and Bristol Charities staging builds | Staging sites with Novamira, never live |
 
