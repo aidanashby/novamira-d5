@@ -281,3 +281,13 @@ Only pages 138 to 140 were created. Claude's browser check of 140: no blank modu
 - Draft 146: a heading with padding from the variable and colour from the colour. Browser: padding 24px, colour rgb(31,111,107), both `:root` custom properties defined. **Pass.**
 - Divi rejects a variables save that drops an existing `gvid-` ID (`global_variable_ids_missing`), so variables cannot be deleted through it; the test variable was archived instead. The test colour was removed.
 - Only the number type and `gcid` colours were rendered. The other variable types use the same save but their references are untested.
+
+## T22. Page production from supplied content (fresh Haiku agent) [Run, 2026-10-15]
+
+Skill `divi5-page-production` (post 153). Brief: Volunteer page for the fictional Oakfield Community Larder, with an approved brand guide and content containing a planted contradiction (shop floor shift Tuesday 10am to 2pm against opening hours Tuesday 10am to 1pm), two gaps (no form link, no surname) and three identical "Apply for this role" buttons.
+
+- Draft 154 "Volunteer with us": one `h1`, five `h2`, three `h3`; all content present. The contradiction and both gaps appear as visible `[placeholder: ...]` text and are listed in the report; button links are `#` and reported. No facts invented. **Pass.**
+- Proposed the brand colours and Lora as globals without writing them. Presets and variables unchanged (hash before and after); the stored colour option is unchanged.
+- Claude's browser check: no blank modules or overflow at 1280px, roles row three across; every row one column at 375px.
+- Misses: the agent did not propose a preset for the three repeated buttons (skill now says to); its first insert lost all but one section because it built the placeholder's `innerContent` by hand, which it found and fixed on its own draft.
+- Finding for audits: `get_global_colors()` stamps Divi's customizer colours with the current time on every read, so compare the stored option `et_global_data`, not the getter's output.
