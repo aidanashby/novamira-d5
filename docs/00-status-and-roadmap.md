@@ -59,6 +59,16 @@ The skill sources in `skills/` match the stored skills byte for byte (md5 checke
 | Divi upgrade check | Divi ships weekly; skills say "tested on 5.15.1" | Rerun T1, T6, T10 and T12 after each minor release |
 | Real sites | Use the skills on Foodbank and Bristol Charities staging builds | Staging sites with Novamira, never live |
 
+## Setup skill: version rules (decided 15 October 2026)
+
+Planned Claude Code skill to install the Novamira skills and User Context on a new WordPress + Novamira site. Each check changes what it does:
+
+- Divi missing or below 5: stop; the skills are Divi 5 only.
+- Divi 5 below 5.7.0: warn, then run the T1 round-trip test before page work. 5.7.0 is the earliest version with every feature the skills use (gradient variables were added in 5.7.0; loop pagination targeting appears by 5.3.0; Loop Builder, ACF dynamic content, group presets, variables, flex rows, Theme Builder, sticky, position and video backgrounds were all in the 5.0.0 public betas). Source: Divi changelog, read 15 October 2026. Most lines there are fixes, so these are latest-possible dates. Components were excluded. No warning from 5.7.0 up.
+- Novamira lacking `execute-php`, `skill-write`, `skill-edit` or User Context: stop and name what is missing.
+- SQLite database (WP Studio): add the variables lock mu-plugin.
+- WordPress version: not checked; nothing depends on it.
+
 ## Learnings worth keeping
 
 - Novamira's skill storage strips every backslash from skill text, even doubled ones. Skills avoid backslashes and build class names with `implode(chr(92), [...])`.
