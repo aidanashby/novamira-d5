@@ -37,8 +37,8 @@ A short User Context (text in [docs/user-context-proposed.md](docs/user-context-
 
 1. Install Novamira on a development or staging copy, never a live site. Novamira gives the agent full admin, PHP, database and file access.
 2. Connect Claude (Claude Desktop extension or Claude Code; see CLAUDE.md, "Connecting Claude Code").
-3. Create the six skills from `skills/` with `novamira/skill-write` and the User Context from docs/user-context-proposed.md. Skills must contain no backslashes; check each stored copy by md5.
-4. Check the site's Divi version. The skills were verified on 5.15.1; rerun the key tests (docs/09) after a Divi upgrade.
+3. In Claude Code, from this repo, ask it to set up the site. The `novamira-setup` skill (`.claude/skills/`) checks Divi (stops below Divi 5, warns below 5.7.0) and Novamira, uploads every skill in `skills/manifest.json`, writes the User Context, adds the SQLite lock fix on WP Studio, verifies each copy by md5 and runs a smoke test.
+4. Each site needs its own Novamira connection (its own MCP server entry and application password). The skills were verified on Divi 5.15.1; rerun the key tests (docs/09) after a Divi upgrade.
 
 ## Repository layout
 
