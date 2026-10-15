@@ -2,8 +2,8 @@ Tested on Divi 5.15.1 (14 October 2026): presets made in the Visual Builder and 
 
 ## Rules
 
-- Applying an existing preset to a module you are writing is allowed.
-- Creating, editing or deleting a preset, or changing which preset is a module's default, is a site-wide change: every module using that preset changes at once, on every page. Ask the user first, every time, unless they asked for that exact change.
+- Prefer existing presets. Before styling a module, read the presets and apply one that fits. Keep the preset list lean: no near-duplicates, no preset for a one-off style.
+- Create or edit a preset when a style will repeat across modules or pages and no existing preset fits. Propose it to the user first, every time: name, module or option group, the settings, and which modules would use it (for an edit, every page using the preset changes). Write it only after the user agrees.
 - Never delete a preset, and never change a module's default preset.
 
 ## Read presets (read only)
@@ -24,7 +24,7 @@ $data = $G::get_data();   // ['module' => [...], 'group' => [...]]
 - Only use IDs that exist in `get_data()`. Divi adds classes such as `preset--module--divi-button--<id>` to the module.
 - A module's own settings override its preset (verified: a local background colour and a local title colour both won over the preset's). Set only what should differ from the preset. Do not repeat preset values on the module.
 
-## Create or edit a preset (only when the user asks)
+## Create or edit a preset (after the user agrees to your proposal)
 
 Copy the current data, add or change one item, and save it the way Divi's own save endpoint does:
 

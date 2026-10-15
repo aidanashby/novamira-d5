@@ -23,7 +23,7 @@ One draft page titled `Design showcase: <site or project name>`. It shows the vi
 
 1. Read the brief: audience, purpose, main actions, tone. Read the site's global colours, variables and presets (`divi5-styling`, `divi5-presets`).
 2. Decide the system and write it down before building: colour roles (background, surface, text, accent, call to action), heading and body fonts with a size scale, spacing scale (section and row padding), corner radius, button style, image treatment.
-3. Use global colours and presets where they fit. When the brief needs colours the globals do not have, use plain values on the showcase and list them as proposed global colours. Never write them to Divi's globals without the user's approval.
+3. Use global colours and existing presets where they fit. When the brief needs colours the globals do not have, use plain values on the showcase and list them as proposed global colours. List repeated styles (buttons, cards, headings) as proposed presets. Write neither until the user approves.
 4. Sections, in order, each with a small label heading such as "Typography":
    - Typography: H1 to H4, body copy, a link, a list, a quote.
    - Buttons and links: primary and secondary buttons, hover states.
