@@ -5,7 +5,7 @@ Tested on Divi 5.15.1 (14 October 2026): presets made in the Visual Builder and 
 - Prefer existing presets. Before styling a module, read the presets and apply one that fits. Keep the preset list lean: no near-duplicates, no preset for a one-off style.
 - Create or edit a preset when a style will repeat across modules or pages and no existing preset fits. Propose it to the user first, every time: name, module or option group, the settings, and which modules would use it (for an edit, every page using the preset changes). Write it only after the user agrees.
 - You may propose a new or changed preset yourself; the user does not need to raise it first.
-- Never delete a preset, and never change a module's default preset.
+- Delete a preset, or change a module's default preset, only with the user's explicit approval. When proposing it, say what changes: every module using the preset, on every page, loses those styles and falls back to its own settings or the default preset (not yet tested here; check a page afterwards). Back up the data first, as below.
 
 ## Read presets (read only)
 
