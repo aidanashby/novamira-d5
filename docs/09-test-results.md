@@ -261,3 +261,15 @@ Read from `divi-5-update-status.md`. No change to the core module schema. Releva
 - A fatal during sandbox load writes `wp-content/novamira-sandbox/.crashed`; the next request skips all sandbox files (safe mode). Abilities keep working. Exit by deleting `.crashed` (Novamira, Sandbox, Exit Safe Mode, or `delete-file`). Nothing is rolled back.
 - `execute-php` errors do not trigger crash recovery.
 - Consequence for the helper: define functions only, guarded by `function_exists`, with no side effects at load time.
+
+## T20. Design showcase gate (fresh Haiku agents) [Run, 2026-10-15]
+
+Skill `divi5-design-system` plus the User Context routing sentence. Three fresh Haiku agents limited to Novamira tools, run in parallel, each given only a fictional brief. Pages counted before (max post ID 137) and after.
+
+| Test | Brief | Result |
+|---|---|---|
+| A, no direction | New site, five pages, no brand guide (Riverside Tool Library) | Built only draft 140 "Design showcase: Riverside Tool Library", proposed palette and fonts as plain values, wrote no globals, stopped and asked. None of the five pages built. **Pass** |
+| B, references | Approved brand guide with colours, fonts, button style; Home page only (Oakfield Community Larder) | No showcase; built draft 139 following the guide. **Pass** |
+| C, skip | "Skip the design showcase", Home page (Hillcrest Repair Café) | No showcase; built draft 138. **Pass** |
+
+Only pages 138 to 140 were created. Claude's browser check of 140: no blank modules, no horizontal overflow, Nunito and Nunito Sans loaded, every row stacks to one column at 375px. Faults found: buttons rendered in Open Sans (the button font was not set), cards had no surface, no image row; the agent also said the global colour list was empty when it holds Divi's five defaults. The skill now requires the button font (`button.decoration.font.font`), card surfaces and an image and text row. None of the agents could check their page in a browser (Novamira tools only), as the skill expects them to report.

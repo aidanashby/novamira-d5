@@ -31,6 +31,8 @@ Log every write in docs/08 with how to undo it, and read each write back to veri
 
 - 14 October 2026 only, for writing and testing the presets skill: create and edit Divi presets on the Studio site. Expires at the end of that day; the skill itself keeps preset writes gated.
 
+- 15 October 2026, for the docs/11 expansion only: add one User Context line routing new-site and redesign tasks to `divi5-design-system` (show the final text once first, gate c); create labelled test presets and components for the audit conversion test, and remove them afterwards.
+
 Not granted, always ask first:
 - Saving or activating a Novamira design.
 - Divi global colours, variables or presets.
