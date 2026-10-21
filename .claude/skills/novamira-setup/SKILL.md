@@ -35,7 +35,7 @@ return [
 | `divi` below 5.0 | Stop. Divi 4 stores pages differently. |
 | `divi` 5.x below 5.7.0 | Warn the user: 5.7.0 is the earliest version with every feature the skills use (docs/00, "Setup skill: version rules"). Continue, then run the T1 round-trip check in step 5 before any page work. |
 | `divi` 5.7.0 or later | Continue. No warning. |
-| Any of `novamira/execute-php`, `novamira/skill-write`, `novamira/skill-edit`, `novamira/skill-get`, `novamira/agent-context` missing | Stop and name the missing ability; the Novamira version or its settings differ from the tested 1.12.9. |
+| Any of `novamira/execute-php`, `novamira/skill-write`, `novamira/skill-edit`, `novamira/skill-get`, `novamira/agent-context` missing | Stop and name the missing ability; the Novamira version or its settings differ from the tested 1.12.9 to 1.12.11. |
 | `db` is `sqlite` (WP Studio) | Install the lock fix in step 3. |
 | A skill named in the manifest already exists | Go on, but in step 2 compare first and ask before replacing a copy that differs from the repo. |
 | `context` not empty and differs from the repo text | Show the user both and ask before replacing (gate c). |
@@ -57,7 +57,7 @@ If step 1 found `sqlite`, ask the user (it writes a file outside Novamira's sand
 
 1. Take the text in the code block under "Current text" in `docs/user-context-proposed.md`. Show it to the user once and get approval (gate c), unless the site already holds exactly this text.
 2. Write it with `execute-php`: `$f = implode(chr(92), ['', 'Novamira', 'Context', 'instructions_update_content']); $f($text);`
-3. Verify that `get_option('novamira_instructions_content')` and `get_option('nvp_instructions_content')` both equal the text, then call `novamira/agent-context` and confirm the text appears in its instructions. If it does not, ask the user to switch User Context on under Novamira, Context.
+3. Verify that `get_option('novamira_instructions_content')` and `get_option('nvp_instructions_content')` both equal the text, then call `novamira/agent-context` and confirm the text appears in its instructions, including the sentence that excludes `novamira-design` (Novamira 1.12.11's system context tells agents to load it; T24). If the text is missing, the User Context feature is switched off: from 1.12.11 it is the feature `novamira/user-context` (on by default, the old `novamira_instructions_enabled` option is legacy), so ask the user to switch it on in Novamira's settings.
 
 ## 5. Smoke test
 
