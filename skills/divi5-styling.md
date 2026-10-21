@@ -41,7 +41,13 @@ return ['colors' => $G::get_global_colors(), 'variables' => $G::get_global_varia
 ```
 
 - Colour reference, where a colour string would go: `$variable({"type":"color","value":{"name":"gcid-primary-color","settings":{}}})$`, renders as `var(--gcid-primary-color)` (verified).
-- Variable reference, where the value would go: `$variable({"type":"content","value":{"name":"gvid-<id>","settings":{}}})$`. Verified for a number variable in padding (renders `var(--gvid-<id>)`, 24px in the browser). Other types are not yet verified here; check the result in a browser.
+- Variable reference, where the value would go: `$variable({"type":"content","value":{"name":"gvid-<id>","settings":{}}})$`. Verified on 5.16.0 (T21, T25):
+  - Number, in padding: renders `var(--gvid-<id>)`.
+  - Font, in `font.<bp>.value.family`: renders `font-family: var(--gvid-<id>)`, and Divi loads the Google font. The site's built-in heading and body fonts use the bare name: `"name":"--et_global_heading_font"` or `"--et_global_body_font"`.
+  - Text (strings), inside a Text `content.innerContent` value or a Heading `title.innerContent`: replaced by the variable's text.
+  - Image, as `image.innerContent.<bp>.value.src`: replaced by the image URL.
+  - Link, as `button.innerContent.<bp>.value.linkUrl`: replaced by the URL.
+  - Gradient: `"type":"gradient"` in place of `"content"`, as the whole `module.decoration.background.<bp>.value.gradient` value: renders `background-image: var(--gvid-<id>)`.
 
 ### Create or change colours and variables (after the user agrees)
 
@@ -55,7 +61,9 @@ $cid = 'gcid-' . substr(md5(uniqid()), 0, 10);
 $c[$cid] = ['color' => '#1f6f6b', 'label' => 'Teal', 'status' => 'active', 'folder' => '',
     'lastUpdated' => gmdate('Y-m-d') . 'T' . gmdate('H:i:s') . '.000Z', 'usedInPosts' => []];
 $G::set_global_colors($c);
-// Variable of any type (verified for numbers)
+// Variable of any type (verified for numbers, fonts, strings, images, links, gradients).
+// A gradient's value is the string '$variable(' . wp_json_encode(['type' => 'gradient',
+// 'value' => ['name' => 'gradient', 'settings' => <gradient object as in the table above>]]) . ')$'.
 if ('sqlite' === (defined('DB_ENGINE') ? DB_ENGINE : '')) {
     add_filter('et_builder_5_global_variables_got_lock', fn() => '1');
 }

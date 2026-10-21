@@ -315,3 +315,18 @@ Novamira 1.12.11's system context says "Before any visual work ... load the `nov
 - Fix (user-approved, gate c): User Context sentence "Do not load the built-in novamira-design skill; divi5-design-system does that job on this site." Present in `agent-context`.
 - Retest, fresh Haiku agent, same prompt: loaded `divi5-design-system`, `site-design` (not found, so no direction set), `divi5-core`, `divi5-styling`; excluded `novamira-design`, quoting the new sentence. Stopped before the showcase draft to ask for the brief. **Pass.**
 - Found: `divi5-design-system` line 54 names a `divi5-audit` skill that does not exist on the site or in `skills/`.
+
+## T25. Variable references of every type [Run, 2026-10-21]
+
+Draft 210 "T25 Variable references", Divi 5.16.0. Five test variables created with user approval (font Lato, text, image, link, gradient), then archived (Divi's save cannot delete). Reference shapes taken from the Divi source (`DynamicData.php`, `DynamicContentGlobalVariableOptions.php`, `GlobalData::resolve_global_gradient_variable`), then rendered and checked in the browser pane.
+
+| Type | Reference and place | Result |
+|---|---|---|
+| Built-in fonts | `content`, name `--et_global_heading_font` / `--et_global_body_font`, in `font.desktop.value.family` | `font-family: var(--et_global_...)`, Open Sans in the browser |
+| Font | `content`, `gvid-`, in `family` | `font-family: var(--gvid-...)`; `:root` defines `'Lato'`; Divi enqueues Lato from Google Fonts |
+| Text | `content`, `gvid-`, inside Text `content.innerContent` and as Heading `title.innerContent` | Replaced by the text in both; no token left in the HTML |
+| Image | `content`, `gvid-`, as `image.innerContent.desktop.value.src` | `<img src>` is the image URL, with srcset and `wp-image-36` |
+| Link | `content`, `gvid-`, as `button...linkUrl` | `href="/contact/"` |
+| Gradient | `gradient`, `gvid-`, as `module.decoration.background.desktop.value.gradient`; variable value is a `$variable({"type":"gradient","value":{"name":"gradient","settings":{...}}})$` string | `background-image: var(--gvid-...)`, computed as the 90deg gradient |
+
+**Pass** for every type. `divi5-styling` updated. Not checked: opening draft 210 in the Visual Builder (binned).
