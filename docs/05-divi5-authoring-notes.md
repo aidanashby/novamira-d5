@@ -25,7 +25,9 @@ Results in docs/09. This table overrides the text below where they differ.
 | Rule 13 variables | Colour references to existing `gcid-` IDs confirmed. Font and number references not tested. |
 | Module gotchas (T8, T11) | Confirmed: blurb title `{text}`, CTA default background, testimonial portrait (`src` and `url` both work), team member image `url` (`src` fails), contact form adds CAPTCHA. Not tested: divider, menu, payment button, gallery, fullwidth header, number counter. |
 | Rule 14 presets (T19) | Wrong on 5.15.1: `groupPreset` is valid (`{"<groupId>":{"presetId":["<id>"],"groupName":"<group>"}}`), and `modulePreset` is a list of IDs. |
-| Not yet verified | Rules 6, 10 (grid), 15, 16, font and number variables, the untested gotchas above. |
+| Text alignment (T23) | On 5.16.0 the Text module ignores body-font `textAlign`; use `module.advanced.text.text.<bp>.value.orientation`. Heading `textAlign` still works. |
+| Variable references (T25) | Every variable type is referenced with `$variable({"type":"content",...})$`, gradients with `"type":"gradient"`; built-in fonts use the bare `--et_global_heading_font` or `--et_global_body_font` name. |
+| Not yet verified | Rules 6, 10 (grid), 15, 16, the untested gotchas above. |
 
 ## Page model
 

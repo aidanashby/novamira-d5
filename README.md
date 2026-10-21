@@ -1,67 +1,106 @@
-# novamira-d5
+# Divi 5 skills for Novamira
 
-Verified Divi 5 skills that let Claude build and edit pages, Theme Builder templates and dynamic content on a WordPress site, through the free Novamira plugin. Built and tested on a local WP Studio site, October 2026. Private repo.
+Let Claude build and edit Divi 5 pages for you on a WordPress development or staging site. You ask in plain English ("make a landing page for our spring appeal", "add an FAQ to the volunteering page", "show our events in a grid"), and Claude builds it as a draft with real Divi modules that you can open and edit in the Visual Builder as usual.
 
-Current status, open items and roadmap: [docs/00-status-and-roadmap.md](docs/00-status-and-roadmap.md).
+This repository holds eight skills and a short set of site instructions for the free [Novamira](https://novamira.ai/) WordPress plugin, plus a setup routine that installs them on a site. Every rule in the skills was tested on a real Divi 5 site.
 
-## What it is
+## What you can ask for
 
-[Novamira](https://novamira.ai/) is a WordPress plugin that runs an MCP server inside the site, so an agent can run PHP and manage files, skills and settings as the connected administrator. Its free tier has no Divi tooling: Divi 5 module abilities are in Novamira Pro.
+- New pages and sections, built from Divi's own modules (headings, text, buttons, images, blurbs, accordions, tabs, sliders, forms and the rest), laid out in rows that stack on phones.
+- A new look for a site: Claude builds a design showcase page first and waits for your approval before building anything else.
+- Pages built from content you supply (a brief, a document, pasted copy), with gaps and contradictions flagged instead of filled with invented facts.
+- Styling: colours, spacing, borders, shadows, fonts, hover effects, sticky elements and responsive settings, using your site's global colours, variables and presets where they exist.
+- Theme Builder work: headers, footers and templates for custom post types.
+- Dynamic content: lists and grids of posts or custom post types with the Loop Builder, ACF fields, filters and pagination.
+- Edits to an existing page, or a safe copy of it.
 
-This project closes that gap with knowledge rather than tooling. The agent writes Divi 5 content itself, following eight Novamira skills that were checked rule by rule against Divi 5.15.1 on a real site and rechecked on 5.16.0:
+## What Claude will not do
+
+The site instructions installed with the skills tell Claude to:
+
+- build new pages as drafts, and publish only when you ask;
+- never delete, bin or unpublish a page, or overwrite one unless you ask;
+- propose new presets, global colours and variables, and create them only after you agree;
+- use native Divi modules, never a Code module or injected HTML, CSS or JavaScript for layout.
+
+## Before you start
+
+You need:
+
+- WordPress with **Divi 5.7.0 or later** (tested on 5.15.1 and 5.16.0). Divi 4 is not supported.
+- The **Novamira** plugin (free version, tested on 1.12.9 to 1.12.11).
+- **Claude Code**, connected to the site through Novamira.
+- A **development or staging copy** of the site. Never use this on a live site: Novamira gives the connected agent full administrator, PHP, database and file access.
+
+## Set up a site
+
+1. Install and activate Novamira on the development or staging site.
+2. In wp-admin go to **Novamira, Configuration** (on some versions **Novamira, Connect**), choose **Claude Code**, create an application password, and click **Copy prompt**.
+3. Start Claude Code in a clone of this repository and paste the prompt. Claude writes the connection settings and asks you to restart the session. Keep the prompt private: it contains the password.
+4. After the restart, ask Claude: "Set up this site for Divi 5." The `novamira-setup` skill then:
+   - checks the Divi and Novamira versions and stops if something essential is missing;
+   - uploads every skill in `skills/manifest.json` and checks each copy byte for byte;
+   - shows you the site instructions and writes them once you agree;
+   - adds a small database lock fix on WP Studio (SQLite) sites, so Divi can save global variables;
+   - builds one test draft, checks it, and asks you to open it in the Visual Builder.
+
+If you connect through the Claude Desktop extension instead, start the site first. If the Novamira tools are missing from a session, switch the extension off and on in the session's connector menu.
+
+## Use it
+
+Ask for what you want in plain English. Claude reads the site instructions, loads the skills it needs and builds a draft. When it finishes it tells you the draft's title and link, what it checked (stored content, rendered output and, where it has a browser, desktop and phone views), and anything it could not do or needs from you.
+
+Open the draft in the Visual Builder to review and edit it, then publish it yourself or ask Claude to.
+
+After a Divi or Novamira update, read their changelogs and rerun the tests in [docs/09](docs/09-test-results.md) that the changes touch. Test T23 shows how.
+
+## The skills
 
 | Skill | Covers |
 |---|---|
-| `divi5-core` | How Divi 5 stores a page, the build recipe, meta, rows and columns, choosing modules, editing and cloning pages, components, silent failures, and how to verify (read-back, render, browser) |
-| `divi5-styling` | Backgrounds, gradients and video backgrounds, spacing, borders, shadows, sizing, fonts, hover, sticky, position, breakpoints, the site's global colours and variables of every type |
-| `divi5-modules` | Attribute shapes for every registered module, contact forms, fullwidth sections |
+| `divi5-core` | How Divi 5 stores a page, the build recipe, rows and columns, choosing modules, editing and copying pages, components, silent failures, and how to check the result |
+| `divi5-styling` | Backgrounds, gradients and video backgrounds, spacing, borders, shadows, sizing, fonts, hover, sticky, position, breakpoints, and global colours and variables of every type |
+| `divi5-modules` | Attribute shapes for every registered module, contact forms, fullwidth sections, the Menu module's collapsible mobile menu |
 | `divi5-theme-builder` | Theme Builder storage, editing header, body and footer layouts, creating single and archive templates for a post type |
 | `divi5-dynamic` | Dynamic content, ACF fields, Loop Builder, pagination, filters by custom field and term, dates, custom post types |
-| `divi5-presets` | Reading and applying module and option-group presets; proposing new or changed ones and writing them after the user agrees |
-| `divi5-design-system` | New-site and redesign workflow: a design showcase draft that the user approves before other pages are built |
+| `divi5-presets` | Reading and applying module and option-group presets; proposing new or changed ones and writing them after you agree |
+| `divi5-design-system` | New-site and redesign workflow: a design showcase draft that you approve before other pages are built |
 | `divi5-page-production` | Building a draft page from supplied content, reporting gaps and sources without inventing facts |
 
-A short User Context (text in [docs/user-context-proposed.md](docs/user-context-proposed.md)) tells every agent on the site to use Divi only, build drafts, publish only when asked, never delete or unpublish a page, leave global settings alone, load `divi5-core`, and use `divi5-design-system` for redesigns in place of Novamira's own `novamira-design`.
+The site instructions (User Context) are in [docs/user-context-proposed.md](docs/user-context-proposed.md).
 
 ## How it works
 
-- Divi 5 stores content as WordPress block markup. Agents build block arrays in PHP and serialise them with WordPress's own `serialize_blocks()`, which matches the Visual Builder's storage byte for byte. Parsing and re-serialising a builder page is lossless, so edits and copies are safe.
-- Every rule in the skills was run on the site: written, rendered, read back and, where layout or JavaScript matters, checked in a browser at desktop and phone width. Pages written this way open, edit and save normally in the Visual Builder.
-- Agents work on drafts and copies. Theme Builder edits, which go live at once, require the user's say-so.
+Novamira runs an MCP server inside WordPress, so Claude can run PHP on the site as the connected administrator. Its free version has no Divi tools, so this project supplies knowledge instead: skills that tell Claude exactly how Divi 5 stores pages.
 
-## Results
+Divi 5 stores content as WordPress block markup. Claude builds each page as PHP arrays and turns them into markup with WordPress's own `serialize_blocks()`, which produces exactly what the Visual Builder saves. Reading a page and writing it back loses nothing, so edits and copies are safe.
 
-- Fresh agents given only the skills built landing pages, FAQ copies, image and text rows, a styled contact page and a Movies grid, and answered read-only questions, after one round of fixes.
-- Tested on the site: all registered modules, styling, cloning a published page, Theme Builder layouts and templates, loops, ACF fields and pagination.
-- Decision: no Novamira Pro. Building pages as real modules, single-module edits, Loop Builder, dynamic content and Theme Builder all worked on the free plugin. Presets also work, with writes kept behind the user's approval (docs/10).
+Every rule in the skills was written to the test site, rendered, read back and, where layout or JavaScript matters, checked in a browser at desktop and phone width. Fresh Claude agents given only the skills then built pages, layouts and loops from short requests. The evidence is in [docs/09](docs/09-test-results.md).
 
-## Using it on another site
+## Known limits
 
-1. Install Novamira on a development or staging copy, never a live site. Novamira gives the agent full admin, PHP, database and file access.
-2. Connect Claude (Claude Desktop extension or Claude Code; see CLAUDE.md, "Connecting Claude Code").
-3. In Claude Code, from this repo, ask it to set up the site. The `novamira-setup` skill (`.claude/skills/`) checks Divi (stops below Divi 5, warns below 5.7.0) and Novamira, uploads every skill in `skills/manifest.json`, writes the User Context, adds the SQLite lock fix on WP Studio, verifies each copy by md5 and runs a smoke test.
-4. Each site needs its own Novamira connection (its own MCP server entry and application password). The skills were verified on Divi 5.15.1; rerun the key tests (docs/09) after a Divi upgrade.
+- Divi's own loop filters take fixed dates, so "events from today onwards" needs the free [Date Conditions for Divi](https://github.com/aidanashby/date-conditions-for-divi) plugin. The skills know how to use it, but that part has not yet been tested on a site.
+- Some modules need data from outside the page (a map API key, a Mailchimp list, a payment account) before they show anything.
+- Claude reads and places Divi components (reusable linked elements), but writes to them only when you ask.
 
 ## Repository layout
 
 | Path | Contents |
 |---|---|
-| `CLAUDE.md` | Rules for Claude in this project: local site only, standing approvals, gates |
-| `skills/` | Source of the six Novamira skills (identical to the copies stored on the site) |
+| `skills/` | The eight Novamira skills, and `manifest.json` listing them for setup |
+| `.claude/skills/novamira-setup/` | The Claude Code skill that installs everything on a site |
+| `tools/studio-divi-variables-lock.php` | The lock fix for WP Studio (SQLite) sites |
 | `docs/00-status-and-roadmap.md` | Status, open items, roadmap, learnings, how to resume |
-| `docs/01` to `docs/04` | Environment, session log, Novamira reference, audit of `divilovewp/divi5-skill` |
-| `docs/05-divi5-authoring-notes.md` | Divi 5 rules with a status table showing what the tests confirmed or corrected |
-| `docs/06-recommendations-and-plan.md` | The original plan and test design |
-| `docs/07-sources.md` | Links |
-| `docs/08-site-change-log.md` | Every write to the site, with how to undo it |
+| `docs/01` to `docs/07` | Background: environment, session log, Novamira reference, audit of `divilovewp/divi5-skill`, Divi 5 authoring notes, the original plan, sources |
+| `docs/08-site-change-log.md` | Every write made to the test site, with how to undo it |
 | `docs/09-test-results.md` | Every test and its evidence |
-| `docs/10-decision-memo.md` | Free versus Pro, design tokens, decisions |
-| `NOTICE.md` | Third-party licences (divi5-skill is MIT) |
+| `docs/10-decision-memo.md` | Free versus Pro, design tokens |
+| `docs/11-design-and-content-workflow-expansion.md` | Design for the design-system and page-production skills |
+| `CLAUDE.md` | Working rules for Claude on the original test site |
+| `NOTICE.md` | Third-party licences |
 
-## Evidence labels
-
-Used in the docs: [Run] observed on the Studio site; [Docs] from Novamira's or the local Divi documentation; [Web] from a web page listed in docs/07; [Skill] a divi5-skill claim not yet verified; [Inferred] reasoning, not verified.
+Evidence labels used in the docs: [Run] observed on the test site; [Docs] from Novamira's or Divi's documentation; [Web] from a page listed in docs/07; [Skill] an unverified claim from divi5-skill; [Inferred] reasoning, not tested.
 
 ## Credits
 
-Parts of the skills are adapted from [divilovewp/divi5-skill](https://github.com/divilovewp/divi5-skill) (MIT, copyright 2026 Shashank Gupta, divilove.com), then verified and rewritten for Divi 5.15.1. See NOTICE.md.
+Parts of the skills are adapted from [divilovewp/divi5-skill](https://github.com/divilovewp/divi5-skill) (MIT, copyright 2026 Shashank Gupta, divilove.com), then verified and rewritten for Divi 5. See [NOTICE.md](NOTICE.md).

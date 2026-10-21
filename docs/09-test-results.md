@@ -338,3 +338,12 @@ Draft 213 "T26 Collapsible mobile menu": one `divi/menu` with `menuMobile.advanc
 ## T27. Visual Builder saves variables on WP Studio [Run, 2026-10-21]
 
 With the mu-plugin `studio-divi-variables-lock.php` active, the user added a Number variable "T26 builder save" = 12px in the Variable Manager (opened from T0, page not saved). Read back: stored as 12px, active; the other eight variables unchanged. **Pass.** The SQLite `GET_LOCK()` blocker (T21) is resolved for the builder too.
+
+## T28. Outstanding visual checks [Run, 2026-10-21]
+
+- Live drafts 138 "Home", 139 "Oakfield Community Larder Home", 140 "Design showcase: Riverside Tool Library" and 154 "Volunteer with us", checked in the browser pane at 1280px and 375px: no zero-size modules, no horizontal overflow, and at 375px every multi-column row stacks. **Pass.** Drafts 46, 48 and 130 (earlier pending checks) are in the bin, so those checks lapse.
+- Button preset colour (T19 doubt): T0 Baseline's button with the user's preset `7ehrfhnk99` computes `rgb(158, 6, 6)` (the preset's `#9e0606`) and white text once Divi's 0.2s button transition has finished. The earlier "transparent" reading was taken mid-transition. **Resolved.**
+
+## T29. Moving date windows through Date Conditions for Divi [Docs, 2026-10-21]
+
+Divi's `metaQuery` takes fixed values (T17), so "from today" loops rely on the user's plugin Date Conditions for Divi 0.1.4, installed on Studio but inactive. Read from its code: rules live only in block attributes on the module with the loop (`dcfdDateRules.innerContent.desktop.value` with `rule1Field`, `rule1Operator` `after`/`before`/`equals`, optional rule 2, both must match; `dcfdEmptyState` holds a published Divi Library item ID shown when nothing matches). It adds a `meta_query` on `divi_loop_data_before_execution`, accepts ACF Date Picker (Ymd, end of day) and Date Time Picker (`Y-m-d H:i:s`) fields, names group subfields `<group>_<field>`, lets posts with an empty field through, and needs Divi 5.8.1, ACF and page caching off. `divi5-dynamic` now describes it, marked untested, and tells agents never to activate it. **Not run:** activating the plugin is outside the standing approvals.
