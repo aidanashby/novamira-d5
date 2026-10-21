@@ -8,18 +8,20 @@ Current status, open items and roadmap: [docs/00-status-and-roadmap.md](docs/00-
 
 [Novamira](https://novamira.ai/) is a WordPress plugin that runs an MCP server inside the site, so an agent can run PHP and manage files, skills and settings as the connected administrator. Its free tier has no Divi tooling: Divi 5 module abilities are in Novamira Pro.
 
-This project closes that gap with knowledge rather than tooling. The agent writes Divi 5 content itself, following six Novamira skills that were checked rule by rule against Divi 5.15.1 on a real site:
+This project closes that gap with knowledge rather than tooling. The agent writes Divi 5 content itself, following eight Novamira skills that were checked rule by rule against Divi 5.15.1 on a real site and rechecked on 5.16.0:
 
 | Skill | Covers |
 |---|---|
 | `divi5-core` | How Divi 5 stores a page, the build recipe, meta, rows and columns, choosing modules, editing and cloning pages, components, silent failures, and how to verify (read-back, render, browser) |
-| `divi5-styling` | Backgrounds, gradients and video backgrounds, spacing, borders, shadows, sizing, fonts, hover, sticky, position, breakpoints, the site's global colours |
+| `divi5-styling` | Backgrounds, gradients and video backgrounds, spacing, borders, shadows, sizing, fonts, hover, sticky, position, breakpoints, the site's global colours and variables of every type |
 | `divi5-modules` | Attribute shapes for every registered module, contact forms, fullwidth sections |
 | `divi5-theme-builder` | Theme Builder storage, editing header, body and footer layouts, creating single and archive templates for a post type |
 | `divi5-dynamic` | Dynamic content, ACF fields, Loop Builder, pagination, filters by custom field and term, dates, custom post types |
-| `divi5-presets` | Reading and applying module and option-group presets; creating and editing them only when the user asks |
+| `divi5-presets` | Reading and applying module and option-group presets; proposing new or changed ones and writing them after the user agrees |
+| `divi5-design-system` | New-site and redesign workflow: a design showcase draft that the user approves before other pages are built |
+| `divi5-page-production` | Building a draft page from supplied content, reporting gaps and sources without inventing facts |
 
-A short User Context (text in [docs/user-context-proposed.md](docs/user-context-proposed.md)) tells every agent on the site to use Divi only, build drafts, publish only when asked, never delete or unpublish a page, leave global settings alone and load `divi5-core`.
+A short User Context (text in [docs/user-context-proposed.md](docs/user-context-proposed.md)) tells every agent on the site to use Divi only, build drafts, publish only when asked, never delete or unpublish a page, leave global settings alone, load `divi5-core`, and use `divi5-design-system` for redesigns in place of Novamira's own `novamira-design`.
 
 ## How it works
 
