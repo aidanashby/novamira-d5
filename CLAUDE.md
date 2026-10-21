@@ -1,5 +1,7 @@
 # novamira-d5: project instructions
 
+These are the working rules used on the original test site. Before reusing them, adapt them as the README describes under "Settings that live outside this repository".
+
 Read `README.md` and `docs/00-status-and-roadmap.md` before doing anything; read `docs/01` to `docs/06` for background when needed. The parent `Projects\CLAUDE.md` also applies (test first, verify before claiming done, plan before executing, no scratch directories inside the Projects tree).
 
 ## What this project is

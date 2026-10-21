@@ -134,10 +134,16 @@ Every rule in the skills was written to the test site, rendered, read back and, 
 | `docs/10-decision-memo.md` | Free versus Pro, design tokens |
 | `docs/11-design-and-content-workflow-expansion.md` | Design for the design-system and page-production skills |
 | `CLAUDE.md` | Working rules for Claude on the original test site |
+| `LICENSE` | MIT licence for this project's own content |
 | `NOTICE.md` | Third-party licences |
+| `CHANGELOG.md` | Release history |
 
 Evidence labels used in the docs: [Run] observed on the test site; [Docs] from Novamira's or Divi's documentation; [Web] from a page listed in docs/07; [Skill] an unverified claim from divi5-skill; [Inferred] reasoning, not tested.
 
 ## Credits
 
 Parts of the skills are adapted from [divilovewp/divi5-skill](https://github.com/divilovewp/divi5-skill) (MIT, copyright 2026 Shashank Gupta, divilove.com), then verified and rewritten for Divi 5. See [NOTICE.md](NOTICE.md).
+
+## Licence
+
+MIT, see [LICENSE](LICENSE). Third-party material keeps its own terms, listed in [NOTICE.md](NOTICE.md).

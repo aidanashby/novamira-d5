@@ -63,7 +63,6 @@ The skill sources in `skills/` match the stored skills byte for byte (md5 checke
 
 ## Open items
 
-- Before making the repo public: add a licence for this project's own content (NOTICE.md covers only divi5-skill), decide whether `CLAUDE.md` and docs/01 to docs/08 (local paths, test-site details) should stay, and make sure the Date Conditions for Divi repo the README links to is public.
 
 ## Roadmap
 
