@@ -330,3 +330,7 @@ Draft 210 "T25 Variable references", Divi 5.16.0. Five test variables created wi
 | Gradient | `gradient`, `gvid-`, as `module.decoration.background.desktop.value.gradient`; variable value is a `$variable({"type":"gradient","value":{"name":"gradient","settings":{...}}})$` string | `background-image: var(--gvid-...)`, computed as the 90deg gradient |
 
 **Pass** for every type. `divi5-styling` updated. Not checked: opening draft 210 in the Visual Builder (binned).
+
+## T26. Menu collapsible mobile submenus (new in Divi 5.16) [Run, 2026-10-21]
+
+Draft 213 "T26 Collapsible mobile menu": one `divi/menu` with `menuMobile.advanced.collapsible` `on` and `parentLinksActive` `off` (paths from the Menu `module.json` and `MenuModule.php` line 83). Stored intact; the wrapper carries `et_pb_menu--collapsible-mobile` and `et_pb_menu--collapsible-parent-links-inactive`. **Pass (render only).** Not checked: expand and collapse in a browser, because the site has no nav menu with child items and creating one is outside the standing approvals. Draft binned; `divi5-modules` updated.
