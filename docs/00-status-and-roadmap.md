@@ -64,7 +64,6 @@ The skill sources in `skills/` match the stored skills byte for byte (md5 checke
 ## Open items
 
 - Date Conditions for Divi (T29): posts with an empty date field and `dcfdEmptyState` (needs a published Divi Library item) are not yet run.
-- Menu collapsible mobile option checked in render output only (T26). A browser check needs a nav menu with child items.
 - Before making the repo public: add a licence for this project's own content (NOTICE.md covers only divi5-skill), decide whether `CLAUDE.md` and docs/01 to docs/08 (local paths, test-site details) should stay, and make sure the Date Conditions for Divi repo the README links to is public.
 
 ## Roadmap
