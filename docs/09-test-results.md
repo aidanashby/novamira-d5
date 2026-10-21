@@ -334,3 +334,7 @@ Draft 210 "T25 Variable references", Divi 5.16.0. Five test variables created wi
 ## T26. Menu collapsible mobile submenus (new in Divi 5.16) [Run, 2026-10-21]
 
 Draft 213 "T26 Collapsible mobile menu": one `divi/menu` with `menuMobile.advanced.collapsible` `on` and `parentLinksActive` `off` (paths from the Menu `module.json` and `MenuModule.php` line 83). Stored intact; the wrapper carries `et_pb_menu--collapsible-mobile` and `et_pb_menu--collapsible-parent-links-inactive`. **Pass (render only).** Not checked: expand and collapse in a browser, because the site has no nav menu with child items and creating one is outside the standing approvals. Draft binned; `divi5-modules` updated.
+
+## T27. Visual Builder saves variables on WP Studio [Run, 2026-10-21]
+
+With the mu-plugin `studio-divi-variables-lock.php` active, the user added a Number variable "T26 builder save" = 12px in the Variable Manager (opened from T0, page not saved). Read back: stored as 12px, active; the other eight variables unchanged. **Pass.** The SQLite `GET_LOCK()` blocker (T21) is resolved for the builder too.
