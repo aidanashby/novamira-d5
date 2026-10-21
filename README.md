@@ -46,6 +46,43 @@ You need:
 
 If you connect through the Claude Desktop extension instead, start the site first. If the Novamira tools are missing from a session, switch the extension off and on in the session's connector menu.
 
+## Settings that live outside this repository
+
+A clone of this repository brings the skills, the setup skill and the docs. These settings are per person and per machine, so you set them yourself.
+
+**The connection.** The Novamira prompt adds the MCP server to your own Claude Code configuration for this folder, not to a file in the repository. Each person, and each site, needs its own application password and connection. Run `/mcp` to see the server's name; the tool names below use it.
+
+**Permissions (optional).** Claude Code asks before every Novamira call. To stop those prompts on a development site, create `.claude/settings.local.json` in your clone (it is git-ignored) with:
+
+```json
+{
+  "permissions": {
+    "allow": ["mcp__<server name>__mcp-adapter-execute-ability"]
+  }
+}
+```
+
+Replace `<server name>` with the name `/mcp` shows (for example `novamira`, or `Novamira___Divi_5` for the Claude Desktop extension). This lets Claude run any PHP on the site without asking, so use it only on a development or staging copy.
+
+**Auto mode (optional).** If you run Claude Code in auto mode, its safety check can block a site-wide change you asked for, such as moving widgets or editing a Theme Builder template. To let those through, add an `autoMode` block to your user settings file, `~/.claude/settings.json`, describing your own site:
+
+```json
+{
+  "autoMode": {
+    "allow": [
+      "Novamira MCP calls (tools mcp__<server name>__*) that make a site-wide change the user explicitly asked for in this session, such as editing Theme Builder templates or layouts, moving widgets, changing site options, or activating a plugin already installed on the site"
+    ],
+    "environment": [
+      "The Novamira MCP server (tools mcp__<server name>__*) connects only to the development site <your site URL>, a disposable copy with test data and no real personal data. It is not production."
+    ]
+  }
+}
+```
+
+Merge these keys into the file if it already exists. Claude Code shows a warning at startup if the file is invalid.
+
+**CLAUDE.md.** The `CLAUDE.md` in this repository holds the working rules used on the original test site: its URL and folder, local paths to a copy of the Divi documentation and theme source, and the approvals that site's owner gave. Before you work in your clone, replace the site URL and folder with yours, point the Divi documentation rule at your own copy (or at [help.elegantthemes.com](https://help.elegantthemes.com/en)), and rewrite the standing approvals to match what you are happy for Claude to do without asking. It also refers to a parent `Projects\CLAUDE.md` that is not in the repository; delete that sentence.
+
 ## Use it
 
 Ask for what you want in plain English. Claude reads the site instructions, loads the skills it needs and builds a draft. When it finishes it tells you the draft's title and link, what it checked (stored content, rendered output and, where it has a browser, desktop and phone views), and anything it could not do or needs from you.
