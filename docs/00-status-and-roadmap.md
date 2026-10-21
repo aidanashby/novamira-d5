@@ -11,7 +11,7 @@ The Studio site runs Divi 5.16.0 and Novamira 1.12.11. On 21 October:
 - Global variable references verified for every type (T25); the Visual Builder saves variables on Studio (T27); all test variables deleted.
 - Menu module collapsible mobile option added to `divi5-modules` (T26, render only).
 - Outstanding desktop and phone checks done and the Button preset colour doubt resolved (T28).
-- Moving date windows: `divi5-dynamic` now explains Date Conditions for Divi, from its code; untested because the plugin is inactive (T29).
+- Moving date windows: `divi5-dynamic` explains Date Conditions for Divi; `after` and `before` verified on a Movies loop (T29). Empty fields and the empty state are not yet run.
 - README rewritten for a public audience.
 
 The original plan (docs/06, "Recommended order") is complete, and the scope was then widened to Theme Builder, dynamic content and custom post types. Both gates the user owned are decided: no Novamira Pro (gate e), and Divi globals stay the source of truth for design tokens (gate d, option 1). See docs/10.
@@ -25,7 +25,7 @@ The original plan (docs/06, "Recommended order") is complete, and the scope was 
 | Skill `divi5-styling` | post 53 | Decoration paths, fonts, hover, sticky, position, video background, responsive, global colours and variables of every type |
 | Skill `divi5-modules` | post 54 | Shapes for every registered module, contact form fields, fullwidth sections, Menu collapsible mobile option |
 | Skill `divi5-theme-builder` | post 90 | Theme Builder storage, editing layouts, creating templates for a post type and its archive |
-| Skill `divi5-dynamic` | post 103 | Dynamic content, ACF fields, Loop Builder, pagination, filters by custom field and term, dates, custom post types, moving date windows through Date Conditions for Divi (untested) |
+| Skill `divi5-dynamic` | post 103 | Dynamic content, ACF fields, Loop Builder, pagination, filters by custom field and term, dates, custom post types, moving date windows through Date Conditions for Divi |
 | Skill `divi5-presets` | post 131 | Read and apply module and option-group presets; propose new or changed ones, write after the user agrees |
 | Skill `divi5-design-system` | post 136 | New-site and redesign workflow: design showcase draft and approval gate (T20) |
 | Skill `divi5-page-production` | post 153 | Build a draft page from supplied content, with gaps and sources reported (T22) |
@@ -63,7 +63,7 @@ The skill sources in `skills/` match the stored skills byte for byte (md5 checke
 
 ## Open items
 
-- Date Conditions for Divi guidance in `divi5-dynamic` is read from the plugin's code and not yet run (T29). Needs the user to activate the plugin on Studio; then test `after` and `before` on a Movies loop and correct the skill.
+- Date Conditions for Divi (T29): posts with an empty date field and `dcfdEmptyState` (needs a published Divi Library item) are not yet run.
 - Menu collapsible mobile option checked in render output only (T26). A browser check needs a nav menu with child items.
 - Before making the repo public: add a licence for this project's own content (NOTICE.md covers only divi5-skill), decide whether `CLAUDE.md` and docs/01 to docs/08 (local paths, test-site details) should stay, and make sure the Date Conditions for Divi repo the README links to is public.
 
