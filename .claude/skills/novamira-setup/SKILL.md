@@ -10,7 +10,7 @@ Run from the `novamira-d5` repo. The site's Novamira MCP tools must already be c
 ## 0. Which site, and is it allowed
 
 1. Call `novamira/execute-php` with `return [home_url(), wp_get_environment_type(), get_bloginfo('name')];`.
-2. Project rule 1 (CLAUDE.md) allows only the local Studio site `http://localhost:8881`. For any other site, stop and ask the user with the choice tool, naming the URL and environment. Novamira gives full admin, PHP and file access, so never set it up on a production site; staging needs the user's explicit yes.
+2. Name the URL and environment to the user and ask with the choice tool whether this is the site to set up. Novamira gives full admin, PHP and file access, so never set it up on a production site (environment `production`, or a live domain); a `local` or `development` site needs the user's yes, and a staging site their explicit yes after naming the risk. If the project's CLAUDE.md names a different site, tell the user it needs adapting (README, "Settings that live outside this repository").
 3. If several Novamira servers are connected, confirm with the user which one is this site before writing anything.
 
 ## 1. Checks, and what each result means
