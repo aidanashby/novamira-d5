@@ -1,6 +1,6 @@
 # 05. Divi 5 authoring notes (unverified until tested)
 
-Distilled from `divilovewp/divi5-skill` v0.6.9 (Divi 5.11.1, MIT, see NOTICE.md) and from `Projects\divi5-builder\divi5-builder-review.md` (measured on Divi 5.14.0 in WP Studio). Rewritten in condensed form. Every item is [Skill] unless marked. **Do not put any of this into a skill as fact until it has been run on the Studio site (5.15.1).** Tests are in docs/06.
+Distilled from `divilovewp/divi5-skill` v0.6.9 (Divi 5.11.1, MIT, see NOTICE.md) and from the independent review of `doughoseck/divi5-builder` (2 October 2026, since deleted; measured on Divi 5.14.0 in WP Studio). Rewritten in condensed form. Every item is [Skill] unless marked. **Do not put any of this into a skill as fact until it has been run on the Studio site (5.15.1).** Tests are in docs/06.
 
 ## Status after T0 to T6 (14 October 2026, Divi 5.15.1) [Run]
 

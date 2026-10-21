@@ -42,7 +42,7 @@ Reading the result: a pass means hand-written markup is viable and the method (h
 
 **T4 dynamic-assets cache.** Add an accordion and tabs by PHP to a page that already rendered once. Check whether their scripts load. Repeat after deleting `_divi_dynamic_assets_cached_modules` and clearing `wp-content/et-cache/`. Decide whether the helper must always clear them.
 
-**T5 schema cross-check (offline, read-only).** Find Divi's own module metadata under `Projects\divi5-builder\Divi` (search for `module.json` and the module library folders). For heading, text, button, image, blurb, cta, row, column, section, check every attribute path the skill claims. Note any difference at 5.14.0 versus 5.15.1.
+**T5 schema cross-check (offline, read-only).** Find Divi's own module metadata under `Projects\divi5-docs\Divi` (search for `module.json` and the module library folders). For heading, text, button, image, blurb, cta, row, column, section, check every attribute path the skill claims. Note any difference at 5.14.0 versus 5.15.1.
 
 **T6 silent-failure rules.** Quick renders: `capitalization` versus `style:["uppercase"]`, `htmlAttributes` shape, button hover shape, `attrs` wrapper, `body` versus `content`. Confirms the skill's claims on 5.15.1.
 

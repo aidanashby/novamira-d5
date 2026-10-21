@@ -36,12 +36,12 @@ Novamira is the free, open-source MCP plugin from Dynamic.ooo. Its free tier giv
 | Path | What it is |
 |---|---|
 | `<projects folder>\divi5-docs\Divi 5 Documentation` | Local mirror of Divi 5 help articles (about 300 Markdown files). `Developer\` holds developer docs, with `Release Notes\` only up to 5.11.1. `divi-5-update-status.md` (fetched 2026-10-12) lists changes up to 5.15.1. |
-| `<projects folder>\divi5-builder\Divi` | Copy of the Divi theme source (5.14.0 at the time of the earlier review). Use it to read Divi's own module metadata and PHP. A search for `Heading\module.json` in the first level found nothing, so the module metadata lives under another path. Locate it before relying on it. |
-| `<projects folder>\divi5-builder\divi5-builder-review.md` | Independent review (2 October 2026) of `doughoseck/divi5-builder`, with hands-on findings on Divi 5.14.0 in WP Studio. Relevant measured facts are summarised in docs/05. |
-| `<projects folder>\divi5-builder\repo` | Copy of that repo. |
+| `<projects folder>\divi5-docs\Divi` | Copy of the Divi theme source (5.15.1; it was 5.14.0 at the time of the earlier review). Use it to read Divi's own module metadata and PHP. A search for `Heading\module.json` in the first level found nothing, so the module metadata lives under another path. Locate it before relying on it. |
+| `divi5-builder-review.md` (deleted) | Independent review (2 October 2026) of `doughoseck/divi5-builder`, with hands-on findings on Divi 5.14.0 in WP Studio. Relevant measured facts are summarised in docs/05. |
+| `divi5-builder\repo` (deleted) | Local copy of that repo. No longer on disk. |
 | `<projects folder>\CLAUDE.md` | Imports `claude-skills\claude-projects.md` (working principles that apply here). |
 | `<projects folder>\date-conditions-for-divi`, `responsive-goodies` and others | The user's own plugins, several of which are active on the Studio site. |
 
 ## Other Divi tooling the user has looked at
 
-`divi5-builder-review.md` compares: Elegant Themes' own Divi AI Agent (shipped in Divi 5.12, 4 September 2026; official MCP announced, no date), DiviOps, Wiplink, Respira, D5MCP and `doughoseck/divi5-builder`. Its verdict for divi5-builder was "fork and trim for staging-only drafting". The Novamira route in this project is a different mechanism (PHP inside WordPress, no custom REST plugin), so that review's REST, mu-plugin and credentials-file findings do not apply directly. Its measured Divi behaviour does apply (see docs/05).
+`divi5-builder-review.md` (since deleted) compares: Elegant Themes' own Divi AI Agent (shipped in Divi 5.12, 4 September 2026; official MCP announced, no date), DiviOps, Wiplink, Respira, D5MCP and `doughoseck/divi5-builder`. Its verdict for divi5-builder was "fork and trim for staging-only drafting". The Novamira route in this project is a different mechanism (PHP inside WordPress, no custom REST plugin), so that review's REST, mu-plugin and credentials-file findings do not apply directly. Its measured Divi behaviour does apply (see docs/05).

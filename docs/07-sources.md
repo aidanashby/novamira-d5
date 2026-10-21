@@ -38,4 +38,4 @@ All read between 14 October 2026 (chat session).
 
 ## Local files
 - Divi docs: `<projects folder>\divi5-docs\Divi 5 Documentation` (notably `divi-5-update-status.md`, `customize-the-divi-5-s-default-breakpoints.md`, `why-the-page-is-blank-or-missing-content-on-the-live-site-in-divi-5.md`, `the-divi-ai-agent-in-divi-5.md`)
-- Earlier review: `<projects folder>\divi5-builder\divi5-builder-review.md`
+- Earlier review of `doughoseck/divi5-builder` (2 October 2026): `divi5-builder-review.md`, since deleted. Its findings are summarised in docs/05.

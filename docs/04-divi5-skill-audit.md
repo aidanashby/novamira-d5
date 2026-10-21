@@ -52,7 +52,7 @@ Could not read: commit dates and the content of the open pull requests (GitHub's
 ## Escaping (important for the PHP route)
 
 - divi5-skill says rich-text values go in as raw HTML (`<p>`), and that pre-escaping (`&lt;` or `\u003c`) ends up visible on the page, because its connector escapes server-side and a JSON `\u003c` survives the transport verbatim.
-- The `doughoseck/divi5-builder` compiler (reviewed in `divi5-builder-review.md`) does the opposite for its REST writes: it escapes `\`, `"`, `<`, `>`, `&` and `--` into JSON unicode escapes, which it measured as the form Divi stores.
+- The `doughoseck/divi5-builder` compiler (reviewed in `divi5-builder-review.md`, since deleted) does the opposite for its REST writes: it escapes `\`, `"`, `<`, `>`, `&` and `--` into JSON unicode escapes, which it measured as the form Divi stores.
 - Both are transport-specific. Over Novamira the write is PHP inside WordPress, so there is no connector. [Inferred] The safest method is to build block attributes as PHP arrays and serialise them with WordPress core (`serialize_block()` or `serialize_blocks()`, which apply WordPress's own comment-safe JSON escaping), then compare the stored result with a Visual Builder-saved page. Not yet tested.
 
 ## Keep, adapt, drop

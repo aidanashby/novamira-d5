@@ -10,7 +10,7 @@ The MIT licence requires the copyright notice and permission notice to be includ
 
 ## Divi documentation and theme source
 
-The local copies under `Projects\divi5-docs` and `Projects\divi5-builder\Divi` belong to Elegant Themes. They are for local reference. Do not redistribute them or paste large passages into shared skills.
+The local copies under `Projects\divi5-docs` and `Projects\divi5-docs\Divi` belong to Elegant Themes. They are for local reference. Do not redistribute them or paste large passages into shared skills.
 
 ## Novamira
 
