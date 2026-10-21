@@ -116,7 +116,7 @@ Every rule in the skills was written to the test site, rendered, read back and, 
 
 ## Known limits
 
-- Divi's own loop filters take fixed dates, so "events from today onwards" needs the free [Date Conditions for Divi](https://github.com/aidanashby/date-conditions-for-divi) plugin. The skills know how to use it, tested on a Movies loop; the empty-loop message it offers has not yet been tested.
+- Divi's own loop filters take fixed dates, so "events from today onwards" needs the free [Date Conditions for Divi](https://github.com/aidanashby/date-conditions-for-divi) plugin. The skills know how to use it, tested on a Movies loop.
 - Some modules need data from outside the page (a map API key, a Mailchimp list, a payment account) before they show anything.
 - Claude reads and places Divi components (reusable linked elements), but writes to them only when you ask.
 

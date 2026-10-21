@@ -11,7 +11,7 @@ The Studio site runs Divi 5.16.0 and Novamira 1.12.11. On 21 October:
 - Global variable references verified for every type (T25); the Visual Builder saves variables on Studio (T27); all test variables deleted.
 - Menu module collapsible mobile option added to `divi5-modules` (T26, render only).
 - Outstanding desktop and phone checks done and the Button preset colour doubt resolved (T28).
-- Moving date windows: `divi5-dynamic` explains Date Conditions for Divi; `after` and `before` verified on a Movies loop (T29). Empty fields and the empty state are not yet run.
+- Moving date windows: `divi5-dynamic` explains Date Conditions for Divi, verified on a Movies loop: `after` and `before`, undated posts and the empty state (T29).
 - README rewritten for a public audience.
 
 The original plan (docs/06, "Recommended order") is complete, and the scope was then widened to Theme Builder, dynamic content and custom post types. Both gates the user owned are decided: no Novamira Pro (gate e), and Divi globals stay the source of truth for design tokens (gate d, option 1). See docs/10.
@@ -63,7 +63,6 @@ The skill sources in `skills/` match the stored skills byte for byte (md5 checke
 
 ## Open items
 
-- Date Conditions for Divi (T29): posts with an empty date field and `dcfdEmptyState` (needs a published Divi Library item) are not yet run.
 - Before making the repo public: add a licence for this project's own content (NOTICE.md covers only divi5-skill), decide whether `CLAUDE.md` and docs/01 to docs/08 (local paths, test-site details) should stay, and make sure the Date Conditions for Divi repo the README links to is public.
 
 ## Roadmap
