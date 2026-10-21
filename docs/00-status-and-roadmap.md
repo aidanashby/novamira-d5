@@ -54,7 +54,6 @@ The skill sources in `skills/` match the stored skills byte for byte (md5 checke
 ## Open items
 
 - Done (23:05): the user set the date field's Return Format to `Y-m-d H:i:s`; single movie pages now show "16 October 2026, 2:17 pm" and the archive "16 Oct, 2026".
-- `divi5-design-system` refers to a `divi5-audit` skill that does not exist (found in T24). Remove the reference or write the skill.
 - The theme's sidebar and footer widgets ("Archives", "Categories") show under Theme Builder bodies on movie pages. Cosmetic; a global footer in the Theme Builder would replace them.
 
 ## Roadmap (not started)

@@ -51,7 +51,7 @@ One draft page titled `Design showcase: <site or project name>`. It shows the vi
 
 ## Redesign
 
-Only when the user asks to redesign, refresh, modernise or restyle. An audit or clean-up request is never a redesign (use `divi5-audit`).
+Only when the user asks to redesign, refresh, modernise or restyle. An audit or clean-up request is never a redesign.
 
 1. Agree the goal, audience and what must stay (brand colours, logo, content).
 2. Build a new showcase as in step 2, titled `Design showcase: <name> (redesign)`, with the current look as one option when the user wants a comparison.
