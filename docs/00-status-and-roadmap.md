@@ -2,7 +2,9 @@
 
 Planning, progress tracking and next steps for the project. The README describes the project; this file says where it stands. Test evidence is in docs/09, every site write in docs/08.
 
-## Status (14 October 2026, 23:10 BST)
+## Status (21 October 2026)
+
+The Studio site runs Divi 5.16.0 and Novamira 1.12.11. The upgrade check (T23) found one change, Text module alignment, and `divi5-styling` now covers it.
 
 The original plan (docs/06, "Recommended order") is complete, and the scope was then widened to Theme Builder, dynamic content and custom post types. Both gates the user owned are decided: no Novamira Pro (gate e), and Divi globals stay the source of truth for design tokens (gate d, option 1). See docs/10.
 
@@ -16,15 +18,17 @@ The original plan (docs/06, "Recommended order") is complete, and the scope was 
 | Skill `divi5-modules` | post 54 | Shapes for every registered module, contact form fields, fullwidth sections |
 | Skill `divi5-theme-builder` | post 90 | Theme Builder storage, editing layouts, creating templates for a post type and its archive |
 | Skill `divi5-dynamic` | post 103 | Dynamic content, ACF fields, Loop Builder, pagination, filters by custom field and term, dates, custom post types |
-| Skill `divi5-presets` | post 131 | Read and apply module and option-group presets; create and edit only when the user asks |
+| Skill `divi5-presets` | post 131 | Read and apply module and option-group presets; propose new or changed ones, write after the user agrees |
+| Skill `divi5-design-system` | post 136 | New-site and redesign workflow: design showcase draft and approval gate (T20) |
+| Skill `divi5-page-production` | post 153 | Build a draft page from supplied content, with gaps and sources reported (T22) |
 | Theme Builder template "All Movies" | template 99, body layout 98 | Single movie pages (`singular:post_type:movie:all`), with a "More movies" loop |
 | Theme Builder template "Movies archive" | template 112, body layout 111 | `/movies/` (`archive:post_type:movie`), paginated grid |
 | Theme Builder template for S5 | template 87, layouts 81 and 83 | Built by the user, header and footer edited by Claude |
 | Test movies | posts 92, 93 | Published, with ACF values; post 91 is the user's |
 
-The skill sources in `skills/` match the stored skills byte for byte (md5 checked after every upload).
+The skill sources in `skills/` match the stored skills byte for byte (md5 checked after every upload, last on 21 October 2026).
 
-### What was tested (all on Divi 5.15.1)
+### What was tested (on Divi 5.15.1; T1, T6, T10 and part of T12 rerun on 5.16.0 in T23)
 
 | Area | Result |
 |---|---|
@@ -44,6 +48,8 @@ The skill sources in `skills/` match the stored skills byte for byte (md5 checke
 1. Chat session (Claude Desktop): Novamira installed and connected, research written up (docs/01 to docs/07).
 2. Claude Code session: tests T0 to T7, User Context, `divi5-core`, sample tasks in two rounds, `divi5-styling` and `divi5-modules`, decision memo and gates.
 3. Same session, widened scope: all-modules page, cloning, browser checks, Theme Builder, loops, ACF, Movies single and archive templates, `divi5-theme-builder` and `divi5-dynamic`.
+4. 15 October: presets, design system and page production skills, global variables (T19 to T22), setup skill.
+5. 21 October: upgrade check for Divi 5.16.0 and Novamira 1.12.11 (T23).
 
 ## Open items
 
@@ -56,7 +62,7 @@ The skill sources in `skills/` match the stored skills byte for byte (md5 checke
 |---|---|---|
 | Moving date windows ("from today") | Divi's `metaQuery` takes fixed values only (T17) | Out of scope here (the user's Date Conditions for Divi plugin) |
 | Font and number variable references | Use the site's own fonts and sizes without writing globals | Number variables verified (T21); other types untested. Saving was blocked by WP Studio's SQLite answer to `GET_LOCK()`, not Divi; skills work around it per request. The builder still cannot save variables on Studio |
-| Divi upgrade check | Divi ships weekly; skills say "tested on 5.15.1" | Rerun T1, T6, T10 and T12 after each minor release |
+| Divi upgrade check | Divi ships weekly; skills say "tested on 5.15.1" | Read the Divi and Novamira changelogs after each update and rerun only the tests the changes touch (T23 is the pattern) |
 | Real sites | Use the skills on Foodbank and Bristol Charities staging builds | Staging sites with Novamira, never live |
 
 ## Setup skill: version rules (decided 15 October 2026)
@@ -82,6 +88,6 @@ Planned Claude Code skill to install the Novamira skills and User Context on a n
 ## Resuming in a new session
 
 1. Read `CLAUDE.md`, this file and the README.
-2. Check the connection: `novamira/execute-php` returning `ET_BUILDER_VERSION`. If the Novamira tools are missing, Claude Desktop's Novamira extension needs switching on and the app restarting.
+2. Check the connection: `novamira/execute-php` returning `ET_BUILDER_VERSION`. If the Novamira tools are missing from a Claude Code session, switch the "Novamira, Divi 5" extension off and on in the session's + menu, Connectors, after Studio is running; the tools arrive on the next turn.
 3. Compare the stored skills with `skills/` by md5 before editing either.
 4. Pick from Open items or the Roadmap. Follow the standing approvals and gates in CLAUDE.md, and log every site write in docs/08.

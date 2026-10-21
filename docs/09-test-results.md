@@ -291,3 +291,15 @@ Skill `divi5-page-production` (post 153). Brief: Volunteer page for the fictiona
 - Claude's browser check: no blank modules or overflow at 1280px, roles row three across; every row one column at 375px.
 - Misses: the agent did not propose a preset for the three repeated buttons (skill now says to); its first insert lost all but one section because it built the placeholder's `innerContent` by hand, which it found and fixed on its own draft.
 - Finding for audits: `get_global_colors()` stamps Divi's customizer colours with the current time on every read, so compare the stored option `et_global_data`, not the getter's output.
+
+## T23. Upgrade check, Divi 5.15.1 to 5.16.0 and Novamira 1.12.9 to 1.12.11 [Run, 2026-10-21]
+
+Scope set by the changelogs (Divi 5.16.0 dated 16 October, Novamira 1.12.10 and 1.12.11). Novamira's changes cover OAuth, Gutenberg editing, Read Mode and Troubleshoot, none of which the skills use. Divi's include a Text module alignment fix, a Menu collapsible mobile option, Tabs and Gallery fixes, and Visual Builder multi-select.
+
+- Connection and context: `novamira/agent-context` lists all eight user skills and the User Context text. The option `novamira_instructions_enabled` no longer exists in the database; 1.12.11 lists it as a legacy option, and the text is still injected.
+- Stored skills: all eight `post_content` and excerpt md5s match `skills/` and `skills/manifest.json`.
+- Module registry: the set of `module.json` names is unchanged (183 in both versions).
+- T1: parse then serialise of T0 (ID 10) is byte-identical. **Pass.**
+- T6 and T10 (draft 203 "T23 Upgrade check 5.16.0", 18 variants): every 5.15.1 result repeats (capitalization, `style` silent failure, CSS ID and class, `attrs` and `body` empty modules, button hover, heading breakpoints, background, gradient, spacing with breakpoints, border, shadow with and without `style`, filters, position and z-index, global colour, hover), with one exception. **Changed:** the Text module ignores body-font `textAlign` (5.16 strips it at render time, `TextModule::remove_body_font_text_align`) and emits `text-align: start`. `module.advanced.text.text.desktop.value.orientation` `"center"` emits `text-align: center`. Heading `textAlign` still renders. `divi5-styling` updated.
+- T12, partial (draft 205 "T23b All modules 5.16.0", 68 top-level modules with no attributes): stored intact, no PHP output, every wrapper present except Tabs, Payment Button and Shortcode, which render nothing when empty. Not checked in a browser or the Visual Builder; the changelog has no storage change for these.
+- Both drafts moved to the bin.

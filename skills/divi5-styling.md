@@ -1,4 +1,4 @@
-Tested on Divi 5.15.1 (14 October 2026) by rendering each shape and reading the emitted CSS. Load `divi5-core` first; this skill only adds styling paths. If `ET_BUILDER_VERSION` differs, verify on this site.
+Tested on Divi 5.15.1 (14 October 2026) and rechecked on 5.16.0 (21 October 2026) by rendering each shape and reading the emitted CSS. Load `divi5-core` first; this skill only adds styling paths. If `ET_BUILDER_VERSION` differs, verify on this site.
 
 ## Rules
 
@@ -28,7 +28,7 @@ Sections and rows take the same groups. Padding on a section, `max-width` on a r
 
 - Text module body: `content.decoration.bodyFont.body.font.<bp>.value`.
 - Heading module: `title.decoration.font.font.<bp>.value`.
-- Keys (verified): `size` (`"21px"`), `color`, `weight` (`"700"`), `lineHeight` (`"1.6em"`), `letterSpacing` (`"1px"`), `textAlign` (`"center"`), `capitalization` (`"uppercase"`, `"lowercase"`, `"capitalize"`, `"smallCaps"`, `"allSmallCaps"`). Heading also takes `headingLevel`. `family` sets the font (`"Georgia"`, or a Google font such as `"Roboto Slab"` or `"Lato"`, which Divi enqueues itself). Button text font is `button.decoration.font.font`.
+- Keys (verified): `size` (`"21px"`), `color`, `weight` (`"700"`), `lineHeight` (`"1.6em"`), `letterSpacing` (`"1px"`), `textAlign` (`"center"`; on the Text module Divi 5.16 ignores it, so use `module.advanced.text.text.<bp>.value.orientation` instead), `capitalization` (`"uppercase"`, `"lowercase"`, `"capitalize"`, `"smallCaps"`, `"allSmallCaps"`). Heading also takes `headingLevel`. `family` sets the font (`"Georgia"`, or a Google font such as `"Roboto Slab"` or `"Lato"`, which Divi enqueues itself). Button text font is `button.decoration.font.font`.
 - `style:["uppercase"]` emits nothing. Use `capitalization`. `style` is for italic, underline and similar.
 
 ## Site colours and variables
