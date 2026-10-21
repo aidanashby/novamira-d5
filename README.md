@@ -14,7 +14,7 @@ This repository holds eight skills and a short set of site instructions for the 
 - Dynamic content: lists and grids of posts or custom post types with the Loop Builder, ACF fields, filters and pagination.
 - Edits to an existing page, or a safe copy of it.
 
-## What Claude will not do
+## Rules Claude follows on your site
 
 The site instructions installed with the skills tell Claude to:
 
