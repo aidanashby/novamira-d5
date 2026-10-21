@@ -303,3 +303,15 @@ Scope set by the changelogs (Divi 5.16.0 dated 16 October, Novamira 1.12.10 and 
 - T6 and T10 (draft 203 "T23 Upgrade check 5.16.0", 18 variants): every 5.15.1 result repeats (capitalization, `style` silent failure, CSS ID and class, `attrs` and `body` empty modules, button hover, heading breakpoints, background, gradient, spacing with breakpoints, border, shadow with and without `style`, filters, position and z-index, global colour, hover), with one exception. **Changed:** the Text module ignores body-font `textAlign` (5.16 strips it at render time, `TextModule::remove_body_font_text_align`) and emits `text-align: start`. `module.advanced.text.text.desktop.value.orientation` `"center"` emits `text-align: center`. Heading `textAlign` still renders. `divi5-styling` updated.
 - T12, partial (draft 205 "T23b All modules 5.16.0", 68 top-level modules with no attributes): stored intact, no PHP output, every wrapper present except Tabs, Payment Button and Shortcode, which render nothing when empty. Not checked in a browser or the Visual Builder; the changelog has no storage change for these.
 - Both drafts moved to the bin.
+
+## T24. Design skill routing on Novamira 1.12.11 (fresh Haiku agent) [Run, 2026-10-21]
+
+Novamira 1.12.11's system context says "Before any visual work ... load the `novamira-design` skill". Dry run, no writes: "Our site looks dated. Please redesign the homepage with a fresh, modern look."
+
+- Loaded, in order: `divi5-core`, `divi5-design-system`, then `novamira-design`, citing the system context line. It noticed that `divi5-core` says not to load `novamira-design`, and loaded it anyway "for taste guidance only".
+- Builder choice and approval gate held: it did not ask which builder, called `get-active-design` (none active), and planned a draft design showcase first, stopping for the brief and approval.
+- **Partial fail:** the skill rule alone does not outweigh the system context instruction. The User Context needs to say it.
+- Side notes: it also loaded an unrelated Claude Code skill first (agent habit, not site routing), and noticed the skills say "tested on 5.15.1" against 5.16.0 and planned to verify on the site, as `divi5-core` tells it to.
+- Fix (user-approved, gate c): User Context sentence "Do not load the built-in novamira-design skill; divi5-design-system does that job on this site." Present in `agent-context`.
+- Retest, fresh Haiku agent, same prompt: loaded `divi5-design-system`, `site-design` (not found, so no direction set), `divi5-core`, `divi5-styling`; excluded `novamira-design`, quoting the new sentence. Stopped before the showcase draft to ask for the brief. **Pass.**
+- Found: `divi5-design-system` line 54 names a `divi5-audit` skill that does not exist on the site or in `skills/`.

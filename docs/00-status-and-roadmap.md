@@ -4,7 +4,7 @@ Planning, progress tracking and next steps for the project. The README describes
 
 ## Status (21 October 2026)
 
-The Studio site runs Divi 5.16.0 and Novamira 1.12.11. The upgrade check (T23) found one change, Text module alignment, and `divi5-styling` now covers it.
+The Studio site runs Divi 5.16.0 and Novamira 1.12.11. The upgrade check (T23) found one change, Text module alignment, and `divi5-styling` now covers it. Novamira 1.12.11 also tells agents to load its `novamira-design` skill for visual work; a User Context sentence now overrides that (T24).
 
 The original plan (docs/06, "Recommended order") is complete, and the scope was then widened to Theme Builder, dynamic content and custom post types. Both gates the user owned are decided: no Novamira Pro (gate e), and Divi globals stay the source of truth for design tokens (gate d, option 1). See docs/10.
 
@@ -54,6 +54,7 @@ The skill sources in `skills/` match the stored skills byte for byte (md5 checke
 ## Open items
 
 - Done (23:05): the user set the date field's Return Format to `Y-m-d H:i:s`; single movie pages now show "16 October 2026, 2:17 pm" and the archive "16 Oct, 2026".
+- `divi5-design-system` refers to a `divi5-audit` skill that does not exist (found in T24). Remove the reference or write the skill.
 - The theme's sidebar and footer widgets ("Archives", "Categories") show under Theme Builder bodies on movie pages. Cosmetic; a global footer in the Theme Builder would replace them.
 
 ## Roadmap (not started)
