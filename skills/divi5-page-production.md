@@ -40,7 +40,7 @@ Never drop source content silently. If something does not fit the page, say what
 
 1. Build the draft with `divi5-core`. Title it as the spec says.
 2. Verify as `divi5-core` says: read-back, render, browser at desktop and 375px.
-3. Then check: every inventory item appears on the page; every link target works or is listed as a placeholder; every image has meaningful `alt` text; the heading outline has one `h1` and no skipped levels; button and link text makes sense out of context (no bare "Read more"). Use `divi5-accessibility` for a fuller check when asked.
+3. Then check: every inventory item appears on the page; every link target works or is listed as a placeholder; every image has meaningful `alt` text; the heading outline has one `h1` and no skipped levels; button and link text makes sense out of context (no bare "Read more").
 
 ## Step 5: report
 

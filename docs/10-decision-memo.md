@@ -30,7 +30,7 @@ After the decision, the free route was also tested on Theme Builder, Loop Builde
 |---|---|
 | Build pages as real modules | No. Free route already produces builder-identical modules. |
 | Single-module edits on existing pages | No. Parse, modify, serialise does this exactly. |
-| Loop Builder, dynamic content (ACF, post data) | No. Tested later the same day (T14 to T16): group, blurb and column loops over a custom post type, ACF text, WYSIWYG, image, URL and date fields, `excludeCurrentPost`, pagination. Loop filters by meta value are still untested. |
+| Loop Builder, dynamic content (ACF, post data) | No. Tested later the same day (T14 to T16): group, blurb and column loops over a custom post type, ACF text, WYSIWYG, image, URL and date fields, `excludeCurrentPost`, pagination. Loop filters by custom field and term were tested later (T17, T18). |
 | Global presets, design system writes | No. Reading, applying, creating and editing module and group presets worked (T19, under a one-day permission); the skill keeps writes gated. |
 | Theme Builder layouts | No. Editing header and footer layouts and creating single and archive templates for a post type all worked (T13, T14, T16). |
 | Memory between sessions | No. Skills and User Context cover it. |
@@ -46,6 +46,5 @@ No failure in testing would have been fixed by Pro. Also check Elegant Themes' o
 
 ## Still open
 
-- Not tested: loop filters by meta value or term, presets, font and number variables, published-page cache behaviour, LiteSpeed on Krystal staging.
-- Open items and roadmap: docs/00.
+Update, 21 October 2026: loop filters (T17, T18), presets (T19) and every variable type (T21, T25) have since been tested, and there are now eight skills. Still not tested: published-page cache behaviour and LiteSpeed on Krystal staging. Roadmap: docs/00.
 - Test drafts moved to the bin (docs/08).

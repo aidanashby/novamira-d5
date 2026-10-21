@@ -6,7 +6,7 @@ Read `README.md` and `docs/00-status-and-roadmap.md` before doing anything; read
 
 ## What this project is
 
-Make Claude able to build and edit Divi 5 pages through the free Novamira plugin on a local WP Studio site, by writing Novamira skills (adapted from `divilovewp/divi5-skill`, MIT) and verifying them on the real site. Then decide whether Novamira Pro is worth buying.
+Make Claude able to build and edit Divi 5 pages through the free Novamira plugin on a local WP Studio site, by writing Novamira skills (adapted from `divilovewp/divi5-skill`, MIT) and verifying them on the real site. Then decide whether Novamira Pro is worth buying (decided 14 October 2026: no, see docs/10).
 
 ## Rules
 
@@ -53,6 +53,8 @@ Gates (stop and ask with the choice tool):
 
 ## Plan to execute
 
+This plan is complete (docs/00, History). It is kept as the record of how the work was run.
+
 Lead the work. Follow the order in docs/06, "Recommended order", without waiting for the user, stopping only at the gates above. At each gate and at the end, summarise what was done, what was verified and what is needed from the user. Keep `docs/00-status-and-roadmap.md` current.
 
 1. Connect Claude Code and check versions (the user pastes the setup prompt).
@@ -82,7 +84,7 @@ Claude Desktop already has a working connection. Claude Code needs its own. Nova
 1. In wp-admin on the Studio site go to **Novamira, Configuration**, choose **Claude Code**, create a new application password named "Claude Code, divi-5", and click **Copy prompt**. (Novamira's pages differ by version: some docs say **Novamira, Connect**. Check both.)
 2. Start Claude Code in `<projects folder>\novamira-d5`, paste the prompt as the first message. The agent writes the MCP config and asks to restart the session.
 3. After the restart, run `/mcp` and confirm `novamira` is connected. Expect three tools: Discover Abilities, Get Ability Info, Execute Ability.
-4. Verify with a read-only call: `novamira/execute-php` with a `code` parameter that returns `ET_BUILDER_VERSION`, `get_bloginfo('version')` and `wp_get_environment_type()`. Expect `5.15.1`, `7.1.3`, `local`.
+4. Verify with a read-only call: `novamira/execute-php` with a `code` parameter that returns `ET_BUILDER_VERSION`, `get_bloginfo('version')` and `wp_get_environment_type()`. Expect `5.16.0`, `7.1.3`, `local` (the test site on 21 October 2026).
 
 The setup prompt contains the application password. Do not save it in this folder.
 

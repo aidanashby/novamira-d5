@@ -36,7 +36,7 @@ The original plan (docs/06, "Recommended order") is complete, and the scope was 
 
 The skill sources in `skills/` match the stored skills byte for byte (md5 checked after every upload, last on 21 October 2026).
 
-### What was tested (on Divi 5.15.1; T1, T6, T10 and part of T12 rerun on 5.16.0 in T23)
+### What was tested (on Divi 5.15.1; T1, T6, T10 and T12 rerun on 5.16.0 in T23 and T12b)
 
 | Area | Result |
 |---|---|
@@ -59,10 +59,11 @@ The skill sources in `skills/` match the stored skills byte for byte (md5 checke
 2. Claude Code session: tests T0 to T7, User Context, `divi5-core`, sample tasks in two rounds, `divi5-styling` and `divi5-modules`, decision memo and gates.
 3. Same session, widened scope: all-modules page, cloning, browser checks, Theme Builder, loops, ACF, Movies single and archive templates, `divi5-theme-builder` and `divi5-dynamic`.
 4. 15 October: presets, design system and page production skills, global variables (T19 to T22), setup skill.
-5. 21 October: upgrade check for Divi 5.16.0 and Novamira 1.12.11, design skill routing, variable types, Menu option, outstanding visual checks, date windows guidance, public README (T23 to T29).
+5. 21 October: upgrade check for Divi 5.16.0 and Novamira 1.12.11, design skill routing, variable types, Menu option, outstanding visual checks, date windows guidance, public README (T23 to T29); then footer widgets moved to inactive, Date Conditions and Menu browser checks, all-modules browser check on 5.16.0 (T29b, T26b, T26c, T12b), MIT licence and release 1.0.0.
 
 ## Open items
 
+None. Next steps are in the roadmap below.
 
 ## Roadmap
 
@@ -97,4 +98,4 @@ The `novamira-setup` Claude Code skill installs the Novamira skills and User Con
 1. Read `CLAUDE.md`, this file and the README.
 2. Check the connection: `novamira/execute-php` returning `ET_BUILDER_VERSION`. If the Novamira tools are missing from a Claude Code session, switch the "Novamira, Divi 5" extension off and on in the session's + menu, Connectors, after Studio is running; the tools arrive on the next turn.
 3. Compare the stored skills with `skills/` by md5 before editing either.
-4. Pick from Open items or the Roadmap. Follow the standing approvals and gates in CLAUDE.md, and log every site write in docs/08.
+4. Pick from the Roadmap. Follow the standing approvals and gates in CLAUDE.md, and log every site write in docs/08.

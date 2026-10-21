@@ -1,4 +1,4 @@
-Tested on Divi 5.15.1 with ACF 6.8.10 (14 October 2026), using the `movie` post type: a Loop Builder page and a Theme Builder template for single movies, both checked in a browser. Load `divi5-core` first.
+Tested on Divi 5.15.1 with ACF 6.8.10 (14 October 2026) and Date Conditions for Divi 0.1.4 on Divi 5.16.0 (21 October 2026), using the `movie` post type: a Loop Builder page and a Theme Builder template for single movies, both checked in a browser. Load `divi5-core` first.
 
 ## Dynamic content values
 

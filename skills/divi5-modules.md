@@ -1,4 +1,4 @@
-Tested on Divi 5.15.1 (14 October 2026): each shape below was written with `serialize_blocks()` and rendered, and those marked "builder" were also opened in the Visual Builder. Load `divi5-core` first. All values sit under `<bp>.value` as `{"desktop":{"value":...}}`; shown here as the desktop value only.
+Tested on Divi 5.15.1 (14 October 2026) and rechecked on 5.16.0 (21 October 2026): each shape below was written with `serialize_blocks()` and rendered, and those marked "builder" were also opened in the Visual Builder. Load `divi5-core` first. All values sit under `<bp>.value` as `{"desktop":{"value":...}}`; shown here as the desktop value only.
 
 ## Parent and child modules
 
