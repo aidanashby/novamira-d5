@@ -109,7 +109,8 @@ $content = serialize_blocks($blocks);
 
 - `parse_blocks()` then `serialize_blocks()` round-trips builder content exactly, including components.
 - When you add a child to a parsed block, also append `null` to that block's `innerContent`, or the child is not written. Builder-saved blocks keep newline strings in `innerContent` between children; leave them.
-- Edit in place only when asked, and then call `remove_static_resources` afterwards.
+- To remove a child, work on a copy of the parent (not a reference), remove the child from `innerBlocks` and the `null` at the matching position in `innerContent` (count the `null` entries, skipping strings), then check that every block has as many `null` entries as children before you serialise. A mismatch makes `serialize_blocks()` emit "Undefined array key" warnings (seen on 5.16.0).
+- Edit in place only when asked, and then call `remove_static_resources` afterwards. On WP Studio it and `wp_trash_post()` sometimes warn that `et-cache` is not empty; the warning is harmless.
 
 ### Clone a published page to a draft copy (verified)
 
@@ -163,7 +164,7 @@ A component instance on a page is `divi/global-layout` with `"globalModule":"<li
 
 1. Read back `post_content` and compare with what you wrote.
 2. Render check without a browser: set up the post and run `apply_filters('the_content', $post->post_content)`; every module should contain its text. Then `$S = implode(chr(92), ['ET', 'Builder', 'FrontEnd', 'Module', 'Style']); $S::render();` returns the module CSS.
-3. Visual check. If you have a browser tool (Claude Code's built-in browser pane, or Claude in Chrome) and it is signed in to wp-admin, open `get_preview_post_link($id)` at desktop and phone width and look: layout, images, anything JavaScript-driven (sliders, tabs, sticky, video backgrounds). A quick script listing `.et_pb_module` elements with zero width or height finds blank modules. If no signed-in browser is available, say so and ask the user to look; never sign in yourself.
+3. Visual check. If you have a browser tool (Claude Code's built-in browser pane, or Claude in Chrome) and it is signed in to wp-admin, open `get_preview_post_link($id)` at desktop and phone width and look: layout, images, anything JavaScript-driven (sliders, tabs, sticky, video backgrounds). A quick script listing `.et_pb_module` elements with zero width or height finds blank modules. Check styling claims (radius, overflow, sizes, colours) with `getComputedStyle` in the browser: a string in the rendered HTML can pass while the style lands on the wrong element. If the browser is not signed in, ask the user to sign in to it once, or check a published page that uses the same pattern; never sign in yourself, and never create an admin sign-in link.
 4. Report the page ID, title, status (draft), the builder URL, what you checked, and ask the user to open it in the Visual Builder and confirm the modules are editable.
 
 Adapted in part from divilovewp/divi5-skill (MIT, copyright 2026 Shashank Gupta, divilove.com), verified and rewritten for Divi 5.15.1.

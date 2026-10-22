@@ -2,7 +2,7 @@
 
 Planning, progress tracking and next steps for the project. The README describes the project; this file says where it stands. Test evidence is in docs/09, every site write in docs/08.
 
-## Status (21 October 2026)
+## Status (22 October 2026)
 
 The Studio site runs Divi 5.16.0 and Novamira 1.12.11. On 21 October:
 
@@ -63,14 +63,15 @@ The skill sources in `skills/` match the stored skills byte for byte (md5 checke
 
 ## Open items
 
-None. Next steps are in the roadmap below.
+- Sync the skills changed after T30 (`divi5-core`, `divi5-dynamic`, `divi5-modules`, `divi5-styling`, `divi5-theme-builder`) to 8881, and to 8882 if it stays in use, and md5-check them. Needs a Novamira connection.
+- Site tests from T30: background image with a gradient overlay (browser), the post content module's `bodyFont` path, and the toggle's `headingLevel`.
+- Rerun `novamira-setup` on a fresh site to exercise its new steps: inactive Divi, the footer-widget and permission offers, and `site-logs/`.
 
 ## Roadmap
 
 | Next step | Why | Needs |
 |---|---|---|
 | Real sites | Use the skills on Foodbank and Bristol Charities staging builds | Staging sites with Novamira, never live |
-| Fresh-site install | Prove `novamira-setup` works beyond this site | A second, clean Studio site with Divi and Novamira, connected |
 | Upgrade checks | Divi ships weekly | After each Divi or Novamira update, read the changelogs and rerun only the tests the changes touch (T23 is the pattern) |
 
 ## Setup skill: version rules (decided 15 October 2026)
@@ -81,6 +82,7 @@ The `novamira-setup` Claude Code skill installs the Novamira skills and User Con
 - Divi 5 below 5.7.0: warn, then run the T1 round-trip test before page work. 5.7.0 is the earliest version with every feature the skills use (gradient variables were added in 5.7.0; loop pagination targeting appears by 5.3.0; Loop Builder, ACF dynamic content, group presets, variables, flex rows, Theme Builder, sticky, position and video backgrounds were all in the 5.0.0 public betas). Source: Divi changelog, read 15 October 2026. Most lines there are fixes, so these are latest-possible dates. Components were excluded. No warning from 5.7.0 up.
 - Novamira lacking `execute-php`, `skill-write`, `skill-edit` or User Context: stop and name what is missing.
 - SQLite database (WP Studio): add the variables lock mu-plugin.
+- Divi installed but not active (T30): offer to activate it. Novamira outside 1.12.9 to 1.12.11: continue with a note.
 - WordPress version: not checked; nothing depends on it.
 
 ## Learnings worth keeping
@@ -95,7 +97,7 @@ The `novamira-setup` Claude Code skill installs the Novamira skills and User Con
 
 ## Resuming in a new session
 
-1. Read `CLAUDE.md`, this file and the README.
+1. Read `CLAUDE.md` (and `CLAUDE.local.md` if present), this file and the README.
 2. Check the connection: `novamira/execute-php` returning `ET_BUILDER_VERSION`. If the Novamira tools are missing from a Claude Code session, switch the "Novamira, Divi 5" extension off and on in the session's + menu, Connectors, after Studio is running; the tools arrive on the next turn.
 3. Compare the stored skills with `skills/` by md5 before editing either.
-4. Pick from the Roadmap. Follow the standing approvals and gates in CLAUDE.md, and log every site write in docs/08.
+4. Pick from the Roadmap. Follow the standing approvals and gates in CLAUDE.local.md (maintainer only), and log every test-site write in docs/08.

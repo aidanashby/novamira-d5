@@ -1,5 +1,24 @@
 # Changelog
 
+## Unreleased
+
+From the fresh-site install test (T30).
+
+### Setup
+
+- `CLAUDE.md` works on any site without editing. Personal rules go in a git-ignored `CLAUDE.local.md`.
+- Changes to a user's site are logged in a git-ignored `site-logs/` folder, so `git pull` never conflicts.
+- `novamira-setup` offers to activate Divi when it is installed but inactive, reports the Novamira version, and offers to move WordPress's default footer widgets and to allow Novamira calls without a prompt (risk stated first).
+- `.gitattributes` keeps every file LF, so hashes match on Windows clones.
+
+### Skills
+
+- `divi5-styling`: Image border and radius on `image.decoration.border`.
+- `divi5-theme-builder`: works on a site where the Theme Builder was never used; layouts created with `et_theme_builder_insert_layout()`.
+- `divi5-dynamic`: ACF Link fields do not resolve; even card images with `et-pb-post-main-image`; check featured-image alt text before a loop.
+- `divi5-modules`: accordion and toggle title heading levels.
+- `divi5-core`: removing a child block safely; computed-style checks in the browser; ask the user to sign in to the browser, never create an admin link; a harmless WP Studio cache warning.
+
 ## 1.0.0 (21 October 2026)
 
 First public release. Tested on Divi 5.16.0 (and 5.15.1), Novamira 1.12.11 (free, from 1.12.9), WordPress 7.1.3 and ACF 6.8.10, on a local WP Studio site. Evidence for every rule is in [docs/09](docs/09-test-results.md) (tests T0 to T29).

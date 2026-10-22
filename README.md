@@ -34,25 +34,28 @@ You need:
 
 ## Set up a site
 
-1. Install and activate Novamira on the development or staging site.
+1. On the development or staging site, install the Divi theme and the Novamira plugin, and activate Novamira. (If Divi is installed but not active, setup offers to activate it.)
 2. In wp-admin go to **Novamira, Configuration** (on some versions **Novamira, Connect**), choose **Claude Code**, create an application password, and click **Copy prompt**.
 3. Start Claude Code in a clone of this repository and paste the prompt. Claude writes the connection settings and asks you to restart the session. Keep the prompt private: it contains the password.
 4. After the restart, ask Claude: "Set up this site for Divi 5." The `novamira-setup` skill then:
-   - checks the Divi and Novamira versions and stops if something essential is missing;
+   - checks the Divi and Novamira versions, and offers to activate Divi if it is installed but inactive;
    - uploads every skill in `skills/manifest.json` and checks each copy byte for byte;
    - shows you the site instructions and writes them once you agree;
    - adds a small database lock fix on WP Studio (SQLite) sites, so Divi can save global variables;
-   - builds one test draft, checks it, and asks you to open it in the Visual Builder.
+   - builds one test draft, checks it, and asks you to open it in the Visual Builder;
+   - offers to tidy WordPress's default widgets out of Divi's footer, and to stop Claude Code asking before every Novamira call (it explains the risk first).
+
+Nothing in the repository needs editing. Every change Claude makes to your site is logged, with how to undo it, in `site-logs/` in your clone; that folder is never committed, so `git pull` brings updates without conflicts.
 
 If you connect through the Claude Desktop extension instead, start the site first. If the Novamira tools are missing from a session, switch the extension off and on in the session's connector menu.
 
 ## Settings that live outside this repository
 
-A clone of this repository brings the skills, the setup skill and the docs. These settings are per person and per machine, so you set them yourself.
+A clone of this repository brings the skills, the setup skill, the working rules in `CLAUDE.md` and the docs. These settings are per person and per machine.
 
 **The connection.** The Novamira prompt adds the MCP server to your own Claude Code configuration for this folder, not to a file in the repository. Each person, and each site, needs its own application password and connection. Run `/mcp` to see the server's name; the tool names below use it.
 
-**Permissions (optional).** Claude Code asks before every Novamira call. To stop those prompts on a development site, create `.claude/settings.local.json` in your clone (it is git-ignored) with:
+**Permissions (optional).** Claude Code asks before every Novamira call. Setup offers to stop those prompts for you. To do it yourself, create `.claude/settings.local.json` in your clone (it is git-ignored) with:
 
 ```json
 {
@@ -81,7 +84,7 @@ Replace `<server name>` with the name `/mcp` shows (for example `novamira`, or `
 
 Merge these keys into the file if it already exists. Claude Code shows a warning at startup if the file is invalid.
 
-**CLAUDE.md.** The `CLAUDE.md` in this repository holds the working rules used on the original test site: its URL and folder, local paths to a copy of the Divi documentation and theme source, and the approvals that site's owner gave. Before you work in your clone, replace the site URL and folder with yours, point the Divi documentation rule at your own copy (or at [help.elegantthemes.com](https://help.elegantthemes.com/en)), and rewrite the standing approvals to match what you are happy for Claude to do without asking. It also refers to a parent `Projects\CLAUDE.md` that is not in the repository; delete that sentence.
+**Your own rules (optional).** `CLAUDE.md` works on any site as it is. To add rules of your own, such as a site's URL or things Claude may do without asking, put them in `CLAUDE.local.md` in your clone. Claude Code loads it alongside `CLAUDE.md`, and it is git-ignored.
 
 ## Use it
 
@@ -129,11 +132,12 @@ Every rule in the skills was written to the test site, rendered, read back and, 
 | `tools/studio-divi-variables-lock.php` | The lock fix for WP Studio (SQLite) sites |
 | `docs/00-status-and-roadmap.md` | Status, open items, roadmap, learnings, how to resume |
 | `docs/01` to `docs/07` | Background: environment, session log, Novamira reference, audit of `divilovewp/divi5-skill`, Divi 5 authoring notes, the original plan, sources |
-| `docs/08-site-change-log.md` | Every write made to the test site, with how to undo it |
+| `docs/08-site-change-log.md` | Every write made to the project's test sites, with how to undo it |
 | `docs/09-test-results.md` | Every test and its evidence |
 | `docs/10-decision-memo.md` | Free versus Pro, design tokens |
 | `docs/11-design-and-content-workflow-expansion.md` | Design for the design-system and page-production skills |
-| `CLAUDE.md` | Working rules for Claude on the original test site |
+| `CLAUDE.md` | Working rules for Claude on any connected site |
+| `site-logs/` | Created by Claude on your computer: a log of changes to each of your sites (git-ignored) |
 | `LICENSE` | MIT licence for this project's own content |
 | `NOTICE.md` | Third-party licences |
 | `CHANGELOG.md` | Release history |
