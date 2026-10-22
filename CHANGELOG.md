@@ -13,9 +13,9 @@ From the fresh-site install test (T30).
 
 ### Skills
 
-- `divi5-styling`: Image border and radius on `image.decoration.border`.
+- `divi5-styling`: Image border and radius on `image.decoration.border`; background image with a gradient overlay.
 - `divi5-theme-builder`: works on a site where the Theme Builder was never used; layouts created with `et_theme_builder_insert_layout()`.
-- `divi5-dynamic`: ACF Link fields do not resolve; even card images with `et-pb-post-main-image`; check featured-image alt text before a loop.
+- `divi5-dynamic`: styling the post content module's text; ACF Link fields do not resolve; even card images with `et-pb-post-main-image`; check featured-image alt text before a loop.
 - `divi5-modules`: accordion and toggle title heading levels.
 - `divi5-core`: removing a child block safely; computed-style checks in the browser; ask the user to sign in to the browser, never create an admin link; a harmless WP Studio cache warning.
 

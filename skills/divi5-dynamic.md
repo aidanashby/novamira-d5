@@ -20,7 +20,7 @@ Rendered here: `post_title`, `post_featured_image`, `post_meta_key`, `loop_post_
 | Inside a loop | `loop_post_title`, `loop_post_link`, `loop_post_featured_image`, `loop_post_excerpt`, `loop_post_date` | as above |
 | Inside a loop, custom field or ACF field | `loop_post_meta_key_manual_custom_field` | `select_loop_meta_key`: `loop_post_meta_key_<field name>`; `enable_html`: `on` for WYSIWYG |
 
-Post content in a Theme Builder body: use the `divi/post-content` module (no attributes beyond `builderVersion`), not a dynamic value.
+Post content in a Theme Builder body: use the `divi/post-content` module, not a dynamic value. Without styling it shows the theme's default font (Open Sans 14px), so set its text to match the design with `module.decoration.bodyFont.body.font.<bp>.value` `{"family","size","color"}`: the post's paragraphs inherit it (verified in a browser on 5.16.0). Headings inside the content take `module.decoration.headingFont.h1` and so on (from Divi's conversion map, not yet run). On an ordinary page the module renders empty.
 
 Verified field types: text, WYSIWYG (with `enable_html` on, HTML kept), image (an ACF image field works as an image `src`), URL, and the subfields of an ACF group, which are flat meta named `<group>_<subfield>`.
 

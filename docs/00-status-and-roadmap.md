@@ -63,8 +63,7 @@ The skill sources in `skills/` match the stored skills byte for byte (md5 checke
 
 ## Open items
 
-- Sync the skills changed after T30 (`divi5-core`, `divi5-dynamic`, `divi5-modules`, `divi5-styling`, `divi5-theme-builder`) to 8881, and to 8882 if it stays in use, and md5-check them. Needs a Novamira connection.
-- Site tests from T30: background image with a gradient overlay (browser), the post content module's `bodyFont` path, and the toggle's `headingLevel`.
+- 8882 holds older copies of five skills (8881 is current, 22 October). Resync only if 8882 stays in use.
 - Rerun `novamira-setup` on a fresh site to exercise its new steps: inactive Divi, the footer-widget and permission offers, and `site-logs/`.
 
 ## Roadmap

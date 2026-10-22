@@ -18,7 +18,7 @@ A parent holds only its children; give the parent just `builderVersion` unless s
 - Call to action (builder): `title.innerContent` text, `content.innerContent` HTML, `button.innerContent` `{text, linkUrl}`. Default background is the theme primary colour.
 - Image (builder): `image.innerContent` `{src, id, alt, titleText, width, height}` (strings), from `wp_get_attachment_image_src($id, 'full')`.
 - Toggle: `title.innerContent` text, `content.innerContent` HTML. Renders closed.
-- Accordion and toggle titles default to `h5`, which skips heading levels after an `h2`. Set each title's `headingLevel` to the next level down from the section heading (verified for accordion items: `h3` rendered `h3`; the toggle's module.json has the same setting, not yet run).
+- Accordion and toggle titles default to `h5`, which skips heading levels after an `h2`. Set each title's `headingLevel` to the next level down from the section heading (verified on 5.16.0 for accordion items and toggles: `h3` rendered `h3`).
 - Testimonial: `content.innerContent` HTML, `author.innerContent` text, `jobTitle.innerContent` text, `company.innerContent` `{text, linkUrl}`, `portrait.innerContent` `{src}`.
 - Team member: `name.innerContent`, `position.innerContent` text, `content.innerContent` HTML, `image.innerContent` `{url}`. `src` does not render here; use `url`.
 

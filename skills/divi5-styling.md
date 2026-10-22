@@ -21,6 +21,7 @@ Tested on Divi 5.15.1 (14 October 2026) and rechecked on 5.16.0 (21 October 2026
 | `position` and `zIndex` | `position`: `{"mode":"relative","offset":{"vertical":"15px","horizontal":"30px"}}` emits `top: 15px; left: 30px`; `zIndex`: `"2"` |
 | `sticky` | `{"position":"top","offset":{"top":"40px"}}` (also `bottom`, `topBottom`). Applied by Divi's script, so check it in a browser: it held in the column on scroll. |
 | `background` video | `{"color":"#1e3a5f","video":{"mp4":"<URL>","width":"1280","height":"720"}}` (`webm` also accepted). Renders a muted, looping, autoplay video behind the section. Keep a fallback `color`. |
+| `background` image with gradient overlay | `{"color":"#1e3a5f","image":{"url":"<URL>","size":"cover","position":"center"},"gradient":{"enabled":"on","overlaysImage":"on","type":"linear","direction":"90deg","stops":[...]}}`. Renders the gradient layered over the image, both `cover` and centred (checked in a browser on 5.16.0). Use translucent stop colours so the image shows through. Leave out `gradient` for an image alone. |
 
 Sections and rows take the same groups. Padding on a section, `max-width` on a row and backgrounds on both were verified.
 

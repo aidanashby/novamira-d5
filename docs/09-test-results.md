@@ -374,8 +374,13 @@ A separate Claude Code session in a fresh clone (HEAD `1f0da77`) ran `novamira-s
 - `loop_post_featured_image` rendered images with no alt text when the media items had none. `divi5-dynamic` now has agents check and ask.
 - Removing a child from a parsed column by reference left `serialize_blocks()` warning "Undefined array key" although child and `null` counts matched afterwards. `divi5-core` now has a removal recipe.
 
-**Seen but not yet verified:**
+**Seen but not yet verified at the time (both run in T30b below):**
 - Background image with a gradient overlay: `module.decoration.background.<bp>.value` `{"color", "image": {"url", "size": "cover", "position": "center"}, "gradient": {"enabled": "on", "overlaysImage": "on", ...}}` (from Divi's background source files). The rendered CSS layered `linear-gradient(...)` over `url(...)`, but the draft was not seen in a browser. Not added to the skills.
 - The post content module in a Theme Builder body shows the theme's default font. Its `module.json` lists `module.decoration.bodyFont` and `headingFont`; the value shape is not yet run. Not added.
+
+**Site tests on 8881 (T30b, 22 October 2026).** Draft 250 "T30b Site tests" in the browser pane, signed in by the user:
+- Section background with image and gradient overlay: computed `background-image` was `linear-gradient(90deg, ...)` then `url(...)` on `.et_pb_section_0`, `background-size` `cover, cover`, position `50% 50%` for both. **Pass.** Added to `divi5-styling`.
+- Toggle `title.decoration.font.font.desktop.value.headingLevel` `"h3"`: the title element is `H3`. **Pass.** `divi5-modules`.
+- Post content `module.decoration.bodyFont.body.font.desktop.value` `{family Georgia, size 22px, color #9e0606}` (path from the module's conversion map): on the page the module rendered empty with those styles. With the user's approval the same value was added to the post content module in body layout 98 "All Movies": on `/movie/test-movie-two/` the paragraph "Test movie two content" computed Georgia, 22px, `rgb(158, 6, 6)`. Layout 98 was then written back from a saved copy (md5 `ea1f9bd3...` before and after) and the page returned to Open Sans 14px. **Pass.** `divi5-dynamic`. Draft 250 binned.
 
 **Not adopted:** a chunked or helper-based skill upload (the eight skills, about 57 KB, uploaded first time and the md5 check catches a bad copy), and `novamira/create-admin-access-link` for signing in the browser (it creates a working admin login; agents ask the user to sign in instead).
