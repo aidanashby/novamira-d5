@@ -428,3 +428,16 @@ On a charity's staging site on Krystal (MySQL, LiteSpeed Cache 7.9.2 on, Divi st
 - `divi5-core` now says saving already refreshes Divi's caches, and that staging sites usually hide pages from logged-out visitors, so checks run signed in and a page cache goes untested.
 
 **LiteSpeed (T33b, same day).** The user switched off Branda's coming-soon page; Krystal confirmed PHP 8.3.35 there is patched against CVE-2026-109618 and CVE-2026-109619. Page 8013 restored and republished ("Cache marker ONE"). Logged-out fetches: first `no-cache` (logged-in cookie path), then `X-LiteSpeed-Cache: miss` with `public,max-age=604800`, then `hit`. After `wp_update_post()` changed the marker to TWO with no manual purge, the next fetch carried no cache header and showed TWO, and the one after was a fresh `miss` with TWO. **Pass:** LiteSpeed purges a page on save. Not tested: whether a Theme Builder layout or component edit purges the pages that use it; the skill tells agents to purge all after one, on staging. Page 8013 set to draft and binned (URL now 404).
+
+## T34. A real page on the staging site [Run, 2026-10-22]
+
+The user asked for page 6834 on the staging site to be rebuilt for the 2026 Big Give winter appeal, with facts only from the Big Give campaign page and data and the site's Bridge page. Built with the skills, then revised at the user's direction. Verified in a browser at 1280px and 375px.
+
+- Number counter: the percent sign is `number.advanced.enablePercentSign`; `percentSign` (the circle counter's key) was ignored and the `%` stayed. The module takes digits only, so a currency sign came from the site's own CSS class (`.pound .percent-value:before { content:'£' }` in the child theme), added through the CSS class attribute; the browser showed "£1200".
+- Image shape: `module.advanced.sizing` `aspectRatio {width 4, height 3}` with `image.decoration.fit` `objectFit: cover` gave three images at 588x441 with `aspect-ratio: 4 / 3` and `object-fit: cover`.
+- Icon list item `icon` `{"unicode":"&#x4e;","type":"divi","weight":"400"}` rendered the ETmodules check mark.
+- Accordion `module.decoration.sizing.maxWidth` `760px` measured 760px.
+- A `modulePreset` of the site's "Tertiary button" styled the Bridge link button.
+- Lessons for page work: the first draft added claims from general knowledge of Big Give (gifts doubled "while the match funding lasts", "give early") that the campaign did not state; the user's check removed them. `divi5-page-production` already says not to invent facts; the general-knowledge slip is the case to watch.
+
+Skills updated: `divi5-modules` (number counter, icon list icon) and `divi5-styling` (image shape). Synced to the staging site; 8881 was not reachable, so its copies are pending.

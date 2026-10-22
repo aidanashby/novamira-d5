@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- From a real page on a staging site (T34): number counter percent sign and currency classes, icon list check marks, image aspect ratio with cover fit.
+
 ## 1.1.1 (22 October 2026)
 
 From the first setup on a staging site and the tests run there (T31 to T33). Tested on Divi 5.16.0, Novamira 1.12.12, WordPress 7.1.3, MySQL and LiteSpeed Cache 7.9.2.

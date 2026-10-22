@@ -25,7 +25,7 @@ Tested on Divi 5.15.1 (14 October 2026) and rechecked on 5.16.0 (21 October 2026
 
 Sections and rows take the same groups. Padding on a section, `max-width` on a row and backgrounds on both were verified.
 
-Image module border and radius go on `image.decoration.border`, which styles `.et_pb_image_wrap` and clips the picture. On `module.decoration.border` the radius lands on the outer wrapper with `overflow: visible`, so the image corners stay square (both checked in a browser on 5.16.0).
+Image module shape: `module.advanced.sizing.<bp>.value` `{"width":"100%","aspectRatio":{"width":"4","height":"3"}}` with `image.decoration.fit.<bp>.value` `{"objectFit":"cover"}` crops every image to the same 4:3 box (verified in a browser on 5.16.0). Image module border and radius go on `image.decoration.border`, which styles `.et_pb_image_wrap` and clips the picture. On `module.decoration.border` the radius lands on the outer wrapper with `overflow: visible`, so the image corners stay square (both checked in a browser on 5.16.0).
 
 ## Text
 
