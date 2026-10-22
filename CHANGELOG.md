@@ -2,7 +2,9 @@
 
 ## Unreleased
 
-- From a real page on a staging site (T34): number counter percent sign and currency classes, icon list check marks, image aspect ratio with cover fit.
+- The repository is renamed `novamira-divi` (from `novamira-divi5`), so the name suits later Divi versions. GitHub redirects the old addresses. The skills keep their `divi5-` names because they are written for Divi 5.
+- Skills from building a real campaign page (T34): date display conditions and date windows, page caches and date switches, a page without the title bar, column order on phones, icon list alignment, countdown limits, contrast and all-width checks, no facts from general knowledge, safe link building.
+- From a real page on a staging site (T34): number counter percent sign, icon list check marks, image aspect ratio with cover fit.
 
 ## 1.1.1 (22 October 2026)
 

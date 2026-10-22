@@ -6,6 +6,7 @@ The user supplies content for a page: a page spec (information architecture and 
 
 - No visual direction set on this site (no `site-design` skill, no design references): load `divi5-design-system` first.
 - This skill does not research or write new facts. When content is missing, list the gap; do not fill it.
+- That includes what you know in general about a platform, funder or scheme (how a match-funding site works, deadlines, tax rules). If the source does not say it, the page does not say it.
 
 ## Step 1: write a page spec
 

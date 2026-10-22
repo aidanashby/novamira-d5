@@ -19,7 +19,7 @@ A parent holds only its children; give the parent just `builderVersion` unless s
 - Image (builder): `image.innerContent` `{src, id, alt, titleText, width, height}` (strings), from `wp_get_attachment_image_src($id, 'full')`.
 - Toggle: `title.innerContent` text, `content.innerContent` HTML. Renders closed.
 - Number counter: `number.innerContent` (digits only, no prefix or suffix, no thousands separator), `title.innerContent`; the percent sign is `number.advanced.enablePercentSign` (`"off"` to hide it; `percentSign` is the circle counter's key and is ignored here). Verified on 5.16.0. The module has no currency or unit setting: put the unit in the title ("pounds gained or saved"), or ask the user how their site shows one.
-- Icon list item icon: `icon.innerContent.<bp>.value` `{"unicode":"&#x4e;","type":"divi","weight":"400"}` gives a check mark (verified on 5.16.0).
+- Icon list item icon: `icon.innerContent.<bp>.value` `{"unicode":"&#x4e;","type":"divi","weight":"400"}` gives a check mark (verified on 5.16.0). Items are flex rows centred vertically, so on items that wrap to two lines the icon drops below the first line: set each item's `module.decoration.layout.<bp>.value.alignItems` to `"flex-start"` (verified at 768px).
 - Accordion and toggle titles default to `h5`, which skips heading levels after an `h2`. Set each title's `headingLevel` to the next level down from the section heading (verified on 5.16.0 for accordion items and toggles: `h3` rendered `h3`).
 - Testimonial: `content.innerContent` HTML, `author.innerContent` text, `jobTitle.innerContent` text, `company.innerContent` `{text, linkUrl}`, `portrait.innerContent` `{src}`.
 - Team member: `name.innerContent`, `position.innerContent` text, `content.innerContent` HTML, `image.innerContent` `{url}`. `src` does not render here; use `url`.
@@ -52,7 +52,7 @@ $form = $b('divi/contact-form', [
 - Before and after: `beforeImage.innerContent` and `afterImage.innerContent` `{src}`, `beforeLabel`, `afterLabel` text.
 - Circle counter: `title.innerContent` text, `number.innerContent` `"70"`. Number counter: same, plus `number.advanced.enablePercentSign` `"off"` to drop the default percent sign.
 - Bar counters: `divi/counters` holding `divi/counter` with `title.innerContent` and `barProgress.innerContent` `"80"`.
-- Countdown: `title.innerContent`, `content.advanced.dateTime` `"2027-01-01 00:00"`.
+- Countdown: `title.innerContent`, `content.advanced.dateTime` `"2027-01-01 00:00"` (site timezone). It has no setting to hide seconds or leading zeros: Divi's script always pads the days to three digits ("039"). Hiding the seconds needs CSS on the module, which these skills avoid; offer it to the user rather than adding it. Hide the countdown after its date with a date condition (`divi5-dynamic`).
 - Pricing: `divi/pricing-tables` holding `divi/pricing-table` with `title`, `price`, `content` (HTML list), `button` `{text, linkUrl}`.
 - Timeline: `divi/timeline` holding `divi/timeline-item` with `date`, `title`, `content`.
 - Divider: `divider.advanced.line` `{show, color, weight}`. Icon: `icon.innerContent` `{unicode, type: "divi", weight}`. Link: `content.innerContent` `{text, linkUrl}`.

@@ -38,7 +38,7 @@ One draft page titled `Design showcase: <site or project name>`. It shows the vi
 
 ## Step 3: check, then stop and ask
 
-1. Verify as `divi5-core` says: read-back, render, then a browser at desktop and phone width (375px). Check text contrast on every background.
+1. Verify as `divi5-core` says: read-back, render, then a browser at desktop, tablet (768px) and phone (375px) width. Check text contrast on every background.
 2. Report: page ID and preview link, the system you chose (colour roles with hex values, fonts, scale), proposed global colours or presets, and anything you could not check.
 3. Ask the user to review it at desktop and phone width and approve or ask for changes. Approval covers the look and the patterns shown, not the sample copy, accessibility compliance or publishing.
 4. Stop. Build no other content page until the user approves.

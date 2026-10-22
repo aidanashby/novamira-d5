@@ -64,6 +64,15 @@ Any module or group repeats once per result when `module.advanced.loop` is set:
 - Other keys Divi reads: `postOffset`, `ignoreStickysPost`, `includeSpecificPosts`, `excludeSpecificPosts`, `search` (not tested here).
 - Use published posts for loop tests; Divi's query skips drafts (verified, T29).
 
+## Show or hide by date (display conditions)
+
+Any module, row or section can switch on a date with `module.decoration.conditions` `{"desktop":{"value":[<condition>, ...]}}`. A condition is `{"id":"<uuid>","conditionName":"dateTime","conditionSettings":{"displayRule":"isBefore" or "isAfter","enableCondition":"on","date":"2026-12-01","time":"12:00","allDay":"off","repeat":"off","adminLabel":"<name>"},"operator":"AND" or "OR"}`.
+
+- Times use the site's timezone (`wp_timezone_string()`); say which when you report.
+- Two conditions with `"operator":"AND"` make a window: `isAfter` the start and `isBefore` the end. With `OR`, either one is enough, so an `isAfter` plus `isBefore` pair would show all the time (verified on 5.16.0).
+- A typical campaign: a reminder and a countdown shown before the start, the donate button shown inside the window, a closing message shown after the end. Use this year's dates everywhere, including calendar links and the countdown.
+- Conditions run when the page is built, so a cached page keeps the old state until its cache is purged; see `divi5-core`.
+
 Check: every card shows a different post, no `$variable(` text is left in the HTML, and images and links differ per item.
 
 ## Custom post types

@@ -441,3 +441,17 @@ The user asked for page 6834 on the staging site to be rebuilt for the 2026 Big 
 - Lessons for page work: the first draft added claims from general knowledge of Big Give (gifts doubled "while the match funding lasts", "give early") that the campaign did not state; the user's check removed them. `divi5-page-production` already says not to invent facts; the general-knowledge slip is the case to watch.
 
 Skills updated: `divi5-modules` (number counter, icon list icon) and `divi5-styling` (image shape). Synced to the staging site; 8881 was not reachable, so its copies are pending.
+
+Later revisions to the same page, verified in a browser at 1280px, 768px and 375px:
+- Date display conditions (`module.decoration.conditions`, `dateTime`, `isBefore`/`isAfter`, `allDay` off, a time) switch modules at 12:00 in the site's timezone (Europe/London). Two conditions with `AND` make a window: on throwaway blocks, a window containing now showed, a window in the past stayed hidden, and the same past pair joined with `OR` showed.
+- A page-specific Theme Builder template with body layout `0` removed the breadcrumbs and title bar; the page's own heading became the only `h1`.
+- `module.decoration.order` phone `-1` moved an image column above its text on phones only.
+- Icon list items are flex rows centred vertically; at 768px the check marks sat beside the last line of two-line items until each item got `alignItems: flex-start`.
+- An accordion with `maxWidth` and `alignment: center` but no width shrank to its content and changed width as items opened; adding `width: 100%` held it at 760px.
+- The countdown has no setting for seconds or leading zeros; its script pads days to three digits. Seconds were hidden with module CSS at the user's request.
+- White 18px regular text on the brand orange failed contrast; 20px semibold passes as large text.
+- An unencoded ampersand in a calendar link cut the event title short; `http_build_query()` with RFC 3986 encoding fixed it.
+- A search for HTML in the stored markup missed because the stored JSON escapes the less-than sign; matching on parsed attributes worked.
+- One desktop reading showed a wrong width and an overflow that a reload cleared.
+
+Skills updated from these: `divi5-core`, `divi5-dynamic`, `divi5-theme-builder`, `divi5-modules`, `divi5-page-production`, `divi5-design-system`. All eight stored skills on the staging site match the repo.

@@ -5,7 +5,7 @@ description: Install this repo's Divi 5 Novamira skills and User Context on a Wo
 
 # Set up a site for Divi 5 work through Novamira
 
-Run from a clone of this repo (`novamira-divi5`). The site's Novamira MCP tools must already be connected (`/mcp` shows the server). Call abilities through that server's `execute-ability` tool.
+Run from a clone of this repo (`novamira-divi`). The site's Novamira MCP tools must already be connected (`/mcp` shows the server). Call abilities through that server's `execute-ability` tool.
 
 ## 0. Which site, and is it allowed
 
@@ -52,7 +52,7 @@ For each entry in `skills/manifest.json`, in order:
 1. Read the file from `skills/`. It must contain no backslash (Novamira's skill save strips them); if one is found, stop and fix the file first.
 2. If the skill does not exist: `novamira/skill-write` with `title`, `description` and `content` from the manifest and file, `enable_prompt: true`, `enable_agentic: true`, `on_conflict: "fail"`.
 3. If it exists and differs: ask the user, then `novamira/skill-edit` with `slug`, `description` and `content`.
-On a site that is not on this computer, the PHP cannot read `skills/`. Either pass each file's text in the `skill-write` call, or have the site fetch the files of the matching release tag (`wp_remote_get('https://raw.githubusercontent.com/aidanashby/novamira-divi5/<tag>/skills/<file>')`) and write them, refusing any download whose md5 differs from the local file (verified on a staging site, T31).
+On a site that is not on this computer, the PHP cannot read `skills/`. Either pass each file's text in the `skill-write` call, or have the site fetch the files of the matching release tag (`wp_remote_get('https://raw.githubusercontent.com/aidanashby/novamira-divi/<tag>/skills/<file>')`) and write them, refusing any download whose md5 differs from the local file (verified on a staging site, T31).
 4. Verify: `novamira/execute-php` returning `md5(get_post_field('post_content', <id>))` and the excerpt, and compare with the local file's md5 (`md5sum`, LF line endings) and the manifest description. Every skill must match.
 
 ## 3. Lock fix (SQLite only)

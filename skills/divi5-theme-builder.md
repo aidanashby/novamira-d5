@@ -53,6 +53,10 @@ add_post_meta($theme_builder_id, '_et_template', $tid);
 - Clear caches for posts of that type with `remove_static_resources`, then check one post of the type and one page that must not change. `.et-l--body` also appears on ordinary pages, so check for the template's own content, not that class.
 - Undo: delete the template and layout posts and remove the template ID from the Theme Builder post's `_et_template` meta.
 
+## A page without the default title bar
+
+When a page should open straight under the header with its own heading as the H1 (a campaign or landing page), it needs a template of its own (`singular:post_type:page:id:<ID>`) whose body layout is `0`, so only the page's content shows between header and footer. Check first whether that page already has one; if so, change only `_et_body_layout_id` to `0` and record the old value for undo (verified on 5.16.0). The page must then carry its own `h1`. Ask before creating a new template.
+
 ## Do not, unless the user asks
 
 Create or delete templates, change `_et_use_on` or `_et_exclude_from`, change which layouts a template points to, or edit the `et_theme_builder` post. These change which pages get which header and footer across the site. When the user asks, use the recipe above rather than writing the meta by hand.
