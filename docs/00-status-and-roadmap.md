@@ -63,7 +63,7 @@ The skill sources in `skills/` match the stored skills byte for byte (md5 checke
 
 ## Open items
 
-- 8882 holds older copies of five skills (8881 is current, 22 October). Resync only if 8882 stays in use.
+- A charity's staging site on Krystal is set up (T31) and passed a fresh-agent regression run (T32); Divi's caches and LiteSpeed's page cache both refresh on save there (T33, T33b); a layout edit's reach into the LiteSpeed cache is untested; writes there are logged in the git-ignored `site-logs/`, not docs/08. Its PHP 8.3.35 needs checking with Krystal (CVE-2026-109618/109619).
 - Rerun `novamira-setup` on a fresh site to exercise its new steps: inactive Divi, the footer-widget and permission offers, and `site-logs/`.
 
 ## Roadmap

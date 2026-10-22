@@ -4,6 +4,8 @@ Let Claude build and edit Divi 5 pages for you on a WordPress development or sta
 
 This repository holds eight skills and a short set of site instructions for the free [Novamira](https://novamira.ai/) WordPress plugin, plus a setup routine that installs them on a site. Every rule in the skills was tested on a real Divi 5 site.
 
+> **Not an official project.** This is an independent community project. It is not made, endorsed or supported by Novamira (Dynamic.ooo) or by Elegant Themes, the makers of Divi. Novamira and Divi are their owners' trademarks. For help with the plugin or the theme themselves, contact their makers.
+
 ## What you can ask for
 
 - New pages and sections, built from Divi's own modules (headings, text, buttons, images, blurbs, accordions, tabs, sliders, forms and the rest), laid out in rows that stack on phones.
@@ -28,7 +30,7 @@ The site instructions installed with the skills tell Claude to:
 You need:
 
 - WordPress with **Divi 5.7.0 or later** (tested on 5.15.1 and 5.16.0). Divi 4 is not supported.
-- The **Novamira** plugin (free version, tested on 1.12.9 to 1.12.11).
+- The **Novamira** plugin (free version, tested on 1.12.9 to 1.12.12).
 - **Claude Code**, connected to the site through Novamira.
 - A **development or staging copy** of the site. Never use this on a live site: Novamira gives the connected agent full administrator, PHP, database and file access.
 

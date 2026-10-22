@@ -38,6 +38,10 @@ SOFTWARE.
 
 The local copies of the Divi documentation and theme source used during testing (not in this repository) belong to Elegant Themes. They are for local reference. Do not redistribute them or paste large passages into shared skills.
 
+## Trademarks
+
+This project is independent. It is not affiliated with, endorsed by or supported by Elegant Themes (Divi) or Dynamic.ooo (Novamira). Divi and Novamira are trademarks of their owners and are named here only to say what these skills work with.
+
 ## Novamira
 
 Novamira is by Dynamic.ooo (Ovation S.r.l.), open source under AGPL-3.0 (core). Documentation is read from https://novamira.ai/docs/. Nothing from the plugin source is copied into this repository.

@@ -15,7 +15,7 @@ Tested on Divi 5.15.1, WordPress 7.1.3 (14 October 2026). If `ET_BUILDER_VERSION
 
 - Everything sits in one `divi/placeholder` block (no attributes).
 - Hierarchy: placeholder, `divi/section`, `divi/row`, `divi/column`, then modules. Never put a module directly in a section or row. A column may also hold `divi/group` or a nested row.
-- Every block except the placeholder carries `"builderVersion"` set to `ET_BUILDER_VERSION`. Read it at runtime, never type a literal. Divi only migrates blocks stamped with an older version, so a current stamp means the shape must already be current.
+- Every block you write, except the placeholder, carries `"builderVersion"` set to `ET_BUILDER_VERSION`. Component instances (`divi/global-layout`) copied from a builder-saved page have none; leave them as they are. Read it at runtime, never type a literal. Divi only migrates blocks stamped with an older version, so a current stamp means the shape must already be current.
 - Attributes are JSON with responsive values: `{"desktop":{"value":...},"tablet":{"value":...},"phone":{"value":...}}`. Always set `desktop`. Add `tablet` or `phone` only where they differ; desktop values cascade down.
 - Text values are HTML: `&amp;`, `<strong>`, `<p>`. Do not pre-escape. The serialiser escapes `&`, `"`, `<`, `>` as JSON unicode escapes, exactly as the Visual Builder does.
 
@@ -108,9 +108,12 @@ $content = serialize_blocks($blocks);
 ```
 
 - `parse_blocks()` then `serialize_blocks()` round-trips builder content exactly, including components.
+- Write HTML for `innerContent` with real line breaks (`PHP_EOL`, or a heredoc), never a backslash-n inside a single-quoted PHP string, which stores the two characters literally.
 - When you add a child to a parsed block, also append `null` to that block's `innerContent`, or the child is not written. Builder-saved blocks keep newline strings in `innerContent` between children; leave them.
 - To remove a child, work on a copy of the parent (not a reference), remove the child from `innerBlocks` and the `null` at the matching position in `innerContent` (count the `null` entries, skipping strings), then check that every block has as many `null` entries as children before you serialise. A mismatch makes `serialize_blocks()` emit "Undefined array key" warnings (seen on 5.16.0).
-- Edit in place only when asked, and then call `remove_static_resources` afterwards. On WP Studio it and `wp_trash_post()` sometimes warn that `et-cache` is not empty; the warning is harmless.
+- Edit in place only when asked, and then call `remove_static_resources` afterwards. On WP Studio it and `wp_trash_post()` sometimes warn that `et-cache` is not empty; the warning is harmless. On a published page, saving with `wp_update_post()` already makes Divi rebuild the page's CSS and its list of modules in use, including a module type the page did not have before (verified on 5.16.0 with MySQL); `remove_static_resources` stays as a cheap extra.
+- LiteSpeed Cache purges a published page when `wp_update_post()` saves it: the next logged-out request was rebuilt with the edit (verified with LiteSpeed Cache 7.9.2). Edits to a Theme Builder layout or a Library component change other pages too, which that purge may not reach (not yet tested); after one, purge the whole cache with `do_action('litespeed_purge_all')` on a staging site, and ask first on any other.
+- A staging site often shows logged-out visitors a maintenance or coming-soon page, and page caches skip signed-in visitors. Then check a published page's output as a signed-in user (the browser pane after the user signs in), and say the page cache was not exercised.
 
 ### Clone a published page to a draft copy (verified)
 

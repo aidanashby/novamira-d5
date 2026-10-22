@@ -31,7 +31,7 @@ Image module border and radius go on `image.decoration.border`, which styles `.e
 
 - Text module body: `content.decoration.bodyFont.body.font.<bp>.value`.
 - Heading module: `title.decoration.font.font.<bp>.value`.
-- Keys (verified): `size` (`"21px"`), `color`, `weight` (`"700"`), `lineHeight` (`"1.6em"`), `letterSpacing` (`"1px"`), `textAlign` (`"center"`; on the Text module Divi 5.16 ignores it, so use `module.advanced.text.text.<bp>.value.orientation` instead), `capitalization` (`"uppercase"`, `"lowercase"`, `"capitalize"`, `"smallCaps"`, `"allSmallCaps"`). Heading also takes `headingLevel`. `family` sets the font (`"Georgia"`, or a Google font such as `"Roboto Slab"` or `"Lato"`, which Divi enqueues itself). Button text font is `button.decoration.font.font`.
+- Keys (verified): `size` (`"21px"`), `color`, `weight` (`"700"`), `lineHeight` (`"1.6em"`), `letterSpacing` (`"1px"`), `textAlign` (`"center"`; on the Text module Divi 5.16 ignores it). For alignment on Text and Heading modules use `module.advanced.text.text.<bp>.value.orientation` (`"left"`, `"center"`, `"right"`): both emit `text-align` (verified on 5.16.0), `capitalization` (`"uppercase"`, `"lowercase"`, `"capitalize"`, `"smallCaps"`, `"allSmallCaps"`). Heading also takes `headingLevel`. `family` sets the font (`"Georgia"`, or a Google font such as `"Roboto Slab"` or `"Lato"`, which Divi enqueues itself). Button text font is `button.decoration.font.font`.
 - `style:["uppercase"]` emits nothing. Use `capitalization`. `style` is for italic, underline and similar.
 
 ## Site colours and variables

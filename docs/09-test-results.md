@@ -384,3 +384,47 @@ A separate Claude Code session in a fresh clone (HEAD `1f0da77`) ran `novamira-s
 - Post content `module.decoration.bodyFont.body.font.desktop.value` `{family Georgia, size 22px, color #9e0606}` (path from the module's conversion map): on the page the module rendered empty with those styles. With the user's approval the same value was added to the post content module in body layout 98 "All Movies": on `/movie/test-movie-two/` the paragraph "Test movie two content" computed Georgia, 22px, `rgb(158, 6, 6)`. Layout 98 was then written back from a saved copy (md5 `ea1f9bd3...` before and after) and the page returned to Open Sans 14px. **Pass.** `divi5-dynamic`. Draft 250 binned.
 
 **Not adopted:** a chunked or helper-based skill upload (the eight skills, about 57 KB, uploaded first time and the md5 check catches a bad copy), and `novamira/create-admin-access-link` for signing in the browser (it creates a working admin login; agents ask the user to sign in instead).
+
+## T31. Setup on a staging site [Run, 2026-10-22]
+
+`novamira-setup` (v1.1.0 skills) run from this session on a charity's staging site on Krystal (a copy of its live site): Divi 5.16.0 (child theme), WordPress 7.1.3, PHP 8.3.35, MySQL, Novamira 1.12.12, with the live site's plugins (ACF Pro, Divi Machine 7.0.0-beta1, LiteSpeed Cache and others). Writes are in the git-ignored `site-logs/<staging host>.md`.
+
+- The site first reported `wp_get_environment_type()` `production`, so the repo's `CLAUDE.md` would have stopped. The user set `WP_ENVIRONMENT_TYPE` to `staging` in `wp-config.php`; setup then proceeded with the user's yes.
+- Checks: Divi active, every required ability present, MySQL (no lock fix), Novamira 1.12.12 (one release past the tested range; nothing failed). Footer Area 1 held WordPress's default Archives and Categories blocks; the user chose to leave them, to keep the copy like live.
+- Skills: the PHP cannot read this computer's files on a remote site, so the site fetched the eight files of tag v1.1.0 from raw.githubusercontent.com, checked each md5 against the local file before writing, and wrote them with `skill-write`. All eight stored copies and descriptions match. **Pass.** Setup now describes this route.
+- User Context: its first sentence said "a local Divi 5 development site", wrong for staging. The user approved a generic opening ("a Divi 5 development or staging copy of the site"), now in docs/user-context-proposed.md and on 8881 and the dev site (md5 `2b943d6e...` on both). Calling `novamira/agent-context` from PHP with `wp_get_ability()->execute([])` failed ("does not define an input schema"); called as a tool it showed the text, the `novamira-design` exclusion and all eight skills. **Pass.**
+- Smoke test: draft 7999 "Setup check" read back identical and rendered. **Pass.** Visual Builder check pending with the user.
+- Permission offer: accepted; the rule `mcp__<staging server>__mcp-adapter-execute-ability` was added to `.claude/settings.local.json` without a block. **Pass.**
+- Novamira 1.12.12's own context warns that PHP 8.3.35 is affected by CVE-2026-109618 and CVE-2026-109619 (fixed in 8.3.36); passed to the user to check with Krystal.
+
+## T32. Fresh-agent regression run on the staging site [Run, 2026-10-22]
+
+Five fresh Haiku agents, each limited to the dev-site Novamira tools and told to start from `novamira/agent-context`, did the four docs/06 sample tasks plus one for the T30 rules. Claude then checked every draft independently (status, builder meta, block names, version stamps, round-trip, render).
+
+| Task | Result | Skills loaded | Score |
+|---|---|---|---|
+| 1. Landing page (hero, three blurbs, CTA) | Draft 8005: native heading, text, button, three `divi/blurb`, `divi/cta`; read back identical, rendered | core, modules, styling | Pass |
+| 2. Copy page 2157 and add an FAQ | Draft 8003 by the clone recipe, plus an `divi/accordion` with `h3` item titles under an `h2`; source md5 unchanged. Its first insert stored a literal backslash-n; the agent caught it on read-back and rebuilt | core, modules | Pass after self-correction |
+| 3. Two columns, image left, stacks on phone | Draft 8001: `equal-columns_2`, columns `12_24` and phone `24_24`, row phone `flexWrap: wrap`; image radius on `image.decoration.border` (new T30 rule), alt from the library | core, modules, styling | Pass |
+| 4. Explain page 1264 (read-only) | Accurate section summary; every block native; named the `[shop_list]` and `[noshop_list]` shortcodes inside blurbs; wrote nothing | core | Pass |
+| 5. Banner with background photo and dark gradient, FAQ toggles | Draft 8002: image plus gradient with `overlaysImage` (new rule), white `h1`, toggles at `h3` under an `h2` (new rule) | core, styling, modules | Pass |
+
+Every agent kept drafts, used native modules only, stamped every block it wrote, and asked no question it could answer itself. None loaded `novamira-design` or asked which builder to use, although three noted that Novamira's own context tells them to; the User Context overrode it each time.
+
+Findings, fixed in the skills:
+- Heading alignment: the agent used `module.advanced.text.text.desktop.value.orientation` `"center"` on a Heading; the CSS emitted `text-align: center` for its `h1` to `h6`. `divi5-styling` now names `orientation` for Text and Heading (CSS checked, not a browser).
+- Component instances in a copied page carry no `builderVersion`; `divi5-core`'s stamp rule now says to leave them.
+- The literal backslash-n slip: `divi5-core` now says to use `PHP_EOL` or a heredoc.
+
+Not checked: browser views of the drafts (the browser pane is not signed in to the dev site). Agents could not write `site-logs/` because they were told not to touch local files; the writes are logged by Claude.
+
+## T33. Caches on the staging site [Run, 2026-10-22]
+
+On a charity's staging site on Krystal (MySQL, LiteSpeed Cache 7.9.2 on, Divi static CSS on), with the user's approval to publish one noindex test page, 8013 "T33 Cache test", later unpublished and binned.
+
+- Logged-out requests get Branda's coming-soon page ("This is a development website") and `X-LiteSpeed-Cache-Control: no-cache`, so LiteSpeed's page cache never serves this site to visitors and could not be tested. LiteSpeed registers `Purge::purge_publish` on `transition_post_status` (which WordPress fires on every update of a published post) and `Purge::purge_ucss` on `edit_post` [Inferred: purge on save; not observed].
+- Divi's per-page CSS files (`et-cache/8013/`) checked through signed-in loopback requests made inside PHP: after a colour change saved with `wp_update_post()` and no purge, the next request served the new colour in both the files and the inline styles. **Pass.**
+- Adding a module type the page did not have (a toggle) with `wp_update_post()` and no purge: `_divi_dynamic_assets_cached_modules` was cleared, and the next request loaded the toggle's CSS and script. **Pass.** (On Studio's SQLite the earlier T12 work used `remove_static_resources`; the skill keeps it as an extra.)
+- `divi5-core` now says saving already refreshes Divi's caches, and that staging sites usually hide pages from logged-out visitors, so checks run signed in and a page cache goes untested.
+
+**LiteSpeed (T33b, same day).** The user switched off Branda's coming-soon page; Krystal confirmed PHP 8.3.35 there is patched against CVE-2026-109618 and CVE-2026-109619. Page 8013 restored and republished ("Cache marker ONE"). Logged-out fetches: first `no-cache` (logged-in cookie path), then `X-LiteSpeed-Cache: miss` with `public,max-age=604800`, then `hit`. After `wp_update_post()` changed the marker to TWO with no manual purge, the next fetch carried no cache header and showed TWO, and the one after was a fresh `miss` with TWO. **Pass:** LiteSpeed purges a page on save. Not tested: whether a Theme Builder layout or component edit purges the pages that use it; the skill tells agents to purge all after one, on staging. Page 8013 set to draft and binned (URL now 404).

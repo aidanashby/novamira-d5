@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.1.1 (22 October 2026)
+
+From the first setup on a staging site and the tests run there (T31 to T33). Tested on Divi 5.16.0, Novamira 1.12.12, WordPress 7.1.3, MySQL and LiteSpeed Cache 7.9.2.
+
+- The repository is renamed `novamira-divi5`. The README and NOTICE say it is an independent project, not made or endorsed by Novamira or Elegant Themes.
+- Public docs name the staging site only as "a charity's staging site on Krystal".
+
+- User Context opens with "This is a Divi 5 development or staging copy of the site", so it fits staging sites.
+- Fresh-agent regression run on the staging site passed (T32). `divi5-styling`: `orientation` aligns Heading as well as Text. `divi5-core`: component instances keep no version stamp; use `PHP_EOL` for line breaks.
+- Caches checked on MySQL hosting (T33): saving a published page refreshes Divi's CSS and module list and purges it from LiteSpeed Cache, without a manual purge; after a Theme Builder layout or component edit, agents purge all on staging. `divi5-core` notes that staging sites usually hide pages from logged-out visitors.
+- `novamira-setup`: installs on a remote site by fetching the release's skill files from GitHub and checking each md5; calls `agent-context` as a tool; tested on Novamira up to 1.12.12.
+
 ## 1.1.0 (22 October 2026)
 
 From the fresh-site install test (T30, T30b). Tested on Divi 5.16.0, Novamira 1.12.11 and WordPress 7.1.3. The new setup offers (activating Divi, footer widgets, the permission rule) and `site-logs/` have not yet run on a site.

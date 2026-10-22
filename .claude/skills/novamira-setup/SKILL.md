@@ -5,7 +5,7 @@ description: Install this repo's Divi 5 Novamira skills and User Context on a Wo
 
 # Set up a site for Divi 5 work through Novamira
 
-Run from the `novamira-d5` repo. The site's Novamira MCP tools must already be connected (`/mcp` shows the server). Call abilities through that server's `execute-ability` tool.
+Run from a clone of this repo (`novamira-divi5`). The site's Novamira MCP tools must already be connected (`/mcp` shows the server). Call abilities through that server's `execute-ability` tool.
 
 ## 0. Which site, and is it allowed
 
@@ -39,7 +39,7 @@ return [
 | `divi` 5.x below 5.7.0 | Warn the user: 5.7.0 is the earliest version with every feature the skills use (docs/00, "Setup skill: version rules"). Continue, then run the T1 round-trip check in step 5 before any page work. |
 | `divi` 5.7.0 or later | Continue. No warning. |
 | Any of `novamira/execute-php`, `novamira/skill-write`, `novamira/skill-edit`, `novamira/skill-get`, `novamira/agent-context` missing | Stop and name the missing ability; the Novamira version or its settings differ from the tested 1.12.9 to 1.12.11. |
-| `novamira` outside 1.12.9 to 1.12.11 | Continue, and tell the user the skills were tested on 1.12.9 to 1.12.11. |
+| `novamira` outside 1.12.9 to 1.12.12 | Continue, and tell the user the skills were tested on 1.12.9 to 1.12.12. |
 | `db` is `sqlite` (WP Studio) | Install the lock fix in step 3. |
 | `footer_widgets` not empty | Note it for step 6 (WordPress's default Archives and Categories blocks usually sit in Divi's footer on a new site). |
 | A skill named in the manifest already exists | Go on, but in step 2 compare first and ask before replacing a copy that differs from the repo. |
@@ -52,6 +52,7 @@ For each entry in `skills/manifest.json`, in order:
 1. Read the file from `skills/`. It must contain no backslash (Novamira's skill save strips them); if one is found, stop and fix the file first.
 2. If the skill does not exist: `novamira/skill-write` with `title`, `description` and `content` from the manifest and file, `enable_prompt: true`, `enable_agentic: true`, `on_conflict: "fail"`.
 3. If it exists and differs: ask the user, then `novamira/skill-edit` with `slug`, `description` and `content`.
+On a site that is not on this computer, the PHP cannot read `skills/`. Either pass each file's text in the `skill-write` call, or have the site fetch the files of the matching release tag (`wp_remote_get('https://raw.githubusercontent.com/aidanashby/novamira-divi5/<tag>/skills/<file>')`) and write them, refusing any download whose md5 differs from the local file (verified on a staging site, T31).
 4. Verify: `novamira/execute-php` returning `md5(get_post_field('post_content', <id>))` and the excerpt, and compare with the local file's md5 (`md5sum`, LF line endings) and the manifest description. Every skill must match.
 
 ## 3. Lock fix (SQLite only)
@@ -62,7 +63,7 @@ If step 1 found `sqlite`, ask the user (it writes a file outside Novamira's sand
 
 1. Take the text in the code block under "Current text" in `docs/user-context-proposed.md`. Show it to the user once and get approval (gate c), unless the site already holds exactly this text.
 2. Write it with `execute-php`: `$f = implode(chr(92), ['', 'Novamira', 'Context', 'instructions_update_content']); $f($text);`
-3. Verify that `get_option('novamira_instructions_content')` and `get_option('nvp_instructions_content')` both equal the text, then call `novamira/agent-context` and confirm the text appears in its instructions, including the sentence that excludes `novamira-design` (Novamira 1.12.11's system context tells agents to load it; T24). If the text is missing, the User Context feature is switched off: from 1.12.11 it is the feature `novamira/user-context` (on by default, the old `novamira_instructions_enabled` option is legacy), so ask the user to switch it on in Novamira's settings.
+3. Verify that `get_option('novamira_instructions_content')` and `get_option('nvp_instructions_content')` both equal the text, then call `novamira/agent-context` as its own tool call (from PHP, `wp_get_ability()->execute([])` fails for want of an input schema) and confirm the text appears in its instructions, including the sentence that excludes `novamira-design` (Novamira 1.12.11's system context tells agents to load it; T24). If the text is missing, the User Context feature is switched off: from 1.12.11 it is the feature `novamira/user-context` (on by default, the old `novamira_instructions_enabled` option is legacy), so ask the user to switch it on in Novamira's settings.
 
 ## 5. Smoke test
 
