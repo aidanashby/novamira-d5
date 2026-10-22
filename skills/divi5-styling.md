@@ -16,7 +16,7 @@ Tested on Divi 5.15.1 (14 October 2026) and rechecked on 5.16.0 (21 October 2026
 | `spacing` | `{"padding":{"top":"40px","bottom":"40px","left":"20px","right":"20px"},"margin":{"top":"0px","bottom":"30px"}}` |
 | `border` | `{"styles":{"all":{"width":"2px","color":"#ccc","style":"solid"}},"radius":{"topLeft":"12px","topRight":"12px","bottomLeft":"12px","bottomRight":"12px","sync":"on"}}` |
 | `boxShadow` | `{"style":"preset1","horizontal":"0px","vertical":"8px","blur":"24px","spread":"0px","position":"outer","color":"rgba(0,0,0,0.15)"}`. `style` is required: without it nothing is emitted. |
-| `sizing` | `{"maxWidth":"720px","minHeight":"400px"}` (columns also carry `flexType` here) |
+| `sizing` | `{"maxWidth":"720px","minHeight":"400px"}` (columns also carry `flexType` here). Add `"alignment":"center"` to centre a module narrower than its column (verified on an accordion on 5.16.0) |
 | `filters` | `{"opacity":"90%","backdropBlur":"8px"}` (backdrop needs a translucent background to show) |
 | `position` and `zIndex` | `position`: `{"mode":"relative","offset":{"vertical":"15px","horizontal":"30px"}}` emits `top: 15px; left: 30px`; `zIndex`: `"2"` |
 | `sticky` | `{"position":"top","offset":{"top":"40px"}}` (also `bottom`, `topBottom`). Applied by Divi's script, so check it in a browser: it held in the column on scroll. |

@@ -26,4 +26,5 @@ This repo holds Novamira skills that let Claude build and edit Divi 5 pages on a
 - After uploading a skill, compare the stored `post_content` md5 with the file's.
 - Add a rule only after running it on a site, and record the evidence in `docs/09-test-results.md` with the Divi and Novamira versions. Evidence labels are listed in the README.
 - Content adapted from divilovewp/divi5-skill keeps the attribution in `NOTICE.md`.
+- Skills must work on any Divi 5 site. Never rely on a CSS class, stylesheet rule, preset or option that exists only on one site; rules like that belong in that site's own site-design skill.
 - Personal or site-specific rules go in a git-ignored `CLAUDE.local.md`, which Claude Code loads alongside this file.
