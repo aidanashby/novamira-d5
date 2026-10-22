@@ -1,8 +1,8 @@
 # Changelog
 
-## Unreleased
+## 1.1.0 (22 October 2026)
 
-From the fresh-site install test (T30).
+From the fresh-site install test (T30, T30b). Tested on Divi 5.16.0, Novamira 1.12.11 and WordPress 7.1.3. The new setup offers (activating Divi, footer widgets, the permission rule) and `site-logs/` have not yet run on a site.
 
 ### Setup
 
