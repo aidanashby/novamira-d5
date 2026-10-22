@@ -116,7 +116,7 @@ $content = serialize_blocks($blocks);
 - LiteSpeed Cache purges a published page when `wp_update_post()` saves it: the next logged-out request was rebuilt with the edit (verified with LiteSpeed Cache 7.9.2). Edits to a Theme Builder layout or a Library component change other pages too, which that purge may not reach (not yet tested); after one, purge the whole cache with `do_action('litespeed_purge_all')` on a staging site, and ask first on any other.
 - Content that a date condition switches (`divi5-dynamic`) only changes when the page is rebuilt. A page cache keeps serving the old version until it expires (LiteSpeed Cache sent `max-age=604800`, seven days, on one site), so tell the user to purge the cache, or schedule a purge, at each switch time.
 - Find what to edit in the parsed block attributes, never by searching the stored markup: the stored JSON escapes characters such as the less-than sign, so a text search for HTML misses.
-- Build link query strings with `http_build_query($args, '', '&', PHP_QUERY_RFC3986)`. Values with an unencoded ampersand ("Bristol & South Glos") are cut short.
+- Build link query strings with `http_build_query($args, '', '&', PHP_QUERY_RFC3986)`. Values with an unencoded ampersand ("Smith & Sons") are cut short.
 - A staging site often shows logged-out visitors a maintenance or coming-soon page, and page caches skip signed-in visitors. Then check a published page's output as a signed-in user (the browser pane after the user signs in), and say the page cache was not exercised.
 
 ### Clone a published page to a draft copy (verified)
